@@ -67,7 +67,7 @@ const RegisterPharmacyProduct = ({ navigation }) => {
           Register your Pharmacy product
         </Text>
         <Text style={{ color: "#545454", fontSize: 16 }}>
-          INFĒRA is proud to offer a limited lifetime warranty on all of its devices. Please select the devices you would like to register.
+          AppName is proud to offer a limited lifetime warranty on all of its devices. Please select the devices you would like to register.
         </Text>
         <View style={{ marginTop: 10 }}>
           <TextInput
