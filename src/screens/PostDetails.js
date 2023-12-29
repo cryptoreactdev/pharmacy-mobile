@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, } from "react";
 import {
   View,
   SafeAreaView,
   ImageBackground,
   ScrollView,
   useWindowDimensions,
+  TouchableOpacity, Image
 } from "react-native";
 import Styles from "../config/Styles";
 import Languages from "../languages";
@@ -18,11 +19,15 @@ import { HTMLStylesDark } from "../config/HTMLStylesDark";
 import HTMLView from "react-native-render-html";
 import usePreferences from "../hooks/usePreferences";
 import moment from "moment";
+// import { useNavigation } from "@react-navigation/native";
+
 
 export default function PostDetails(props, { navigation }) {
   const { width } = useWindowDimensions();
   const { route } = props;
   //const { navigation } = props;
+  // const navigation = useNavigation();
+
   const { id } = route.params;
 
   const { theme } = usePreferences();
@@ -36,6 +41,7 @@ export default function PostDetails(props, { navigation }) {
 
   useEffect(() => {
     getPostById(id).then((response) => {
+      console.log("RESPONSE IS : " + JSON.stringify(response))
       setItem(response[0]);
       setIsLoaded(true);
     });
@@ -61,22 +67,59 @@ export default function PostDetails(props, { navigation }) {
                 style={Styles.Header2Image}
                 resizeMode={"cover"}
               >
+
+
                 <LinearGradient
                   colors={["rgba(0,0,0,0.1)", "rgba(0,0,0,0.5)"]}
-                  style={Styles.Header2Gradient}
-                >
-                  <Text style={[Styles.Header2SubTitle, { fontSize: 14 }]}>
+                  style={Styles.Header2Gradient}>
+
+                  <View style={{ flex: 1, width: 44, alignItems: 'center', }}>
+                    <TouchableOpacity style={{ marginTop: 16, paddingVertical: 12, paddingRight: 16, marginLeft: -12 }}
+                      onPress={() => props.navigation.goBack()}>
+                      <Image
+                        source={require("../../assets/left-arrow-white.png")}
+                        style={Styles.img2}
+                      />
+                    </TouchableOpacity>
+                  </View>
+
+                  {/* <Text style={[Styles.Header2SubTitle, { fontSize: 14 }]}>
                     {moment(item.date).fromNow()}
-                  </Text>
-                  <Text style={Styles.Header2Title}>{item.title}</Text>
+                  </Text> */}
                   <Text
-                    style={[
-                      Styles.Header2Category,
-                      { fontSize: 18, fontWeight: "bold" },
-                    ]}
-                  >
-                    {item.tag}
+                    numberOfLines={3}
+                    style={{
+                      fontWeight: "bold",
+                      color: "#F7F1E7",
+                      fontSize: 20,
+                      marginVertical: 8,
+                      marginLeft: 2
+                    }}>
+                    {item.title}
                   </Text>
+                  <View
+                    style={{
+                      borderRadius: 12,
+                      borderWidth: 1,
+                      borderColor: '#F4E9DD',
+                      backgroundColor: '#F4E9DD',
+                      alignContent: 'center',
+                      alignItems: 'center',
+                      paddingVertical: 2,
+                      paddingHorizontal: 6
+                    }}>
+                    <Text
+                      numberOfLines={1}
+                      style={{
+                        fontWeight: "bold",
+                        color: '#75695A',
+                        fontSize: 14,
+                        textAlign: 'center'
+                      }}>
+                      {item.tag}
+                    </Text>
+                  </View>
+
                 </LinearGradient>
               </ImageBackground>
 

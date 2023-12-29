@@ -75,7 +75,6 @@ export default function Shop2(props) {
         // Add the product to the array of its type
         separatedData[productType].push(product);
       });
-      console.log("DATA IS : " + JSON.stringify(separatedData))
       setAllTypesProducts(separatedData);
 
       setProducts(modifiedProducts);
@@ -89,7 +88,7 @@ export default function Shop2(props) {
   };
   return (
     <View style={globalStyles.cont}>
-      <ScrollView style={globalStyles.scroll}>
+      <ScrollView showsVerticalScrollIndicator={false} style={globalStyles.scroll}>
         <Header />
         <Text style={globalStyles.bigtext}>Shop</Text>
         <Text style={globalStyles.text1}>Get our best products</Text>
@@ -97,7 +96,7 @@ export default function Shop2(props) {
         <View style={styles.smallcont}>
           <Text style={globalStyles.bigtext2}>Packages</Text>
         </View>
-        <ScrollView style={styles.cont2} horizontal={true}>
+        <ScrollView showsHorizontalScrollIndicator={false} style={styles.cont2} horizontal={true}>
           {packages.map((item, index) => (
             <TouchableOpacity
               key={index}
@@ -120,7 +119,7 @@ export default function Shop2(props) {
             />
           </TouchableOpacity>
         </View>
-        <ScrollView horizontal={true}>
+        <ScrollView showsHorizontalScrollIndicator={false} horizontal={true}>
           <View style={styles.filters}>
             <TouchableOpacity
               style={styles.btn}
@@ -203,14 +202,19 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     //justifyContent: "space-between",
     // alignItems: "flex-start",
-    //flexWrap: "wrap",
+    paddingLeft: 4,
+    flexWrap: "wrap",
+    alignContent: 'center',
     marginBottom: responsiveHeight(5),
   },
   cont3: {
     flexDirection: "row",
     flexWrap: "wrap",
-    justifyContent: "flex-start",
-    marginBottom: responsiveHeight(3),
+    paddingLeft: 4,
+    // justifyContent: "flex-start",
+    // alignContent: 'center',
+    alignContent: 'center',
+    marginBottom: responsiveHeight(5),
     // padding: 10, // Adjust padding as needed
   },
   btn: {
@@ -231,8 +235,9 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   cardContainer2: {
-    marginRight: responsiveWidth(3),
-    width: "30%",
+    alignSelf: "center",
+    // marginRight: responsiveWidth(3),
+    // width: "30%",
     marginBottom: responsiveHeight(1),
   },
   discover: {

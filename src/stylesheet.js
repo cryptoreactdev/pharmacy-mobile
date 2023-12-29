@@ -8,17 +8,17 @@ import { StyleSheet, Text, View, ScrollView } from "react-native";
 export const globalStyles = StyleSheet.create({
   scroll: {
     width: responsiveWidth(90),
-    alignself: "center",
-    backgroundColor: "#EAEAEA",
+    alignSelf: "center",
+    backgroundColor: "#FAF9F7",
     marginBottom: responsiveHeight(10),
   },
   cont: {
     alignItems: "center",
-    backgroundColor: "#EAEAEA",
+    backgroundColor: "#FAF9F7",
     flex: 1,
   },
   bigtext: {
-    fontSize: responsiveFontSize(4),
+    fontSize: responsiveFontSize(3.6),
     fontWeight: "bold",
     marginTop: responsiveHeight(1),
     marginBottom: responsiveHeight(1),
@@ -39,11 +39,11 @@ export const globalStyles = StyleSheet.create({
     color: "#41392F",
   },
   text2: {
-    fontSize: responsiveFontSize(2.5),
+    fontSize: responsiveFontSize(2.2),
     marginTop: responsiveHeight(1),
     marginBottom: responsiveHeight(1),
     color: "#75695A",
-    fontWeight: "bold",
+    // fontWeight: "bold",
   },
   blackLargeText: {
     fontSize: 16,
@@ -94,6 +94,6 @@ export const globalStyles = StyleSheet.create({
     height: responsiveHeight(4),
     width: responsiveWidth(8),
     resizeMode: "contain",
-    marginLeft: responsiveWidth(2),
+    // marginLeft: responsiveWidth(1),
   },
 });

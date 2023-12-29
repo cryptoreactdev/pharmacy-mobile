@@ -54,10 +54,10 @@ export default function Care({ navigation }) {
   };
   return (
     <View style={globalStyles.cont}>
-      <ScrollView style={globalStyles.scroll}>
+      <ScrollView showsVerticalScrollIndicator={false} style={globalStyles.scroll}>
         <Header />
-        <Text style={globalStyles.bigtext}>Care</Text>
-        <Text style={globalStyles.text1}>Explore our most recent products</Text>
+        <Text style={[globalStyles.bigtext, { marginHorizontal: 2 }]}>Care</Text>
+        <Text style={styles.txtSubline}>Explore our most recent products</Text>
         <ScrollView horizontal={true}>
           {items.map((item, index) => (
             <TouchableOpacity
@@ -75,7 +75,7 @@ export default function Care({ navigation }) {
             </TouchableOpacity>
           ))}
         </ScrollView>
-        <Text style={globalStyles.text2}>We Can Help You with</Text>
+        {/* <Text style={globalStyles.text2}>We Can Help You with</Text> */}
         <View style={styles.search}>
           <Image
             source={require("../../assets/search.png")}
@@ -123,6 +123,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexWrap: "wrap",
     marginBottom: responsiveHeight(5),
+  },
+  txtSubline: {
+    fontSize: responsiveFontSize(2),
+    //marginTop: responsiveHeight(1),
+    // marginBottom: responsiveHeight(1),
+    //fontFamily: "Inter",
+    color: "#75695A",
+    marginBottom: 14,
+    marginHorizontal: 2
   },
   img: {
     height: responsiveHeight(20),

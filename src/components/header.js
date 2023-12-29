@@ -49,26 +49,28 @@ export default function Header(props) {
 
 const styles = StyleSheet.create({
   cont: {
-    height: responsiveHeight(15),
-    width: responsiveWidth(100),
-    backgroundColor: "#fff",
+    // height: responsiveHeight(15),
+    // width: responsiveWidth(100),
+    // width: '100%',
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: "#EAEAEA",
+    alignContent: 'center',
   },
   img1: {
-    height: responsiveHeight(7),
-    width: responsiveWidth(20),
+    height: responsiveHeight(9),
+    width: responsiveWidth(17),
     resizeMode: "contain",
-    marginTop: responsiveHeight(3),
-    marginLeft: responsiveWidth(-1),
+    marginTop: responsiveHeight(6),
+    marginBottom: 12
   },
   img2: {
     height: responsiveHeight(5),
-    width: responsiveWidth(20),
+    width: responsiveWidth(10),
     resizeMode: "contain",
-    marginTop: responsiveHeight(4),
-    marginRight: responsiveWidth(7),
+    alignSelf: 'center',
+    marginTop: responsiveHeight(5.4),
+
+    // marginRight: responsiveWidth(7),
   },
 });

@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     padding: responsiveWidth(0.5),
     borderRadius: 10,
     marginBottom: responsiveHeight(1),
-    backgroundColor: "#fff",
+    backgroundColor: "#FFFFFF",
   },
   cont2: {
     alignItems: "center",

@@ -36,14 +36,14 @@ module.exports = StyleSheet.create({
   AuthInput: {
     marginBottom: 8,
     backgroundColor: "transparent",
-    borderColor:"#CBCBCB",
+    borderColor: "#CBCBCB",
     borderWidth: 1,
     // borderRadius:40,
     // borderEndEndRadius: 40,
-    borderBottomEndRadius:20,
-    borderBottomLeftRadius:20,
-    borderTopEndRadius:20,
-    borderTopLeftRadius:20
+    borderBottomEndRadius: 20,
+    borderBottomLeftRadius: 20,
+    borderTopEndRadius: 20,
+    borderTopLeftRadius: 20
   },
 
   AuthButton: {
@@ -885,5 +885,13 @@ module.exports = StyleSheet.create({
     right: 10,
     top: 13,
     position: "absolute",
+  },
+
+  img2: {
+    height: 20,
+    width: 20,
+    resizeMode: "contain",
+    // marginTop: responsiveHeight(4),
+    // marginRight: responsiveWidth(7),
   },
 });

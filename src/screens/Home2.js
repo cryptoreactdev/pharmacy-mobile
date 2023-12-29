@@ -105,6 +105,8 @@ export default function Home2(props) {
           product.product_info.type_title === "Skin Care" &&
           product.product_info.product_title
       );
+      console.log("AUTH ID2 : ", JSON.stringify(skinCareProductsList))
+
 
       setDevices(devices);
       setAccesories(accessoriesList);
@@ -159,7 +161,8 @@ export default function Home2(props) {
     <View style={globalStyles.cont}>
       <ScrollView
         showsVerticalScrollIndicator={false}
-        style={globalStyles.scroll}>
+        style={globalStyles.scroll}
+        overScrollMode="never">
         <Header {...props} />
         <Text style={globalStyles.bigtext}>Welcome Back, {user.displayName}</Text>
         {promotions.map((promotion) => (
@@ -171,7 +174,7 @@ export default function Home2(props) {
           />
         ))}
         <View style={styles.smallcont}>
-          <Text style={globalStyles.bigtext2}>My Treatements</Text>
+          <Text style={globalStyles.bigtext2}>My Treatments</Text>
           <TouchableOpacity
             onPress={() => {
               props.navigation.navigate("Shop");
@@ -183,7 +186,7 @@ export default function Home2(props) {
             />
           </TouchableOpacity>
         </View>
-        <Text style={globalStyles.text2}>Devices</Text>
+        <Text style={styles.subTitle}>Devices</Text>
         {devices.length > 0 ? (
           devices.map((device) => (
             <TouchableOpacity
@@ -196,10 +199,10 @@ export default function Home2(props) {
         ) : (
           <Text style={globalStyles.warningText}>You have not purchased any device yet.</Text>
         )}
-        <Text style={globalStyles.text2}>Skin Care</Text>
+        <Text style={styles.subTitle}>Skin Care</Text>
         {skinCareProducts.length > 0 ? (
           skinCareProducts?.map((product, index) => (
-            <View style={styles.card} key={index}>
+            <View style={[styles.card, { paddingVertical: openSkinCareOption[index] ? responsiveHeight(2) : 0 }]} key={index}>
               <Card3 product={product} onPress={() => handleCardClick(index)} />
               {openSkinCareOption[index] && (
                 <View>
@@ -252,7 +255,7 @@ export default function Home2(props) {
             />
           </TouchableOpacity>
         </View>
-        <ScrollView horizontal={true}>
+        <ScrollView showsHorizontalScrollIndicator={false} horizontal={true} overScrollMode="never">
           {items.map((item, index) => (
             <TouchableOpacity
               key={index}
@@ -302,10 +305,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    marginTop: 4
   },
   plus: {
-    height: 30,
-    width: 30,
+    height: responsiveHeight(5),
+    width: responsiveWidth(10),
     resizeMode: "contain",
   },
   img: {
@@ -315,10 +319,11 @@ const styles = StyleSheet.create({
     marginRight: responsiveWidth(4),
   },
   card: {
-    width: responsiveWidth(90),
+    // flex: 1,
+    // width: '96%',
     backgroundColor: "#fff",
     borderRadius: 10,
-    paddingVertical: responsiveHeight(2),
+    // paddingVertical: responsiveHeight(2),
     marginBottom: responsiveHeight(2),
   },
   row: {
@@ -388,6 +393,13 @@ const styles = StyleSheet.create({
   blogTitle: {
     color: "#fff",
     fontSize: 16,
+    fontWeight: "bold",
+  },
+  subTitle: {
+    fontSize: responsiveFontSize(2.2),
+    marginTop: responsiveHeight(1),
+    marginBottom: responsiveHeight(1),
+    color: "#75695A",
     fontWeight: "bold",
   },
 });

@@ -21,7 +21,7 @@ export default function Card5(props) {
       <Image source={{ uri: item.image }} style={styles.img} />
 
       <View style={styles.textcont}>
-        <Text style={styles.productName}>
+        <Text numberOfLines={2} style={styles.productName}>
           {/* {item.title.length > 10
             ? `${item.title.substring(0, 10)}...`
             : item.title} */}
@@ -30,7 +30,7 @@ export default function Card5(props) {
         <Text style={styles.txtStartingFrom}>
           Starting from:
         </Text>
-        <Text style={globalStyles.text1}>$ {item.price_30_days}</Text>
+        <Text style={styles.txtPrice}>${item.price_30_days}</Text>
       </View>
     </View>
   );
@@ -39,7 +39,7 @@ export default function Card5(props) {
 const styles = StyleSheet.create({
   img: {
     height: responsiveHeight(18),
-    width: responsiveWidth(26),
+    width: responsiveWidth(27),
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20,
     borderBottomLeftRadius: 20,
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 10,
-    // marginRight: responsiveWidth(3),
+    marginRight: responsiveWidth(2.6),
   },
   textcont: {
     alignItems: "center",
@@ -58,18 +58,30 @@ const styles = StyleSheet.create({
   },
 
   productName: {
-    fontSize: responsiveFontSize(1.8),
+    fontSize: responsiveFontSize(1.7),
     marginTop: responsiveHeight(1),
-    marginBottom: responsiveHeight(1),
+    // marginBottom: responsiveHeight(1),
     color: "#75695A",
-    backgroundColor: 'red'
+    width: '100%',
+    height: 32,
+    fontWeight: '500',
+    textAlign: 'center',
     // fontWeight: "bold",
   },
   txtStartingFrom: {
-    fontSize: responsiveFontSize(1.6),
-    marginTop: responsiveHeight(1),
+    fontSize: responsiveFontSize(1.5),
+    marginTop: responsiveHeight(0.3),
+    marginBottom: responsiveHeight(0.2),
+    color: "#75695A",
+    // fontWeight: "bold",
+  },
+
+  txtPrice: {
+    fontSize: responsiveFontSize(2),
+    // marginTop: responsiveHeight(0.3),
     marginBottom: responsiveHeight(1),
     color: "#75695A",
+    fontWeight: '700',
     // fontWeight: "bold",
   },
 
