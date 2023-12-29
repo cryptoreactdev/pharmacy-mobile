@@ -90,12 +90,12 @@ const App = () => {
   };
 
   useEffect(() => {
-        async function checkUser() {
+    async function checkUser() {
       onAuthStateChanged(auth, (user) => {
         if (user !== null) {
           setIsLogged(true);
           setLoaded(true);
-                  } else {
+        } else {
           setIsLogged(false);
           setLoaded(true);
         }

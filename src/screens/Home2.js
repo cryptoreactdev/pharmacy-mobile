@@ -4,7 +4,7 @@ import {
   View,
   ScrollView,
   Image,
-  TouchableOpacity,AsyncStorage
+  TouchableOpacity, AsyncStorage
 } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 import React, { useState, useEffect } from "react";
@@ -47,7 +47,7 @@ export default function Home2(props) {
   const [user, setUser] = useState([]);
 
   const auth = getAuth();
-  
+
   useEffect(() => {
     const initialOpenStates = {};
     skinCareProducts.forEach((product) => {
@@ -57,11 +57,11 @@ export default function Home2(props) {
   }, [skinCareProducts]);
 
   useEffect(() => {
-      setUser(auth.currentUser);
-      setIsLoaded(true);
+    setUser(auth.currentUser);
+    setIsLoaded(true);
   }, []);
 
-  const fetchData = async() => {
+  const fetchData = async () => {
     getFeaturedProducts().then((response) => {
       const modifiedProducts = response.map((product) => {
         const imageArray = product.image.split(",");
@@ -157,7 +157,9 @@ export default function Home2(props) {
 
   return (
     <View style={globalStyles.cont}>
-      <ScrollView style={globalStyles.scroll}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={globalStyles.scroll}>
         <Header {...props} />
         <Text style={globalStyles.bigtext}>Welcome Back, {user.displayName}</Text>
         {promotions.map((promotion) => (

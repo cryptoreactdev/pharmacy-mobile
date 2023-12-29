@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { SafeAreaView, View, Alert, TouchableOpacity, KeyboardAvoidingView } from "react-native";
+import { SafeAreaView, View, Alert, TouchableOpacity, KeyboardAvoidingView, ScrollView } from "react-native";
 import { Text, TextInput, IconButton } from "react-native-paper";
 import Styles from "../config/Styles";
 import Languages from "../languages";
@@ -15,6 +15,7 @@ import {
 } from "firebase/auth";
 import { getFirestore, collection, doc, setDoc } from "firebase/firestore";
 import AuthenticationBtn from "../components/AuthenticationBtn";
+import { style } from "deprecated-react-native-prop-types/DeprecatedTextPropTypes";
 
 const auth = getAuth();
 
@@ -70,14 +71,18 @@ const Register = ({ navigation }) => {
   };
 
   return (
+    // <ScrollView
+    //   showsVerticalScrollIndicator={false}
+    // >
     <SafeAreaView
-      style={{ flex: 1, justifyContent: "center", backgroundColor: "#FAF9F7" }}
-    >
+      style={{ flex: 1, justifyContent: "center", backgroundColor: "#FAF9F7" }}>
+
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={{ flex: 1 }}
       >
         <View style={[Styles.AuthPage]}>
+
           <View style={[Styles.AuthContent]}>
             <View style={{ marginTop: 50 }}>
               <TextInput
@@ -126,23 +131,21 @@ const Register = ({ navigation }) => {
                     <MaterialCommunityIcons
                       name="information"
                       size={25}
-                      color={`${
-                        eightCharacters &&
+                      color={`${eightCharacters &&
                         noSpaces &&
                         (atLeastOneNumber || atLeastOneSymbol)
-                          ? "green"
-                          : "red"
-                      }`}
+                        ? "green"
+                        : "red"
+                        }`}
                     />
                     <Text>
                       Password Strength:{" "}
-                      {`${
-                        eightCharacters &&
+                      {`${eightCharacters &&
                         noSpaces &&
                         (atLeastOneNumber || atLeastOneSymbol)
-                          ? "Strong"
-                          : "Week"
-                      }`}
+                        ? "Strong"
+                        : "Week"
+                        }`}
                     </Text>
                   </View>
                   <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -155,11 +158,10 @@ const Register = ({ navigation }) => {
                   </View>
                   <View style={{ flexDirection: "row", alignItems: "center" }}>
                     <MaterialCommunityIcons
-                      name={`${
-                        atLeastOneNumber || atLeastOneSymbol
-                          ? "check"
-                          : "window-close"
-                      }`}
+                      name={`${atLeastOneNumber || atLeastOneSymbol
+                        ? "check"
+                        : "window-close"
+                        }`}
                       size={25}
                       color={"black"}
                     />
@@ -252,18 +254,16 @@ const Register = ({ navigation }) => {
               </View>
               <AuthenticationBtn
                 textColor={{
-                  color: `${
-                    email && password && firstName && lastName && phoneNumber
-                      ? "#F7F1E7"
-                      : "#757575"
-                  }`,
+                  color: `${email && password && firstName && lastName && phoneNumber
+                    ? "#F7F1E7"
+                    : "#757575"
+                    }`,
                 }}
                 btnstyle={{
-                  backgroundColor: `${
-                    email && password && firstName && lastName && phoneNumber
-                      ? "#41392F"
-                      : "#e2e2e2"
-                  }`,
+                  backgroundColor: `${email && password && firstName && lastName && phoneNumber
+                    ? "#41392F"
+                    : "#e2e2e2"
+                    }`,
                   width: "100%",
                   height: 60,
                 }}
@@ -274,7 +274,8 @@ const Register = ({ navigation }) => {
           </View>
         </View>
       </KeyboardAvoidingView>
-    </SafeAreaView>
+    </SafeAreaView >
+
   );
 };
 

@@ -64,7 +64,7 @@ const RegisterPharmacyProduct = ({ navigation }) => {
     >
       <View style={{ marginTop: 30, flex: 6 }}>
         <Text style={[styles.title, { fontFamily: "Bricolage Grotesque" }]}>
-          Register your Pharmacy product
+          Register your product
         </Text>
         <Text style={{ color: "#545454", fontSize: 16 }}>
           AppName is proud to offer a limited lifetime warranty on all of its devices. Please select the devices you would like to register.
@@ -91,9 +91,8 @@ const RegisterPharmacyProduct = ({ navigation }) => {
                 <IconButton
                   icon={"check-circle-outline"}
                   style={{
-                    backgroundColor: `${
-                      selectedProducts.includes(product) && "#75695A"
-                    }`,
+                    backgroundColor: `${selectedProducts.includes(product) && "#75695A"
+                      }`,
                     flexDirection: "row",
                     justifyContent: "center",
                     alignItems: "center",
@@ -102,7 +101,7 @@ const RegisterPharmacyProduct = ({ navigation }) => {
                 />
                 <Image
                   source={{ uri: product.image }}
-                  style={{ width: 50, height: 50, marginBottom: 10 }}
+                  style={{ width: 60, height: 60, marginBottom: 10 }}
                 />
               </View>
               <Text>{product.title}</Text>
@@ -164,19 +163,20 @@ const styles = StyleSheet.create({
   productContainer: {
     flexDirection: "row",
     flexWrap: "wrap",
-    justifyContent: "space-between",
+    // justifyContent: "space-between",
   },
   productButton: {
     backgroundColor: "transparent",
     borderColor: "#000",
-    paddingHorizontal: 1,
+    paddingHorizontal: 0,
+    marginHorizontal: 5,
     marginVertical: 5,
     width: "30%",
   },
   selectedButton: {},
   productImageContainer: {
     backgroundColor: "white",
-    paddingLeft: 10,
+    paddingLeft: 0,
     alignItems: "center",
   },
 });

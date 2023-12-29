@@ -2,7 +2,7 @@ import {
   responsiveHeight,
   responsiveWidth,
   responsiveFontSize,
-} from "react-native-responsive-dimensions";  
+} from "react-native-responsive-dimensions";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 
 export const globalStyles = StyleSheet.create({
@@ -67,11 +67,11 @@ export const globalStyles = StyleSheet.create({
     fontWeight: '400',
   },
   text3: {
-    fontSize: responsiveFontSize(2),
+    fontSize: responsiveFontSize(1.6),
     marginTop: responsiveHeight(1),
     marginBottom: responsiveHeight(1),
     color: "#75695A",
-    fontWeight: "bold",
+    // fontWeight: "bold",
   },
   goldentext2: {
     fontSize: responsiveFontSize(2),

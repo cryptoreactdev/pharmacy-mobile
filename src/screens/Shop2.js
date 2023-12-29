@@ -75,6 +75,7 @@ export default function Shop2(props) {
         // Add the product to the array of its type
         separatedData[productType].push(product);
       });
+      console.log("DATA IS : " + JSON.stringify(separatedData))
       setAllTypesProducts(separatedData);
 
       setProducts(modifiedProducts);
@@ -123,25 +124,25 @@ export default function Shop2(props) {
           <View style={styles.filters}>
             <TouchableOpacity
               style={styles.btn}
-              // onPress={() => onChangeScreenProduct(product, "skincare")}
+            // onPress={() => onChangeScreenProduct(product, "skincare")}
             >
               <Text style={globalStyles.text3}>Skin care</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.btn}
-              // onPress={() => onChangeScreenProduct(product, "skincare")}
+            // onPress={() => onChangeScreenProduct(product, "skincare")}
             >
               <Text style={globalStyles.text3}>Devices</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.btn}
-              // onPress={() => onChangeScreenProduct(product, "skincare")}
+            // onPress={() => onChangeScreenProduct(product, "skincare")}
             >
               <Text style={globalStyles.text3}>Accessories</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.btn}
-              // onPress={() => onChangeScreenProduct(product, "skincare")}
+            // onPress={() => onChangeScreenProduct(product, "skincare")}
             >
               <Text style={globalStyles.text3}>Warranty</Text>
             </TouchableOpacity>

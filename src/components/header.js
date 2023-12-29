@@ -20,13 +20,13 @@ export default function Header(props) {
   const [user, setUser] = useState([]);
   useEffect(() => {
 
-      setUser(auth.currentUser);
+    setUser(auth.currentUser);
 
   }, []);
   const onChangeScreen = (page) => {
-    props.navigation.navigate(page);""
+    props.navigation.navigate(page);
   };
-   const onShoppingCartPress = () => {
+  const onShoppingCartPress = () => {
     props.navigation.navigate('shoppingCart'); // Replace 'shoppingCart' with the actual name of your shopping cart screen
   };
   return (

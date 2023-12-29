@@ -83,20 +83,32 @@ export default function Routine() {
           </View>
           <View style={styles.conttt}>
             <View style={styles.date}>
-              <Text style={globalStyles.text1}>Sun</Text>
-              <Text style={globalStyles.text1}>21</Text>
+              <Text style={styles.txtDate}>Sun</Text>
+              <Text style={styles.txtDate}>21</Text>
             </View>
             <View style={styles.date}>
-              <Text style={globalStyles.text1}>Sun</Text>
-              <Text style={globalStyles.text1}>21</Text>
+              <Text style={styles.txtDate}>Mon</Text>
+              <Text style={styles.txtDate}>22</Text>
             </View>
             <View style={styles.date}>
-              <Text style={globalStyles.text1}>Sun</Text>
-              <Text style={globalStyles.text1}>21</Text>
+              <Text style={styles.txtDate}>Tue</Text>
+              <Text style={styles.txtDate}>23</Text>
             </View>
             <View style={styles.date}>
-              <Text style={globalStyles.text1}>Sun</Text>
-              <Text style={globalStyles.text1}>21</Text>
+              <Text style={styles.txtDate}>Wed</Text>
+              <Text style={styles.txtDate}>24</Text>
+            </View>
+            <View style={styles.date}>
+              <Text style={styles.txtDate}>Thu</Text>
+              <Text style={styles.txtDate}>25</Text>
+            </View>
+            <View style={styles.date}>
+              <Text style={styles.txtDate}>Fri</Text>
+              <Text style={styles.txtDate}>26</Text>
+            </View>
+            <View style={styles.date}>
+              <Text style={styles.txtDate}>Sat</Text>
+              <Text style={styles.txtDate}>27</Text>
             </View>
           </View>
         </TouchableOpacity>
@@ -119,8 +131,8 @@ export default function Routine() {
           <View>
             <View style={styles.lastcard}>
               <View style={styles.aikor}>
-                <Text style={globalStyles.text2}>Morning, 8am</Text>
-                <Text style={globalStyles.bigtext2}> [ Product ]</Text>
+                <Text numberOfLines={1} style={styles.useTime}>Morning, 8AM</Text>
+                <Text numberOfLines={1} style={styles.productName}>[ Product ]</Text>
               </View>
               <Image
                 source={require("../../assets/soap.png")}
@@ -129,8 +141,8 @@ export default function Routine() {
             </View>
             <View style={styles.lastcard}>
               <View style={styles.aikor}>
-                <Text style={globalStyles.text2}>Morning, 8am</Text>
-                <Text style={globalStyles.bigtext2}> [ Product ]</Text>
+                <Text numberOfLines={1} style={styles.useTime}>Morning, 8AM</Text>
+                <Text numberOfLines={1} style={styles.productName}>[ Product ]</Text>
               </View>
               <Image
                 source={require("../../assets/soap.png")}
@@ -146,8 +158,9 @@ export default function Routine() {
 
 const styles = StyleSheet.create({
   soap: {
-    height: responsiveHeight(10),
-    width: responsiveWidth(20),
+    flex: 1,
+    height: responsiveHeight(9),
+    width: responsiveWidth(18),
     resizeMode: "contain",
   },
   smallcont: {
@@ -173,7 +186,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    width: responsiveWidth(70),
+    width: responsiveWidth(90),
     backgroundColor: "#F7F1E7",
     alignSelf: "center",
     borderRadius: 10,
@@ -181,7 +194,7 @@ const styles = StyleSheet.create({
   },
   btn2: {
     height: responsiveHeight(4.5),
-    width: responsiveWidth(35),
+    width: responsiveWidth(45),
     borderRadius: 10,
     flexDirection: "row",
     justifyContent: "center",
@@ -189,7 +202,7 @@ const styles = StyleSheet.create({
   },
   btn: {
     height: responsiveHeight(4.5),
-    width: responsiveWidth(35),
+    width: responsiveWidth(45),
     backgroundColor: "#fff",
     borderRadius: 10,
     flexDirection: "row",
@@ -209,7 +222,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 10,
     borderWidth: 1,
     borderColor: "#41392F",
   },
@@ -221,7 +233,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 10,
   },
   imgg: {
     height: 20,
@@ -237,11 +248,13 @@ const styles = StyleSheet.create({
     marginBottom: responsiveHeight(2),
     width: responsiveWidth(90),
     alignSelf: "center",
-    marginTop: responsiveHeight(2),
+    marginTop: responsiveHeight(3),
   },
   date: {
     justifyContent: "center",
     alignItems: "center",
+    // backgroundColor: 'red',
+    width: '12%'
   },
   conttt: {
     flexDirection: "row",
@@ -249,6 +262,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: responsiveWidth(90),
     alignSelf: "center",
+    // backgroundColor: 'red',
+    paddingHorizontal: responsiveWidth(4)
   },
   lastcont: {
     flexDirection: "row",
@@ -273,13 +288,40 @@ const styles = StyleSheet.create({
     height: responsiveHeight(12),
     width: responsiveWidth(70),
     borderRadius: 10,
-    justifyContent: "space-between",
-    paddingHorizontal: responsiveWidth(2),
+    alignItems: 'center',
+    // justifyContent: "space-between",
+    // paddingHorizontal: responsiveWidth(2),
+    paddingLeft: responsiveWidth(5),
     marginBottom: responsiveHeight(2),
     marginLeft: responsiveWidth(2),
   },
   aikor: {
-    justifyContent: "center",
-    alignItems: "center",
+    flex: 2,
+    height: 'auto',
   },
+  productName: {
+    paddingVertical: 2,
+    fontSize: responsiveFontSize(2.3),
+    fontWeight: "bold",
+    // backgroundColor: 'green',
+    // marginTop: responsiveHeight(1),
+    // marginBottom: responsiveHeight(1),
+    color: "#41392F",
+  },
+  useTime: {
+    paddingVertical: 2,
+    fontSize: responsiveFontSize(2.2),
+    // marginTop: responsiveHeight(1),
+    // marginBottom: responsiveHeight(1),
+    // backgroundColor: 'red',
+    color: "#75695A",
+
+  },
+  txtDate: {
+    fontSize: responsiveFontSize(1.9),
+    //marginTop: responsiveHeight(1),
+    // marginBottom: responsiveHeight(1),
+    color: "#41392F",
+  },
+
 });
