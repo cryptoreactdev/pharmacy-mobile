@@ -70,14 +70,14 @@ export default function DailyRoutine(props) {
 
   const handleSave = async () => {
     try {
-       const reminderPayload = {
+      const reminderPayload = {
         user_id: auth.currentUser.uid,
         product_id: '12',
         days: selectedDays,
         morning_time: morningTime,
         evening_time: eveningTime,
       };
-      
+
       console.log('Sending payload:', reminderPayload);
 
       const responseData = await addReminder(reminderPayload);

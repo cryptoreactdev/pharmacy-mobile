@@ -10,9 +10,12 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
+  Dimensions
 } from "react-native";
 import React from "react";
 import { globalStyles } from "../../stylesheet";
+const { width, height } = Dimensions.get("window");
+
 
 export default function card1({ key, text1, text2, imageSrc }) {
   return (
@@ -37,12 +40,13 @@ export default function card1({ key, text1, text2, imageSrc }) {
 
 const styles = StyleSheet.create({
   img: {
-    height: responsiveHeight(8),
+    height: height > 700 ? responsiveHeight(6) : responsiveHeight(8),
     width: responsiveWidth(15),
     resizeMode: "contain",
     backgroundColor: 'white',
     borderWidth: 1,
     borderRadius: 12,
+    borderColor: '#ffffff',
     elevation: 1,
     marginRight: responsiveWidth(2),
   },

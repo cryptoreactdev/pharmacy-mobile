@@ -4,7 +4,7 @@ import {
   View,
   ScrollView,
   Image,
-  TouchableOpacity, AsyncStorage
+  TouchableOpacity, AsyncStorage, Dimensions
 } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 import React, { useState, useEffect } from "react";
@@ -31,6 +31,7 @@ import {
 } from "../config/DataApp";
 import { getAuth } from 'firebase/auth';
 import Pressable from "react-native/Libraries/Components/Pressable/Pressable";
+const { width, height } = Dimensions.get("window");
 
 export default function Home2(props) {
   const [isLoaded, setIsLoaded] = useState(false);

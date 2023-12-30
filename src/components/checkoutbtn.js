@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignSelf: "center",
     marginTop: 20,
+    marginBottom: 42
   },
   btn1: {
     backgroundColor: "#41392F",
@@ -29,6 +30,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignSelf: "center",
     marginTop: 20,
+    marginBottom: 42
   },
   text: {
     color: "#FFFFFF",

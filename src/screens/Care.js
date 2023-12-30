@@ -6,6 +6,7 @@ import {
   Image,
   TouchableOpacity,
   TextInput,
+  Dimensions
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import Header from "../components/header";
@@ -15,6 +16,7 @@ import Card2 from "../components/homescreencards/card2";
 import { getFeaturedPosts } from "../config/DataApp";
 import { getLatestPosts } from "../config/DataApp";
 import { LinearGradient } from "expo-linear-gradient";
+const { width, height } = Dimensions.get("window");
 
 import {
   responsiveHeight,
@@ -134,7 +136,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 2
   },
   img: {
-    height: responsiveHeight(20),
+    height: height > 700 ? responsiveHeight(16) : responsiveHeight(18),
     width: responsiveWidth(26),
     // resizeMode: "contain",
     alignSelf: "center",

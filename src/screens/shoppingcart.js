@@ -6,6 +6,8 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
+  SafeAreaView,
+  Dimensions
 } from "react-native";
 import { removeFromCart } from "../actions/cartActions";
 import DropdownComponent from "../components/DropDownComponent";
@@ -23,11 +25,13 @@ import { getLatestProducts } from "../config/DataApp";
 import Card5 from "../components/homescreencards/card5";
 import { useNavigation } from "@react-navigation/native";
 import Pressable from "react-native/Libraries/Components/Pressable/Pressable";
+const { width, height } = Dimensions.get("window");
+
 const data = [
-  { label: "30 days", value: "30days" },
-  { label: "60 days", value: "60days" },
-  { label: "90 days", value: "90days" },
-  { label: "120 days", value: "120days" },
+  { label: "Every 30 days", value: "30days" },
+  { label: "Every 60 days", value: "60days" },
+  { label: "Every 90 days", value: "90days" },
+  { label: "Every 120 days", value: "120days" },
 ];
 export default function ShoppingCart(props) {
   // Retrieve cart information from the Redux store
@@ -56,56 +60,58 @@ export default function ShoppingCart(props) {
     });
   }, []);
 
-  const removeProductFromCart = (item) => {};
+  const removeProductFromCart = (item) => { };
 
   // Log the cart information to the console
   return (
     <View style={{ flex: 1 }}>
-      <ScrollView style={styles.cont} showsVerticalScrollIndicator={false}>
-        <View>
-          <View style={styles.header}>
-            <TouchableOpacity
-              style={{ width: 70, header: 80 }}
-              onPress={() => {
-                props.navigation.goBack();
-              }}
-            >
-              <Image
-                source={require("../../assets/left.png")}
-                style={styles.left}
-              />
-            </TouchableOpacity>
-            <Text style={styles.text}>Cart</Text>
-          </View>
-          <View style={styles.imgcont}>
-            {cartInformation.cartItems.map((item, index) => (
-              <CartItem
-                key={index}
-                item={item}
-                removeProductFromCart={removeProductFromCart}
-              />
-            ))}
-          </View>
-          <View style={styles.imgcont}>
-            <Text style={styles.customH3}>Frequently bought together</Text>
-          </View>
-          <ScrollView
-            style={styles.cont2}
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-          >
-            {products.map((item, index) => (
+      <SafeAreaView style={globalStyles.droidSafeArea}>
+        <ScrollView style={styles.cont} showsVerticalScrollIndicator={false}>
+          <View>
+            <View style={styles.header}>
               <TouchableOpacity
-                key={index}
-                onPress={() => onChangeScreenProduct(item)}
+                style={{ width: 70, header: 80 }}
+                onPress={() => {
+                  props.navigation.goBack();
+                }}
               >
-                <Card5 item={item} />
+                <Image
+                  source={require("../../assets/left.png")}
+                  style={styles.left}
+                />
               </TouchableOpacity>
-            ))}
-          </ScrollView>
-          <Checkoutbtn title={"Checkout"} onPress={handleCheckout} />
-        </View>
-      </ScrollView>
+              <Text style={styles.text}>Cart</Text>
+            </View>
+            <View style={styles.imgcont}>
+              {cartInformation.cartItems.map((item, index) => (
+                <CartItem
+                  key={index}
+                  item={item}
+                  removeProductFromCart={removeProductFromCart}
+                />
+              ))}
+            </View>
+            <View style={styles.imgcont}>
+              <Text style={styles.customH3}>Frequently bought together</Text>
+            </View>
+            <ScrollView
+              style={styles.cont2}
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+            >
+              {products.map((item, index) => (
+                <TouchableOpacity
+                  key={index}
+                  onPress={() => onChangeScreenProduct(item)}
+                >
+                  <Card5 item={item} />
+                </TouchableOpacity>
+              ))}
+            </ScrollView>
+            <Checkoutbtn title={"Checkout"} onPress={handleCheckout} />
+          </View>
+        </ScrollView>
+      </SafeAreaView>
     </View>
   );
 }
@@ -174,33 +180,38 @@ const CartItem = (props) => {
             </View>
           </View>
         ) : (
-          <DropdownComponent
-            data={data}
-            value={value}
-            setValue={setValue}
-            isFocus={isFocus}
-            setIsFocus={setIsFocus}
-          />
+
+          <View style={{ alignSelf: 'flex-end', backgroundColor: 'red', flexDirection: 'row' }}>
+            <DropdownComponent
+              data={data}
+              value={value}
+              setValue={setValue}
+              isFocus={isFocus}
+              setIsFocus={setIsFocus}
+            />
+            <View
+            // style={{ alignItems: "center", width: 20, justifyContent: "center" }}
+            >
+              <Pressable
+                style={styles.crossText}
+                onPress={() => {
+                  dispatch(removeFromCart(item.productInformation.id));
+                }}
+              >
+                <Text style={{ color: "red" }}>X</Text>
+              </Pressable>
+            </View>
+          </View>
+
         )}
       </View>
-      <View style={{}}>
+      <View >
         <View style={styles.textContainer}>
           <Text style={styles.additionalText}>
             ${quantity * item.productInformation.one_time_price}
           </Text>
         </View>
-        <View
-          style={{ alignItems: "center", width: 20, justifyContent: "center" }}
-        >
-          <Pressable
-            style={styles.crossText}
-            onPress={() => {
-              dispatch(removeFromCart(item.productInformation.id));
-            }}
-          >
-            <Text style={{ color: "red" }}>X</Text>
-          </Pressable>
-        </View>
+
       </View>
     </View>
   );
@@ -241,9 +252,10 @@ const styles = StyleSheet.create({
     marginTop: responsiveHeight(2),
   },
   text: {
-    fontSize: responsiveFontSize(2),
+    fontSize: height > 700 ? responsiveFontSize(2) : responsiveFontSize(3),
     color: "#000000",
     marginRight: responsiveWidth(45),
+    fontWeight: 'bold'
   },
   crossText: {
     display: "flex",

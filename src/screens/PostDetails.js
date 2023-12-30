@@ -56,11 +56,12 @@ export default function PostDetails(props, { navigation }) {
   } else {
     return (
       <View style={{ flex: 1 }}>
-        <ScrollView
-          showsHorizontalScrollIndicator={false}
-          showsVerticalScrollIndicator={false}
-        >
-          <SafeAreaView>
+        <SafeAreaView>
+
+          <ScrollView
+            showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
+          >
             <View>
               <ImageBackground
                 source={{ uri: item.image }}
@@ -133,8 +134,9 @@ export default function PostDetails(props, { navigation }) {
                 />
               </View>
             </View>
-          </SafeAreaView>
-        </ScrollView>
+          </ScrollView>
+        </SafeAreaView>
+
       </View>
     );
   }

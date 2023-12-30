@@ -10,6 +10,18 @@ import Blog from "../screens/Blog";
 
 const Tab = createBottomTabNavigator();
 
+const getTabBarVisibility = (route) => {
+  const routeName = route.state
+    ? route.state.routes[route.state.index].name
+    : '';
+
+  if (routeName === 'confirmcheckout') {
+    return false;
+  }
+
+  return true;
+};
+
 const BottomTabNavigation = () => {
   return (
     <Tab.Navigator
@@ -46,11 +58,26 @@ const BottomTabNavigation = () => {
         inactiveTintColor: "gray",
       }}
     >
-      <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Routine" component={Routine} />
-      <Tab.Screen name="Care" component={Care} />
-      <Tab.Screen name="Community" component={Blog} />
-      <Tab.Screen name="Shop" component={Store} />
+      <Tab.Screen name="Home" component={Home}
+        options={({ route }) => ({
+          tabBarVisible: getTabBarVisibility(route),
+        })} />
+      <Tab.Screen name="Routine" component={Routine}
+        options={({ route }) => ({
+          tabBarVisible: getTabBarVisibility(route),
+        })} />
+      <Tab.Screen name="Care" component={Care}
+        options={({ route }) => ({
+          tabBarVisible: getTabBarVisibility(route),
+        })} />
+      <Tab.Screen name="Community" component={Blog}
+        options={({ route }) => ({
+          tabBarVisible: getTabBarVisibility(route),
+        })} />
+      <Tab.Screen name="Shop" component={Store}
+        options={({ route }) => ({
+          tabBarVisible: getTabBarVisibility(route),
+        })} />
     </Tab.Navigator>
   );
 };

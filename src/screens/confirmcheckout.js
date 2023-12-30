@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import { getAuth } from 'firebase/auth';
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Image, TextInput } from "react-native";
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Image, TextInput, SafeAreaView, Dimensions } from "react-native";
 import { Picker } from '@react-native-picker/picker';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from "react-native-responsive-dimensions";
 import { globalStyles } from "../stylesheet";
@@ -11,12 +11,13 @@ import Card5 from "../components/homescreencards/card5";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch } from 'react-redux';
 import { clearCart } from '../actions/cartActions'; // Update the path
+const { width, height } = Dimensions.get("window");
 
 
-export default function ConfirmCheckout() {
+export default function ConfirmCheckout(props, { navigation }) {
   const [inputValue, setInputValue] = useState('');
   const cartInformation = useSelector((state) => state.cart);
-  const navigation = useNavigation();
+  // const navigation = useNavigation();
 
   const dispatch = useDispatch(); // Add this line to get the dispatch function
 
@@ -28,6 +29,7 @@ export default function ConfirmCheckout() {
       totalAmount += cartInformation.cartItems[i].finalPrice || 0;
     }
   }
+
 
   const auth = getAuth();
 
@@ -64,121 +66,124 @@ export default function ConfirmCheckout() {
 
   return (
     <View style={{ flex: 1 }}>
-      <ScrollView style={styles.cont}>
-        <View>
-          <View style={styles.header}>
-            <TouchableOpacity
-              onPress={() => {
-                navigation.navigate("checkout2", props);
-              }}
-            >
-              <Image
-                source={require("../../assets/left.png")}
-                style={styles.left}
-              />
-            </TouchableOpacity>
-            <Text style={styles.text}>Checkout</Text>
-          </View>
-          <View style={styles.mainContainer}>
-            <Text style={styles.shippingTitle}>Shipping Address</Text>
-            <TouchableOpacity
-              onPress={() => {
-                // Handle shipping address press
-              }}
-            >
-              <View style={styles.shippingAddressContainer}>
-                <View style={styles.firstRow}>
-                  <Image
-                    source={require("../../assets/shipping-icon.png")}
-                    style={styles.shippingImage}
-                  />
-                </View>
-                <View style={styles.secondRow}>
-                  <Text style={styles.upperText}>Logan Paul</Text>
-                  <Text style={styles.lowerText}>Av. Address 123. Medellin, Colombia. </Text>
-                </View>
-                <View style={styles.thirdRow}>
-                  <Image
-                    source={require("../../assets/chevron-right.png")}
-                    style={styles.shippingImage}
-                  />
-                </View>
-              </View>
-            </TouchableOpacity>
-            <Text style={styles.discountTitle}>Discounts</Text>
-            <TextInput
-              style={styles.discountInput}
-              placeholder="Insert coupon"
-              onChangeText={handleInputChange}
-              value={inputValue}
-            />
-            <TouchableOpacity
-              style={styles.package}
-              onPress={() => {}}
-            >
-              <View style={styles.textrow}>
-                <View style={{ flexDirection: "row" }}>
-                  <Image
-                    source={require("../../assets/radio-button-empty.png")}
-                    style={styles.box}
-                  />
-                  <Text style={globalStyles.text2}>Use credits</Text>
-                </View>
-                <Text style={globalStyles.text2}>
-                  $75
-                </Text>
-              </View>
-            </TouchableOpacity>
-            <Text style={styles.discountTitle}>Pay with</Text>
-            <TouchableOpacity
-              onPress={() => {
-                // Handle payment method press
-              }}
-            >
-              <View style={styles.shippingAddressContainer}>
-                <View style={styles.firstRowCard}>
-                  <Image
-                    source={require("../../assets/visa.png")}
-                    style={styles.cardImage}
-                  />
-                </View>
-                <View style={styles.secondRowCard}>
-                  <Text style={styles.upperText}>*****3241</Text>
-                  <Text style={styles.lowerText}>Logan Paul</Text>
-                </View>
-              </View>
-            </TouchableOpacity>
-            <Text style={styles.discountTitle}>Price details</Text>
-            <View style={styles.priceDetailsContainer}>
-              {cartInformation.cartItems.map((item, index) => (
-                <View key={index} style={styles.priceDetailsRow}>
-                  <View style={styles.priceDetailsLeftRow}>
-                    <Text style={styles.priceDetailsText}>{item.productInformation.title}</Text>
-                  </View>
-                  <View style={styles.priceDetailsRightRow}>
-                    <Text style={styles.priceDetailsText}>${item.finalPrice}</Text>
-                  </View>
-                </View>
-              ))}
+      <SafeAreaView style={globalStyles.droidSafeArea}>
+        <ScrollView showsVerticalScrollIndicator={false} style={styles.cont} overScrollMode="never">
+          <View>
+            <View style={styles.header}>
+              <TouchableOpacity
+                onPress={() => {
+                  props.navigation.goBack()
+                }}
+              >
+                <Image
+                  source={require("../../assets/left.png")}
+                  style={styles.left}
+                />
+              </TouchableOpacity>
+              <Text style={styles.text}>Checkout</Text>
             </View>
+            <View style={styles.mainContainer}>
+              <Text style={styles.shippingTitle}>Shipping Address</Text>
+              <TouchableOpacity
+                onPress={() => {
+                  // Handle shipping address press
+                }}
+              >
+                <View style={styles.shippingAddressContainer}>
+                  <View style={styles.firstRow}>
+                    <Image
+                      source={require("../../assets/shipping-icon.png")}
+                      style={styles.shippingImage}
+                    />
+                  </View>
+                  <View style={styles.secondRow}>
+                    <Text style={styles.upperText}>Logan Paul</Text>
+                    <Text numberOfLines={2} style={styles.lowerText}>Av. Address 123. Medellin, Colombia. </Text>
+                  </View>
+                  <View style={styles.thirdRow}>
+                    <Image
+                      source={require("../../assets/chevron-right.png")}
+                      style={styles.shippingImage}
+                    />
+                  </View>
+                </View>
+              </TouchableOpacity>
+              <Text style={styles.discountTitle}>Discounts</Text>
+              <TextInput
+                style={styles.discountInput}
+                placeholder="Insert coupon"
+                onChangeText={handleInputChange}
+                value={inputValue}
+              />
+              <TouchableOpacity
+                style={styles.package}
+                onPress={() => { }}
+              >
+                <View style={styles.textrow}>
+                  <View style={{ flexDirection: "row" }}>
+                    <Image
+                      source={require("../../assets/radio-button-empty.png")}
+                      style={styles.box}
+                    />
+                    <Text style={styles.txtUseCredit}>Use credits</Text>
+                  </View>
+                  <Text style={styles.txtUseCredit}>
+                    $75
+                  </Text>
+                </View>
+              </TouchableOpacity>
+              <Text style={styles.discountTitle}>Pay with</Text>
+              <TouchableOpacity
+                onPress={() => {
+                  // Handle payment method press
+                }}
+              >
+                <View style={styles.shippingAddressContainer}>
+                  <View style={styles.firstRowCard}>
+                    <Image
+                      source={require("../../assets/visa.png")}
+                      style={styles.cardImage}
+                    />
+                  </View>
+                  <View style={styles.secondRowCard}>
+                    <Text style={styles.upperText}>*****3241</Text>
+                    <Text style={styles.lowerText}>Logan Paul</Text>
+                  </View>
+                </View>
+              </TouchableOpacity>
+              <Text style={styles.discountTitle}>Price details</Text>
+              <View style={styles.priceDetailsContainer}>
+                {cartInformation.cartItems.map((item, index) => (
+                  <View key={index} style={styles.priceDetailsRow}>
+                    <View style={styles.priceDetailsLeftRow}>
+                      <Text style={styles.priceDetailsText}>{item.productInformation.title}</Text>
+                    </View>
+                    <View style={styles.priceDetailsRightRow}>
+                      <Text style={styles.priceText}>${item.finalPrice}</Text>
+                    </View>
+                  </View>
+                ))}
+              </View>
+            </View>
+            <Checkoutbtn
+              title={`Buy now · $${totalAmount}`}
+              onPress={handleCheckout}
+
+            />
           </View>
-          <Checkoutbtn
-            title={`Buy now · $${totalAmount}`}
-            onPress={handleCheckout}
-           
-          />
-        </View>
-      </ScrollView>
+        </ScrollView>
+      </SafeAreaView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   cont: {
-    width: responsiveWidth(90),
+    width: responsiveWidth(100),
+    padding: 10,
     alignSelf: "center",
-   // marginBottom: responsiveHeight(10),
-    backgroundColor: '#F5F5F5'
+    // marginBottom: responsiveHeight(10),
+    backgroundColor: '#FAF9F7'
   },
   left: {
     height: 50,
@@ -208,8 +213,9 @@ const styles = StyleSheet.create({
     marginTop: responsiveHeight(2),
   },
   text: {
-    fontSize: responsiveFontSize(2),
+    fontSize: height > 700 ? responsiveFontSize(2) : responsiveFontSize(2.4),
     color: "#000000",
+    fontWeight: '700',
     marginRight: responsiveWidth(45),
   },
   text2: {
@@ -273,12 +279,12 @@ const styles = StyleSheet.create({
     fontWeight: '400',
   },
   package: {
-  paddingVertical: responsiveHeight(2),
-  paddingHorizontal: 0, // Set left and right padding to 0
-  marginVertical: responsiveHeight(1),
-  borderRadius: 10,
-  width: '100%',
-},
+    // paddingVertical: responsiveHeight(2),
+    paddingHorizontal: height > 700 ? responsiveWidth(1) : responsiveWidth(2), // Set left and right padding to 0
+    // marginVertical: responsiveHeight(1),
+    borderRadius: 10,
+    width: '100%',
+  },
   textrow: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -289,7 +295,7 @@ const styles = StyleSheet.create({
     width: 20,
     resizeMode: "contain",
     marginTop: responsiveHeight(1.2),
-    marginRight: responsiveWidth(1),
+    marginRight: responsiveWidth(2),
   },
   counterContainer: {
     flexDirection: "row",
@@ -302,7 +308,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 0,
     borderBottomRightRadius: 0,
     borderWidth: 1,
-    borderColor: '#E2E2E2', 
+    borderColor: '#E2E2E2',
     backgroundColor: '#FFF',
     padding: 4,
     width: 32,
@@ -313,7 +319,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 0,
     borderBottomLeftRadius: 0,
     borderWidth: 1,
-    borderColor: '#E2E2E2', 
+    borderColor: '#E2E2E2',
     backgroundColor: '#FFF',
     padding: 4,
     width: 32,
@@ -321,7 +327,7 @@ const styles = StyleSheet.create({
   },
   operationsButtonCounter: {
     borderWidth: 1,
-    borderColor: '#E2E2E2', 
+    borderColor: '#E2E2E2',
     backgroundColor: '#FFF',
     display: 'flex',
     width: 32,
@@ -342,10 +348,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  
+
   additionalText: {
     // Apply the styles you provided earlier for the additional text
-    fontSize: responsiveFontSize(2), 
+    fontSize: responsiveFontSize(2),
     color: '#1F1F1F',
     textAlign: 'right',
     fontSize: 16,
@@ -365,7 +371,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FAF9F7',
   },
   pickerItem: {
-    color: '#41392F', 
+    color: '#41392F',
   },
   customH3: {
     color: '#41392F', // Fallback color if the custom variable is not supported
@@ -411,8 +417,8 @@ const styles = StyleSheet.create({
   },
   shippingTitle: {
     color: '#41392F', // Fallback color if the custom variable is not supported
-    fontFamily: 'Bricolage Grotesque',
-    fontSize: 18,
+    // fontFamily: 'Bricolage Grotesque',
+    fontSize: height > 700 ? responsiveFontSize(2) : responsiveFontSize(2.4),
     fontStyle: 'normal',
     fontWeight: 'bold',
     lineHeight: 24,
@@ -425,23 +431,23 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     lineHeight: 24,
     marginTop: 16,
-    marginBottom: 16,
+    marginBottom: 10,
   },
   shippingAddressContainer: {
-    display: 'flex',
+    // display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    width: 344,
+    width: '100%',
     paddingHorizontal: 12,
     borderRadius: 16,
-    backgroundColor: '#FFFFFF',
-    marginTop: 24,
+    backgroundColor: '#ffffff',
+    marginTop: height > 700 ? 12 : 10,
   },
 
   firstRow: {
-    width: 24,
-    height: 24,
+    width: height > 700 ? 24 : 26,
+    height: height > 700 ? 24 : 26,
   },
   shippingImage: {
     width: 24,
@@ -449,29 +455,30 @@ const styles = StyleSheet.create({
   },
   secondRow: {
     flex: 1,
-    flexDirection: 'column', 
+    flexDirection: 'column',
     justifyContent: 'center',
-    marginLeft: 8, 
+    marginLeft: 8,
     marginRight: 8,
     width: '100%',
+    paddingVertical: 6
   },
 
   thirdRow: {
-
+    // marginRight: height > 700 ? 0 : 12
   },
 
   upperText: {
     color: '#000',
     fontFamily: 'Bricolage Grotesque',
-    fontSize: 18,
+    fontSize: height > 700 ? responsiveFontSize(2) : responsiveFontSize(2.4),
     fontStyle: 'normal',
     fontWeight: 'bold',
-    lineHeight: 24, 
+    lineHeight: 24,
   },
 
   lowerText: {
     color: '#000',
-    fontSize: 16,
+    fontSize: height > 700 ? responsiveFontSize(1.9) : responsiveFontSize(2.2),
     fontStyle: 'normal',
     fontWeight: '400',
     lineHeight: 24,
@@ -488,25 +495,19 @@ const styles = StyleSheet.create({
     borderColor: '#CBCBCB', // Use your desired color or the fallback color
     backgroundColor: '#FAF9F7', // Use your desired color or the fallback color
   },
-  package: {
-    padding: responsiveHeight(2),
-    marginVertical: responsiveHeight(1),
-    borderRadius: 10,
-    width: '100%'
-  },
+  // package: {
+  //   padding: responsiveHeight(2),
+  //   marginVertical: responsiveHeight(1),
+  //   borderRadius: 10,
+  //   width: '100%'
+  // },
 
   textrow: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
   },
-  box: {
-    height: 20,
-    width: 20,
-    resizeMode: "contain",
-    marginTop: responsiveHeight(1.2),
-    marginRight: responsiveWidth(1),
-  },
+
   cardImage: {
     height: 48,
     width: 48,
@@ -519,8 +520,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
-    marginLeft: 8, 
-    marginRight: 8, 
+    marginLeft: 8,
+    marginRight: 8,
     paddingVertical: 8,
     paddingHorizontal: 12,
     display: 'flex',
@@ -529,10 +530,11 @@ const styles = StyleSheet.create({
   priceDetailsContainer: {
     display: 'flex',
     width: '100%',
-    padding: 24,
+    paddingHorizontal: 22,
+    paddingVertical: 22,
     flexDirection: 'column',
     alignItems: 'flex-end',
-    gap: 16,
+    gap: 8,
     borderRadius: 16,
     backgroundColor: '#FFF',
     shadowColor: '#000',
@@ -553,20 +555,34 @@ const styles = StyleSheet.create({
 
   priceDetailsText: {
     fontSize: 16,
-    color: '#000000',
     color: '#1F1F1F',
-    fontSize: 16,
     fontStyle: 'normal',
     fontWeight: '400',
-    lineHeight: 24
+    lineHeight: 24,
+    // Add any other styles you need for the text
+  },
+  priceText: {
+    fontSize: 16,
+    color: '#1F1F1F',
+    fontStyle: 'normal',
+    fontWeight: '400',
+    lineHeight: 24,
+    textAlign: 'right'
     // Add any other styles you need for the text
   },
   priceDetailsLeftRow: {
     width: '70%',
-    marginRight: '5%'
+    marginRight: '5%',
   },
   priceDetailsRightRow: {
     width: '25%',
+  },
+  txtUseCredit: {
+    fontSize: responsiveFontSize(2.2),
+    marginTop: responsiveHeight(1),
+    marginBottom: responsiveHeight(1),
+    color: "#75695A",
+    fontWeight: "bold",
   },
 
 

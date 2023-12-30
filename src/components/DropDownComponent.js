@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Dimensions } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import {
@@ -7,6 +7,7 @@ import {
   responsiveWidth,
   responsiveFontSize,
 } from "react-native-responsive-dimensions";
+const { width, height } = Dimensions.get("window");
 
 const DropdownComponent = ({
   name,
@@ -59,17 +60,18 @@ export default DropdownComponent;
 
 const styles = StyleSheet.create({
   container: {
-    width: responsiveWidth(45),
+    width: height > 700 ? responsiveWidth(40) : responsiveWidth(40),
     height: responsiveHeight(3),
-    marginBottom: responsiveHeight(2),
-    backgroundColor: "white",
-    padding: 16,
+    // marginBottom: responsiveHeight(2),
+    marginRight: 12
+    // padding: 6,
   },
   dropdown: {
-    height: 50,
-    borderColor: "gray",
+    height: height > 700 ? 34 : 31,
+    borderColor: "#CBCBCB",
+    backgroundColor: '#FFF',
     borderWidth: 0.5,
-    borderRadius: 8,
+    borderRadius: height > 700 ? 13 : 12,
     paddingHorizontal: 8,
   },
   icon: {
@@ -82,13 +84,13 @@ const styles = StyleSheet.create({
     top: 8,
     zIndex: 999,
     paddingHorizontal: 8,
-    fontSize: 14,
+    fontSize: 12,
   },
   placeholderStyle: {
     fontSize: 16,
   },
   selectedTextStyle: {
-    fontSize: 16,
+    fontSize: 14,
   },
   iconStyle: {
     width: 20,

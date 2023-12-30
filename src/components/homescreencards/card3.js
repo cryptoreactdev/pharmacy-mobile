@@ -51,7 +51,8 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
     marginRight: responsiveWidth(2),
     borderWidth: 1,
-    borderRadius: 6
+    borderRadius: 6,
+    borderColor: 'white'
   },
   cont: {
     alignItems: "center",

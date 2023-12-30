@@ -59,7 +59,7 @@ export default function Newstack() {
         name="dailyroutine"
         component={DailyRoutine}
         options={{ headerShown: false }}
-            />
+      />
     </Stack.Navigator>
   );
 }
@@ -116,7 +116,7 @@ export function ShopStack() {
         component={ProductDetails}
         options={{ headerShown: false }}
       />
-      
+
     </Stack.Navigator>
   );
 }

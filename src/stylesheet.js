@@ -12,6 +12,11 @@ export const globalStyles = StyleSheet.create({
     backgroundColor: "#FAF9F7",
     marginBottom: responsiveHeight(10),
   },
+  droidSafeArea: {
+    flex: 1,
+    backgroundColor: 'white',
+    paddingTop: Platform.OS === 'android' ? 25 : 0
+  },
   cont: {
     alignItems: "center",
     backgroundColor: "#FAF9F7",

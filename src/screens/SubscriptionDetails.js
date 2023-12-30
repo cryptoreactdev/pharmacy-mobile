@@ -22,10 +22,10 @@ import RenderHtml from "react-native-render-html";
 import DropdownComponent from "../components/DropDownComponent";
 import { useNavigation } from "@react-navigation/native";
 const data = [
-  { label: "30 days", value: "30days" },
-  { label: "60 days", value: "60days" },
-  { label: "90 days", value: "90days" },
-  { label: "120 days", value: "120days" },
+  { label: "30 days", value: "Every 30 days" },
+  { label: "60 days", value: "Every 60 days" },
+  { label: "90 days", value: "Every 90 days" },
+  { label: "120 days", value: "Every 120 days" },
 ];
 const SubscriptionDetails = (props) => {
   const { width } = useWindowDimensions();
@@ -209,7 +209,7 @@ const SubscriptionDetails = (props) => {
                 justifyContent: "space-between",
               }}
             >
-              <View style={{flexDirection:"coloum"}}>
+              <View style={{ flexDirection: "coloum" }}>
                 <Text style={{ color: "#75695A", marginBottom: 2 }}>
                   Frequency
                 </Text>
@@ -294,7 +294,7 @@ const SubscriptionDetails = (props) => {
                 paddingBottom: 10,
               }}
             >
-              How to Use 
+              How to Use
             </Text>
             <Text style={{ color: "#1F1F1F", flex: 1 }}>
               {productDetail.hiworks}
