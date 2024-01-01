@@ -1,5 +1,5 @@
 // BottomTabNavigation.js
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Home from "../screens/Home";
@@ -7,9 +7,12 @@ import Routine from "../screens/Routine";
 import Care from "../screens/Care";
 import Store from "../screens/Store";
 import Blog from "../screens/Blog";
+import BottomSheet from "@gorhom/bottom-sheet";
+
 
 const Tab = createBottomTabNavigator();
-
+const bottomSheetRef = React.useRef(null);
+let timerRef = React.useRef(null);
 const getTabBarVisibility = (route) => {
   const routeName = route.state
     ? route.state.routes[route.state.index].name
@@ -21,6 +24,7 @@ const getTabBarVisibility = (route) => {
 
   return true;
 };
+
 
 const BottomTabNavigation = () => {
   return (
@@ -62,7 +66,7 @@ const BottomTabNavigation = () => {
         options={({ route }) => ({
           tabBarVisible: getTabBarVisibility(route),
         })} />
-      <Tab.Screen name="Routine" component={Routine}
+      <Tab.Screen name="Roddutine" component={Routine}
         options={({ route }) => ({
           tabBarVisible: getTabBarVisibility(route),
         })} />
@@ -81,5 +85,7 @@ const BottomTabNavigation = () => {
     </Tab.Navigator>
   );
 };
+
+
 
 export default BottomTabNavigation;

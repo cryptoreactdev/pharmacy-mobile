@@ -22,10 +22,10 @@ import Card5 from "../components/homescreencards/card5";
 import { getCommunityPosts } from "../config/DataApp";
 import { useNavigation } from "@react-navigation/native";
 
-export default function Community2() {
+export default function Community2(props) {
   const [blogPosts, setBlogPosts] = useState([]);
-  const navigation = useNavigation(); 
-  
+  const navigation = useNavigation();
+
   useEffect(() => {
     getCommunityPosts().then((response) => {
       console.warn("community posts", response)
@@ -40,10 +40,10 @@ export default function Community2() {
   return (
     <View style={globalStyles.cont}>
       <ScrollView style={globalStyles.scroll}>
-        <Header />
+        <Header {...props} />
         <Text style={globalStyles.bigtext}>Community</Text>
         <Text style={globalStyles.text1}>
-          Get inspiration from other pharmacyname users
+          Get inspiration from other pharmacy name users
         </Text>
         <View style={styles.cont1}>
           <View style={styles.cont2}>

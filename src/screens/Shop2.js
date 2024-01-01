@@ -89,7 +89,7 @@ export default function Shop2(props) {
   return (
     <View style={globalStyles.cont}>
       <ScrollView showsVerticalScrollIndicator={false} style={globalStyles.scroll}>
-        <Header />
+        <Header {...props} />
         <Text style={globalStyles.bigtext}>Shop</Text>
         <Text style={globalStyles.text1}>Get our best products</Text>
 
@@ -182,6 +182,8 @@ export default function Shop2(props) {
     </View>
   );
 }
+
+
 
 const styles = StyleSheet.create({
   discover: {

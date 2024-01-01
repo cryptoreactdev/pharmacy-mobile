@@ -4,10 +4,11 @@ import {
   View,
   ScrollView,
   Image,
+  Button,
   TouchableOpacity, AsyncStorage, Dimensions
 } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import Header from "../components/header";
 import { globalStyles } from "../stylesheet";
 import Card1 from "../components/homescreencards/card1";
@@ -20,20 +21,25 @@ import {
 } from "react-native-responsive-dimensions";
 import Card3 from "../components/homescreencards/card3";
 import Card4 from "../components/homescreencards/card4";
+import ReminderCardContent from "../components/homescreencards/reminderCard";
 import {
   getFeaturedProducts,
   getPromotions,
   getLatestPosts,
-  getDeviceList,
-  getSkinCareProductList,
   getUserPurchases,
-  getProductById,
 } from "../config/DataApp";
 import { getAuth } from 'firebase/auth';
 import Pressable from "react-native/Libraries/Components/Pressable/Pressable";
+import BottomSheet, { BottomSheetBackdrop } from "@gorhom/bottom-sheet";
+import ReminderBottomSheet from "../components/reminderBottomSheet";
+import MinuteView from "../components/common/MinuteView";
+import { useCommonView } from "../components/common/CommonViewShow";
 const { width, height } = Dimensions.get("window");
 
 export default function Home2(props) {
+  // const bottomSheetRef = useRef < BottomSheet > (null);
+  const bottomSheetRef = React.useRef(null);
+  let timerRef = React.useRef(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState([]);
   const [promotions, setPromotions] = useState([]);
@@ -46,8 +52,14 @@ export default function Home2(props) {
   const [openSkinCareOption, setOpenSkinCareOption] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [user, setUser] = useState([]);
-
+  const { isVisible, showView, hideView } = useCommonView();
   const auth = getAuth();
+  // const fall = React.useRef(new Animated.Value(1)).current;
+
+  // const animatedShadowOpacity = Animated.interpolateNode(fall, {
+  //   inputRange: [0, 1],
+  //   outputRange: [0.5, 0],
+  // });
 
   useEffect(() => {
     const initialOpenStates = {};
@@ -60,7 +72,9 @@ export default function Home2(props) {
   useEffect(() => {
     setUser(auth.currentUser);
     setIsLoaded(true);
+    return () => clearTimeout(timerRef.current);
   }, []);
+
 
   const fetchData = async () => {
     getFeaturedProducts().then((response) => {
@@ -128,6 +142,19 @@ export default function Home2(props) {
     }, [])
   );
 
+  useEffect(() => {
+    // hideView
+    setTimeout(() => {
+      hideView
+      console.log("Checkkkkk")
+    }, 10000);
+
+    if (isVisible) {
+      // console.log("Checkkkkk")
+      openBottomSheet();
+    }
+  }, [isVisible]);
+
   const toggleCardState = (productId) => {
     setOpenCardStates((prevStates) => ({
       ...prevStates,
@@ -158,6 +185,25 @@ export default function Home2(props) {
     props.navigation.navigate("checkout1", device);
   };
 
+  const openBottomSheet = () => {
+    bottomSheetRef.current?.snapToIndex(0); // Open the bottom sheet to a snap point to change the height.
+  };
+
+
+
+  // renders
+  const renderBackdrop = useCallback(
+    props => (
+      <BottomSheetBackdrop
+        {...props}
+        disappearsOnIndex={1}
+        appearsOnIndex={2}
+      />
+    ),
+    []
+  );
+
+
   return (
     <View style={globalStyles.cont}>
       <ScrollView
@@ -165,6 +211,10 @@ export default function Home2(props) {
         style={globalStyles.scroll}
         overScrollMode="never">
         <Header {...props} />
+        {isVisible && <Pressable
+          style={{ backgroundColor: 'gray', width: 40, height: 40 }}
+          onPress={hideView} >
+        </Pressable>}
         <Text style={globalStyles.bigtext}>Welcome Back, {user.displayName}</Text>
         {promotions.map((promotion) => (
           <Card1
@@ -178,8 +228,10 @@ export default function Home2(props) {
           <Text style={globalStyles.bigtext2}>My Treatments</Text>
           <TouchableOpacity
             onPress={() => {
-              props.navigation.navigate("Shop");
+              // props.navigation.navigate("Shop");
+              openBottomSheet();
             }}
+          // onPress={showView}
           >
             <Image
               source={require("../../assets/plus.png")}
@@ -297,9 +349,66 @@ export default function Home2(props) {
           </TouchableOpacity>
         ))}
       </ScrollView>
+      <ReminderBottomSheet refBottomSheet={bottomSheetRef} onClose={hideView} />
+      {/* <BottomSheet
+        ref={bottomSheetRef}
+        style={{
+          borderRadius: 24,
+          shadowColor: '#000000',
+          shadowOffset: {
+            width: 0,
+            height: 8,
+          },
+          shadowOpacity: 0.2,
+          shadowRadius: 24,
+          elevation: 15,
+        }}
+        snapPoints={height > 700 ? ["50%", "70%"] : ["60%", "80%"]}
+        enablePanDownToClose
+        index={-1}
+      >
+        <View style={{ width: '100%', alignItems: 'center' }}>
+          <Text
+            style={{
+              color: '#000',
+              fontSize: height > 700 ? responsiveFontSize(2.2) : responsiveFontSize(2.8),
+              fontWeight: '700',
+              marginTop: 8
+            }}>
+            Treatment Reminder
+          </Text>
+          <Text
+            style={{
+              color: '#000',
+              fontSize: height > 700 ? responsiveFontSize(1.8) : responsiveFontSize(2.2),
+              fontWeight: '400',
+              marginTop: 8
+            }}>
+            Treatment Reminder
+          </Text>
+          <ReminderCardContent />
+        </View>
+      </BottomSheet> */}
     </View>
   );
 }
+
+const bottomStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "gray",
+  },
+  contentContainer: {
+    flex: 1,
+    alignItems: "center",
+    marginTop: 50,
+  },
+  text: {
+    fontSize: 20,
+  },
+
+
+});
 
 const styles = StyleSheet.create({
   smallcont: {
@@ -309,8 +418,8 @@ const styles = StyleSheet.create({
     marginTop: 4
   },
   plus: {
-    height: responsiveHeight(5),
-    width: responsiveWidth(10),
+    height: height > 700 ? responsiveHeight(4) : responsiveHeight(5),
+    width: height > 700 ? responsiveWidth(9) : responsiveWidth(10),
     resizeMode: "contain",
   },
   img: {

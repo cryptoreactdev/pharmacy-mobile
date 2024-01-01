@@ -1,5 +1,7 @@
 import "react-native-gesture-handler";
 import React, { useState, useEffect, useMemo } from "react";
+import { StyleSheet, Text, View, Image } from "react-native";
+
 import "./src/config/ConfigFirebase";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { LogBox, StatusBar } from "react-native";
@@ -29,6 +31,7 @@ import moment from "moment";
 import "moment/locale/es";
 import "moment/locale/ar";
 import Materialbottombar from "./src/navigation/materialbottombar";
+import { CommonViewProvider } from "./src/components/common/CommonViewShow";
 
 DarkThemePaper.colors.primary = ColorsApp.PRIMARY;
 DarkThemePaper.colors.accent = ColorsApp.PRIMARY;
@@ -164,11 +167,13 @@ const App = () => {
                 backgroundColor="transparent"
                 barStyle={theme === "dark" ? "light-content" : "dark-content"}
               />
-              <NavigationContainer
-                theme={theme === "dark" ? DarkThemeNav : DefaultThemeNav}
-              >
-                {isLogged ? <Materialbottombar /> : <GuestNavigation />}
-              </NavigationContainer>
+              <CommonViewProvider>
+                <NavigationContainer
+                  theme={theme === "dark" ? DarkThemeNav : DefaultThemeNav}
+                >
+                  {isLogged ? <Materialbottombar /> : <GuestNavigation />}
+                </NavigationContainer>
+              </CommonViewProvider>
             </PaperProvider>
           </LanguageContext.Provider>
         </Preferences.Provider>

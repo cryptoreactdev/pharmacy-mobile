@@ -18,7 +18,7 @@ import {
 } from "react-native-responsive-dimensions";
 import CalendarPicker from "react-native-calendar-picker";
 
-export default function Routine() {
+export default function Routine(props) {
   const [selectedStartDate, setSelectedStartDate] = useState(null);
   const [open, setOpen] = useState(false);
 
@@ -29,7 +29,7 @@ export default function Routine() {
   return (
     <View style={globalStyles.cont}>
       <ScrollView style={globalStyles.scroll}>
-        <Header />
+        <Header {...props} />
         <View style={styles.row}>
           <TouchableOpacity style={styles.btn}>
             <Image

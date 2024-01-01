@@ -64,7 +64,7 @@ export default function ShoppingCart(props) {
 
   // Log the cart information to the console
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, backgroundColor: '#FAF9F7' }}>
       <SafeAreaView style={globalStyles.droidSafeArea}>
         <ScrollView style={styles.cont} showsVerticalScrollIndicator={false}>
           <View>
@@ -91,12 +91,13 @@ export default function ShoppingCart(props) {
                 />
               ))}
             </View>
-            <View style={styles.imgcont}>
+            <View style={styles.headingTitleContainer}>
               <Text style={styles.customH3}>Frequently bought together</Text>
             </View>
             <ScrollView
               style={styles.cont2}
               horizontal={true}
+              overScrollMode="never"
               showsHorizontalScrollIndicator={false}
             >
               {products.map((item, index) => (
@@ -110,9 +111,9 @@ export default function ShoppingCart(props) {
             </ScrollView>
             <Checkoutbtn title={"Checkout"} onPress={handleCheckout} />
           </View>
-        </ScrollView>
-      </SafeAreaView>
-    </View>
+        </ScrollView >
+      </SafeAreaView >
+    </View >
   );
 }
 
@@ -151,10 +152,21 @@ const CartItem = (props) => {
         />
       </View>
       <View style={styles.textContainer}>
-        <View style={styles.titleContainer}>
-          <Text style={styles.text2}>{item.productInformation.title}</Text>
+        <View style={{ flexDirection: 'row' }}>
+          <View style={[styles.titleContainer, { flex: 1, paddingRight: 12 }]}>
+            <Text numberOfLines={2} style={styles.text2}>{item.productInformation.title}</Text>
+          </View>
+          <View>
+            <View>
+              <Text style={styles.additionalText}>
+                ${quantity * item.productInformation.one_time_price}
+              </Text>
+            </View>
+
+          </View>
         </View>
-        <Text style={styles.text3}>{item.productInformation.volumn}</Text>
+        {/* {item.productInformation.volumn} */}
+        <Text style={styles.volumeColor}>30ml / 1 fl.oz</Text>
         {item.selectedOption === "onetime" ? (
           <View style={styles.textrow}>
             <View style={styles.counterContainer}>
@@ -178,54 +190,70 @@ const CartItem = (props) => {
                 </View>
               </TouchableOpacity>
             </View>
-          </View>
-        ) : (
-
-          <View style={{ alignSelf: 'flex-end', backgroundColor: 'red', flexDirection: 'row' }}>
-            <DropdownComponent
-              data={data}
-              value={value}
-              setValue={setValue}
-              isFocus={isFocus}
-              setIsFocus={setIsFocus}
-            />
-            <View
-            // style={{ alignItems: "center", width: 20, justifyContent: "center" }}
-            >
+            <View>
               <Pressable
                 style={styles.crossText}
                 onPress={() => {
                   dispatch(removeFromCart(item.productInformation.id));
                 }}
               >
-                <Text style={{ color: "red" }}>X</Text>
+                <Image
+                  source={require("../../assets/img_trash.png")}
+                  style={styles.btnDeleteImage}
+                />
+                {/* <Text style={{ color: "red" }}>X</Text> */}
               </Pressable>
             </View>
           </View>
+        ) : (
 
+          <View style={{ flex: 1, flexDirection: 'row', marginTop: responsiveHeight(2), }}>
+            <View style={{ flex: 1 }}>
+              <DropdownComponent
+                data={data}
+                value={value}
+                setValue={setValue}
+                isFocus={isFocus}
+                setIsFocus={setIsFocus}
+              />
+            </View>
+            <View>
+              <Pressable
+                style={styles.crossText}
+                onPress={() => {
+                  dispatch(removeFromCart(item.productInformation.id));
+                }}
+              >
+                <Image
+                  source={require("../../assets/img_trash.png")}
+                  style={styles.btnDeleteImage}
+                />
+                {/* <Text style={{ color: "red" }}>X</Text> */}
+              </Pressable>
+            </View>
+          </View>
         )}
       </View>
-      <View >
-        <View style={styles.textContainer}>
-          <Text style={styles.additionalText}>
-            ${quantity * item.productInformation.one_time_price}
-          </Text>
-        </View>
 
-      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   cont: {
-    width: responsiveWidth(90),
+    // width: responsiveWidth(90),
+    backgroundColor: '#FAF9F7',
     alignSelf: "center",
     marginBottom: responsiveHeight(2),
   },
   left: {
     height: 50,
     width: 50,
+    resizeMode: "contain",
+  },
+  btnDeleteImage: {
+    height: 28,
+    width: 28,
     resizeMode: "contain",
   },
   header: {
@@ -243,7 +271,13 @@ const styles = StyleSheet.create({
   },
   imgcont: {
     flexDirection: "column", // Use a column layout
-    alignItems: "flex-start", // Stretch items to fill the width
+    paddingHorizontal: 16,
+    // alignItems: "flex-start", // Stretch items to fill the width
+  },
+  headingTitleContainer: {
+    paddingHorizontal: 16,
+    marginBottom: 14,
+    marginTop: 18
   },
   textcont: {
     width: responsiveWidth(50),
@@ -252,20 +286,20 @@ const styles = StyleSheet.create({
     marginTop: responsiveHeight(2),
   },
   text: {
-    fontSize: height > 700 ? responsiveFontSize(2) : responsiveFontSize(3),
+    fontSize: height > 700 ? responsiveFontSize(2) : responsiveFontSize(2.4),
     color: "#000000",
     marginRight: responsiveWidth(45),
     fontWeight: 'bold'
   },
   crossText: {
-    display: "flex",
+    // display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: "#E2E2E2",
-    backgroundColor: "#FFF",
-    padding: 4,
+    // borderRadius: 8,
+    // borderWidth: 1,
+    // borderColor: "#E2E2E2",
+    // backgroundColor: "#FFF",
+    // padding: 4,
     width: 32,
     height: 32,
     // alignSelf: "center",
@@ -279,25 +313,21 @@ const styles = StyleSheet.create({
     // width: 32,
     // height: 32
   },
-  text2: {
-    color: "#000000",
-    fontWeight: "bold",
-  },
-  text3: {
-    fontSize: responsiveFontSize(1.5),
-    color: "#000000",
-  },
-  text4: {
-    fontSize: responsiveFontSize(1.8),
-    color: "#000000",
-    fontWeight: "400",
-  },
+  // text2: {
+  //   color: "#000000",
+  //   fontWeight: "bold",
+  // },
+  // text3: {
+  //   fontSize: responsiveFontSize(1.5),
+  //   color: "#000000",
+  // },
   cartItem: {
-    display: "flex",
+    // display: "flex",
     flexDirection: "row",
     width: "100%", // Fill the whole width
-    padding: 16,
-    alignItems: "flex-start",
+    // padding: 16,
+    // alignItems: "flex-start",
+    padding: 12,
     marginVertical: 16,
     borderRadius: 16,
     backgroundColor: "#FFF",
@@ -308,10 +338,12 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.04,
     shadowRadius: 32,
-    elevation: 5,
+    elevation: 0.4,
   },
   imageContainer: {
-    marginRight: 30,
+    // marginRight: 30,
+    marginLeft: 2,
+    marginRight: 18
   },
   img: {
     height: responsiveHeight(20),
@@ -320,8 +352,8 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     flex: 1,
-    justifyContent: "space-between",
-    alignItems: "flex-start",
+    // justifyContent: "space-between",
+    // alignItems: "flex-start",
   },
   text2: {
     color: "#000000",
@@ -329,10 +361,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 24,
   },
-  text3: {
-    fontSize: responsiveFontSize(1.5),
-    color: "#000000",
-    marginBottom: responsiveHeight(1.9),
+  volumeColor: {
+    fontSize: responsiveFontSize(2.2),
+    color: "#757575",
+    // marginBottom: responsiveHeight(1),
   },
   text4: {
     fontSize: responsiveFontSize(1.8),
@@ -350,6 +382,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    marginTop: responsiveHeight(2),
+
   },
   box: {
     height: 20,
@@ -362,7 +396,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    marginTop: responsiveHeight(2),
   },
   operationsButtonRemove: {
     display: "flex",
@@ -416,12 +449,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 
+  titleMainContainer: {
+
+  },
+
   additionalText: {
     // Apply the styles you provided earlier for the additional text
-    fontSize: responsiveFontSize(2),
+    fontSize: responsiveFontSize(2.4),
     color: "#1F1F1F",
     textAlign: "right",
-    fontSize: 16,
     fontStyle: "normal",
     fontWeight: "700",
     lineHeight: 24,
@@ -443,7 +479,7 @@ const styles = StyleSheet.create({
   customH3: {
     color: "#41392F", // Fallback color if the custom variable is not supported
     fontFamily: "Bricolage Grotesque",
-    fontSize: 20,
+    fontSize: responsiveFontSize(2.5),
     fontStyle: "normal",
     fontWeight: "700",
     lineHeight: 32,
@@ -453,21 +489,23 @@ const styles = StyleSheet.create({
     // justifyContent: "space-between",
     // alignItems: "flex-start",
     // flexWrap: "wrap",
+    marginRight: 14,
+    paddingLeft: 12,
     marginBottom: responsiveHeight(5),
   },
   cardContainer: {
     marginBottom: responsiveHeight(5),
     alignSelf: "center",
   },
-  titleContainer: {
-    // position: "absolute",
-    // bottom: 0,
-    // left: 0,
-    // right: 0,
-    // padding: 10,
-    // borderBottomLeftRadius: 10,
-    // borderBottomRightRadius: 10,
-  },
+  // titleContainer: {
+  // position: "absolute",
+  // bottom: 0,
+  // left: 0,
+  // right: 0,
+  // padding: 10,
+  // borderBottomLeftRadius: 10,
+  // borderBottomRightRadius: 10,
+  // },
   blogTitle: {
     color: "#fff",
     fontSize: 16,

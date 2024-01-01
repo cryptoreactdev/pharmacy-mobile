@@ -5,6 +5,7 @@ import {
   Image,
   TouchableOpacity,
   Touchable,
+  Dimensions
 } from "react-native";
 import React, { useState, useEffect } from 'react';
 import {
@@ -13,6 +14,7 @@ import {
   responsiveFontSize,
 } from "react-native-responsive-dimensions";
 import { getAuth, signOut } from 'firebase/auth';
+const { width, height } = Dimensions.get("window");
 
 
 export default function Header(props) {
@@ -58,15 +60,15 @@ const styles = StyleSheet.create({
     alignContent: 'center',
   },
   img1: {
-    height: responsiveHeight(9),
-    width: responsiveWidth(17),
+    height: height > 700 ? responsiveHeight(7) : responsiveHeight(9),
+    width: height > 700 ? responsiveWidth(15) : responsiveWidth(17),
     resizeMode: "contain",
-    marginTop: responsiveHeight(6),
-    marginBottom: 12
+    marginTop: height > 700 ? responsiveHeight(8) : responsiveHeight(7),
+    marginBottom: 12,
   },
   img2: {
-    height: responsiveHeight(5),
-    width: responsiveWidth(10),
+    height: height > 700 ? responsiveHeight(4) : responsiveHeight(5),
+    width: height > 700 ? responsiveWidth(9) : responsiveWidth(10),
     resizeMode: "contain",
     alignSelf: 'center',
     marginTop: responsiveHeight(5.4),

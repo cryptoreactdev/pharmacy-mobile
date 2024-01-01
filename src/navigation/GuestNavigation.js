@@ -23,6 +23,7 @@ import PhoneVerification from "../screens/PhoneVerification";
 import ForgotPassPhoneNo from "../screens/ForgotPassPhoneNo";
 import ForgotPassVerifyPhoneNo from "../screens/ForgotPassVerifyPhoneNo";
 import ResetPass from "../screens/ResetPass";
+import { BottomSheetModal, BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 
 const RootStack = createStackNavigator();
 
@@ -62,7 +63,7 @@ export default function GuestNavigation(props) {
     headerTitleAlign: "center",
     gestureEnabled: true,
     /*cardOverlayEnabled: true,
-		...TransitionPresets.ModalPresentationIOS*/
+    ...TransitionPresets.ModalPresentationIOS*/
   };
 
   return (

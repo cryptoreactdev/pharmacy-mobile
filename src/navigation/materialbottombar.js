@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, Image } from "react-native";
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Care from "../screens/Care";
 import Routine from "../screens/Routine";
 import Shop2 from "../screens/Shop2";
@@ -18,15 +18,70 @@ import ConfirmCheckout from "../screens/confirmcheckout";
 import ThanksPurchase from "../screens/thankspurchase";
 import DailyRoutine from "../screens/dailyRoutine";
 import SubscriptionDetails from "../screens/SubscriptionDetails";
-
+import BottomSheet from "@gorhom/bottom-sheet";
 
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createStackNavigator();
 
 function TabNav() {
   // const hide = props.routeName != "Profile"
+
+  const bottomSheetRef = React.useRef(null);
+  let timerRef = React.useRef(null);
+
+
+  useEffect(() => {
+    setInterval(openBottomSheet, 5000)
+    // openBottomSheet()
+  }, []);
+
+
+  const openBottomSheet = () => {
+    bottomSheetRef.current?.snapToIndex(0); // Open the bottom sheet to a snap point to change the height.
+  };
+
+  const closeBottomSheet = () => {
+    bottomSheetRef.current?.close();
+
+    // if (timerRef.current != null) {
+    //   clearTimeout(timerRef.current)
+    // }
+
+    // timerRef.current = setTimeout(() => {
+    //   openBottomSheet();
+    // }, 5000);
+
+
+    //   <BottomSheet
+    //   ref={bottomSheetRef}
+    //   // initialSnap={0}
+    //   snapPoints={["40%", "80%"]} // Set custom heights here
+    //   enablePanDownToClose // Pan down gesture closes the sheet
+    //   index={-1} // Initial position of the bottom sheet (optional). Default is 0
+    // >
+    //   <View style={bottomStyles.contentContainer}>
+    //     <Text >React Native Bottom Sheet</Text>
+    //     <Button onPress={closeBottomSheet} title="Close Bottom Sheet" />
+    //   </View>
+    // </BottomSheet>
+  };
+
   return (
     <Tab.Navigator
+      // tabBar={(props) => <MyTabBar {...props} />
+      //   // <BottomSheet
+      //   //   ref={bottomSheetRef}
+      //   //   // initialSnap={0}
+      //   //   snapPoints={["40%", "80%"]} // Set custom heights here
+      //   //   enablePanDownToClose // Pan down gesture closes the sheet
+      //   // // index={-1} // Initial position of the bottom sheet (optional). Default is 0
+      //   // >
+      //   //   <View style={bottomStyles.contentContainer}>
+      //   //     <Text >React Native Bottom Sheet</Text>
+      //   //     <Button onPress={closeBottomSheet} title="Close Bottom Sheet" />
+      //   //   </View>
+      //   // </BottomSheet>
+      // }
       barStyle={{
         backgroundColor: "#F7F1E7",
         position: "absolute",
@@ -158,12 +213,13 @@ function TabNav() {
         }}
       />
     </Tab.Navigator>
+
   );
 }
 export default function Materialbottombar() {
   return (
     <Stack.Navigator initialRouteName="Tab" >
-      <Stack.Screen name="Tab" component={TabNav}  options={{ headerShown: false }}/>
+      <Stack.Screen name="Tab" component={TabNav} options={{ headerShown: false }} />
       <Stack.Screen
         name="subscriptiondetails"
         component={SubscriptionDetails}
@@ -199,11 +255,27 @@ export default function Materialbottombar() {
         component={DailyRoutine}
         options={{ headerShown: false }}
       />
-      
-    </Stack.Navigator>
 
+    </Stack.Navigator>
   );
 }
+
+const bottomStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "grey",
+  },
+  contentContainer: {
+    flex: 1,
+    alignItems: "center",
+    marginTop: 50,
+  },
+  text: {
+    fontSize: 20,
+  },
+
+
+});
 
 const styles = StyleSheet.create({
   cont: {

@@ -26,7 +26,7 @@ import {
 import Card3 from "../components/homescreencards/card3";
 import Card4 from "../components/homescreencards/card4";
 
-export default function Care({ navigation }) {
+export default function Care({ props, navigation }) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [search, setSearch] = useState("");
   const [items, setItems] = useState([]);
@@ -57,7 +57,7 @@ export default function Care({ navigation }) {
   return (
     <View style={globalStyles.cont}>
       <ScrollView showsVerticalScrollIndicator={false} style={globalStyles.scroll}>
-        <Header />
+        <Header {...props} />
         <Text style={[globalStyles.bigtext, { marginHorizontal: 2 }]}>Care</Text>
         <Text style={styles.txtSubline}>Explore our most recent products</Text>
         <ScrollView horizontal={true}>

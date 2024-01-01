@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     width: height > 700 ? responsiveWidth(40) : responsiveWidth(40),
     height: responsiveHeight(3),
     // marginBottom: responsiveHeight(2),
-    marginRight: 12
+    // marginRight: 12
     // padding: 6,
   },
   dropdown: {

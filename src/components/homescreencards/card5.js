@@ -44,12 +44,16 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 20,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
+    backgroundColor: '#FFF'
+
   },
   container: {
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 10,
-    marginRight: responsiveWidth(2.6),
+    marginHorizontal: responsiveWidth(1),
+
+    // marginRight: responsiveWidth(2.6),
   },
   textcont: {
     alignItems: "center",
