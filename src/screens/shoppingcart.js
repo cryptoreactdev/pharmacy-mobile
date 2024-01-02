@@ -247,8 +247,8 @@ const styles = StyleSheet.create({
     marginBottom: responsiveHeight(2),
   },
   left: {
-    height: 50,
-    width: 50,
+    height: responsiveHeight(15),
+    width: responsiveWidth(15),
     resizeMode: "contain",
   },
   btnDeleteImage: {
@@ -331,13 +331,14 @@ const styles = StyleSheet.create({
     marginVertical: 16,
     borderRadius: 16,
     backgroundColor: "#FFF",
-    shadowColor: "#000",
+
+    shadowColor: '#000000',
     shadowOffset: {
       width: 0,
-      height: 8,
+      height: 1,
     },
-    shadowOpacity: 0.04,
-    shadowRadius: 32,
+    shadowOpacity: 0.18,
+    shadowRadius: 4,
     elevation: 0.4,
   },
   imageContainer: {

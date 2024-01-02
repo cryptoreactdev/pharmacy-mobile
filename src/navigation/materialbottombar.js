@@ -19,6 +19,8 @@ import ThanksPurchase from "../screens/thankspurchase";
 import DailyRoutine from "../screens/dailyRoutine";
 import SubscriptionDetails from "../screens/SubscriptionDetails";
 import BottomSheet from "@gorhom/bottom-sheet";
+import AddSchedule from "../screens/AddSchedule";
+import EditSchedule from "../screens/EditSchedule";
 
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -223,6 +225,16 @@ export default function Materialbottombar() {
       <Stack.Screen
         name="subscriptiondetails"
         component={SubscriptionDetails}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="addSchedule"
+        component={AddSchedule}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="editSchedule"
+        component={EditSchedule}
         options={{ headerShown: false }}
       />
       <Stack.Screen

@@ -37,7 +37,7 @@ export default function Gallery(props) {
             colors={["rgba(0,0,0,0.0)", "rgba(0,0,0,0.9)"]}
             style={styles.titleContainer}
           >
-            <Text style={styles.blogTitle}>Shomo SHomo</Text>
+            <Text style={styles.blogTitle}>Oct 21, 2023</Text>
           </LinearGradient>
         </TouchableOpacity>
         <TouchableOpacity style={styles.cardContainer}>
@@ -49,7 +49,7 @@ export default function Gallery(props) {
             colors={["rgba(0,0,0,0.0)", "rgba(0,0,0,0.9)"]}
             style={styles.titleContainer}
           >
-            <Text style={styles.blogTitle}>Shomo SHomo</Text>
+            <Text style={styles.blogTitle}>Oct 21, 2023</Text>
           </LinearGradient>
         </TouchableOpacity>
       </View>
@@ -62,34 +62,36 @@ const styles = StyleSheet.create({
     height: responsiveHeight(20),
     width: responsiveWidth(100),
     flexDirection: "row",
+    paddingHorizontal: 18,
     justifyContent: "space-between",
     alignItems: "center",
   },
   img: {
-    height: 50,
-    width: 50,
-    resizeMode: "contain",
+    height: responsiveHeight(8),
+    width: responsiveWidth(8),
+    // resizeMode: "contain",
   },
   img2: {
-    height: 50,
-    width: 50,
+    height: responsiveHeight(8),
+    width: responsiveWidth(8),
     resizeMode: "contain",
     tintColor: "#fff",
   },
   text: {
-    fontSize: responsiveFontSize(3),
-    fontWeight: "bold",
-    color: "#000",
+    fontSize: responsiveFontSize(2.3),
+    color: "#000000",
+    fontWeight: "700",
+    // marginRight: responsiveWidth(45),
   },
   cardContainer: {
     marginBottom: responsiveHeight(5),
     flexDirection: "row",
     alignItems: "center",
-    marginRight: responsiveWidth(3),
+    marginHorizontal: responsiveWidth(3),
   },
   discover: {
-    height: responsiveHeight(22),
-    width: responsiveWidth(42),
+    height: responsiveHeight(20),
+    width: responsiveWidth(40),
     borderRadius: 10,
     // resizeMode: "contain",
     // borderRadius: 10,
@@ -102,7 +104,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
-    width: responsiveWidth(42),
+    width: responsiveWidth(40),
   },
   blogTitle: {
     color: "#fff",

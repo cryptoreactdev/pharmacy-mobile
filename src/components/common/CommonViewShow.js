@@ -18,7 +18,7 @@ export const CommonViewProvider = ({ children }) => {
         // Set a new timeout for 1 minute (60000 milliseconds)
         setTimeout(() => {
             showView();
-        }, 10000);
+        }, 60000);
     };
 
     // Initial setup: Show the view when the app starts

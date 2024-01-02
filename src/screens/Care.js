@@ -25,6 +25,8 @@ import {
 } from "react-native-responsive-dimensions";
 import Card3 from "../components/homescreencards/card3";
 import Card4 from "../components/homescreencards/card4";
+import ReminderBottomSheet from "../components/reminderBottomSheet";
+import { useCommonView } from "../components/common/CommonViewShow";
 
 export default function Care({ props, navigation }) {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -32,6 +34,16 @@ export default function Care({ props, navigation }) {
   const [items, setItems] = useState([]);
   const [latestPosts, setLatestPosts] = useState([]);
   const [filteredLatestPosts, setFilteredLatestPosts] = useState([]);
+  const { isVisible, showView, hideView } = useCommonView();
+  const bottomSheetRef = React.useRef(null);
+
+  const openBottomSheet = () => {
+    bottomSheetRef.current?.snapToIndex(0); // Open the bottom sheet to a snap point to change the height.
+  };
+
+  const closeBottomSheet = () => {
+    bottomSheetRef.current?.close();
+  };
 
   useEffect(() => {
     getFeaturedPosts().then((response) => {
@@ -54,6 +66,17 @@ export default function Care({ props, navigation }) {
   const onChangeScreen = (id, title) => {
     navigation.navigate("postdetails", { id, title });
   };
+
+
+  useEffect(() => {
+    if (isVisible) {
+      openBottomSheet();
+    } else {
+      closeBottomSheet();
+    }
+  }, [isVisible]);
+
+
   return (
     <View style={globalStyles.cont}>
       <ScrollView showsVerticalScrollIndicator={false} style={globalStyles.scroll}>
@@ -106,19 +129,21 @@ export default function Care({ props, navigation }) {
           ))}
         </View>
       </ScrollView>
+      {/* <ReminderBottomSheet refBottomSheet={bottomSheetRef} onClose={hideView} /> */}
+
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  discover: {
-    height: responsiveHeight(23),
-    width: responsiveWidth(90),
-    resizeMode: "contain",
-    alignSelf: "center",
-    marginBottom: responsiveHeight(1),
-    alignSelf: "center",
-  },
+  // discover: {
+  //   height: responsiveHeight(23),
+  //   width: responsiveWidth(90),
+  //   resizeMode: "contain",
+  //   alignSelf: "center",
+  //   marginBottom: responsiveHeight(1),
+  //   alignSelf: "center",
+  // },
   cont2: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -192,7 +217,7 @@ const styles = StyleSheet.create({
   discover: {
     height: responsiveHeight(20),
     width: responsiveWidth(90),
-    resizeMode: "contain",
+    resizeMode: "cover",
     borderRadius: 10,
   },
   titleContainer: {

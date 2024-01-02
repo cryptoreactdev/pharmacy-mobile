@@ -5,6 +5,8 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
+  Dimensions,
+  Pressable
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import Header from "../components/header";
@@ -26,6 +28,9 @@ import Card3 from "../components/homescreencards/card3";
 import Card4 from "../components/homescreencards/card4";
 import Card5 from "../components/homescreencards/card5";
 import { LinearGradient } from "expo-linear-gradient";
+import ReminderBottomSheet from "../components/reminderBottomSheet";
+import { useCommonView } from "../components/common/CommonViewShow";
+const { width, height } = Dimensions.get("window");
 
 export default function Shop2(props) {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -40,6 +45,11 @@ export default function Shop2(props) {
     "Accesories",
     "Accidental Warranty",
   ];
+
+  const { isVisible, showView, hideView } = useCommonView();
+  const bottomSheetRef = React.useRef(null);
+  let timerRef = React.useRef(null);
+
   useEffect(() => {
     getPackages().then((response) => {
       // TODO add multiple image for packages. It should come from a query to the database
@@ -86,10 +96,33 @@ export default function Shop2(props) {
     // props.navigation.navigate("productdetails", { id, title });
     props.navigation.navigate("checkout1", product);
   };
+
+
+  const openBottomSheet = () => {
+    bottomSheetRef.current?.snapToIndex(0); // Open the bottom sheet to a snap point to change the height.
+  };
+
+  const closeBottomSheet = () => {
+    bottomSheetRef.current?.close();
+  };
+
+  useEffect(() => {
+    if (isVisible) {
+      openBottomSheet();
+    } else {
+      closeBottomSheet();
+    }
+  }, [isVisible]);
+
+
   return (
     <View style={globalStyles.cont}>
       <ScrollView showsVerticalScrollIndicator={false} style={globalStyles.scroll}>
         <Header {...props} />
+        {/* {isVisible && <Pressable
+          style={{ backgroundColor: 'gray', width: 40, height: 40 }}
+          onPress={hideView} >
+        </Pressable>} */}
         <Text style={globalStyles.bigtext}>Shop</Text>
         <Text style={globalStyles.text1}>Get our best products</Text>
 
@@ -179,6 +212,7 @@ export default function Shop2(props) {
           ))}
         </ScrollView> */}
       </ScrollView>
+      {/* <ReminderBottomSheet refBottomSheet={bottomSheetRef} onClose={hideView} /> */}
     </View>
   );
 }

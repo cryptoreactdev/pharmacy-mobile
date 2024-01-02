@@ -28,7 +28,7 @@ export default function Progress(props) {
   const pickImage = async () => {
     // Check for camera permissions
     const { status } = await ImagePicker.requestCameraPermissionsAsync();
-    
+
     if (status !== 'granted') {
       console.error('Camera permission not granted');
       return;
@@ -74,7 +74,7 @@ export default function Progress(props) {
             <Text style={globalStyles.text3}>Process</Text>
           </TouchableOpacity>
         </View>
-        <Text style={globalStyles.bigtext}>Process</Text>
+        <Text style={[globalStyles.bigtext, { marginTop: 22 }]}>Process</Text>
         <Text style={globalStyles.text1}>
           Follow you care schedule and track your beauty process results
         </Text>
@@ -90,12 +90,12 @@ export default function Progress(props) {
             source={require("../../assets/warning.png")}
             style={styles.img}
           />
-          <Text style={styles.blacktextsmall}>
+          <Text numberOfLines={2} style={styles.blacktextsmall}>
             For reliable results, use consistent lighting and location
           </Text>
         </View>
         <View style={styles.smallcont}>
-          <Text style={globalStyles.bigtext2}>Discover</Text>
+          <Text style={globalStyles.bigtext2}>Gallery</Text>
           <TouchableOpacity
             onPress={() => {
               props.navigation.navigate("gallery");
@@ -105,8 +105,9 @@ export default function Progress(props) {
             <Text style={globalStyles.text2}>See All</Text>
             <Image
               source={require("../../assets/right.png")}
-              style={globalStyles.right}
+              style={[globalStyles.right]}
             />
+
           </TouchableOpacity>
         </View>
         <View style={{ flexDirection: "row" }}>
@@ -145,6 +146,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    marginTop: 6,
     paddingHorizontal: responsiveWidth(2),
   },
   img: {
@@ -162,11 +164,12 @@ const styles = StyleSheet.create({
   },
   rowdiv: {
     flexDirection: "row",
-
-    marginVertical: responsiveHeight(2),
+    marginVertical: responsiveHeight(1),
     alignItems: "center",
+    paddingHorizontal: 6
   },
   blacktextsmall: {
+    flex: 1,
     fontSize: responsiveFontSize(1.6),
   },
   card: {
@@ -180,23 +183,25 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    width: responsiveWidth(70),
+    // width: responsiveWidth(70),
     backgroundColor: "#F4E9DD",
     alignSelf: "center",
     borderRadius: 10,
-    padding: responsiveWidth(1),
+    width: responsiveWidth(90),
+    paddingVertical: responsiveHeight(.4),
+    paddingHorizontal: responsiveWidth(1.8)
   },
   btn2: {
-    height: responsiveHeight(4.5),
-    width: responsiveWidth(35),
+    height: responsiveHeight(3.8),
+    width: responsiveWidth(45),
     borderRadius: 10,
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
   },
   btn: {
-    height: responsiveHeight(4.5),
-    width: responsiveWidth(35),
+    height: responsiveHeight(3.8),
+    width: responsiveWidth(45),
     backgroundColor: "#fff",
     borderRadius: 10,
     flexDirection: "row",
@@ -206,9 +211,9 @@ const styles = StyleSheet.create({
   opencamera: {
     marginVertical: responsiveHeight(2),
     backgroundColor: "#F4E9DD",
-    height: responsiveHeight(18),
+    height: responsiveHeight(16),
     width: responsiveWidth(90),
-    borderRadius: 10,
+    borderRadius: 16,
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",

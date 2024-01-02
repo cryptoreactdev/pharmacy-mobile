@@ -13,8 +13,8 @@ export const globalStyles = StyleSheet.create({
     marginBottom: responsiveHeight(10),
   },
   droidSafeArea: {
-    flex: 1,
-    backgroundColor: 'white',
+    // flex: 1,
+    backgroundColor: '#FAF9F7',
     paddingTop: Platform.OS === 'android' ? 25 : 0
   },
   cont: {
@@ -23,7 +23,7 @@ export const globalStyles = StyleSheet.create({
     flex: 1,
   },
   bigtext: {
-    fontSize: responsiveFontSize(3.6),
+    fontSize: responsiveFontSize(3.2),
     fontWeight: "bold",
     marginTop: responsiveHeight(1),
     marginBottom: responsiveHeight(1),
@@ -37,7 +37,7 @@ export const globalStyles = StyleSheet.create({
     color: "#41392F",
   },
   text1: {
-    fontSize: responsiveFontSize(2),
+    fontSize: responsiveFontSize(1.8),
     //marginTop: responsiveHeight(1),
     // marginBottom: responsiveHeight(1),
     //fontFamily: "Inter",
@@ -96,8 +96,8 @@ export const globalStyles = StyleSheet.create({
     fontWeight: "bold",
   },
   right: {
-    height: responsiveHeight(4),
-    width: responsiveWidth(8),
+    height: responsiveHeight(3.2),
+    width: responsiveWidth(6.4),
     resizeMode: "contain",
     // marginLeft: responsiveWidth(1),
   },

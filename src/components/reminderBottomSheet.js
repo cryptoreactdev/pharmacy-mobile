@@ -12,8 +12,7 @@ import {
 
 const ReminderBottomSheet = ({ refBottomSheet, onClose }) => {
     const handleSheetChanges = useCallback((index) => {
-        console.log('handleSheetChanges', index);
-        if (index <= 0) {
+        if (index < 0) {
             onClose();
         }
     }, []);

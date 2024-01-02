@@ -5,8 +5,9 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
+  Dimensions
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../components/header";
 import { globalStyles } from "../stylesheet";
 import Card1 from "../components/homescreencards/card1";
@@ -17,13 +18,39 @@ import {
   responsiveFontSize,
 } from "react-native-responsive-dimensions";
 import CalendarPicker from "react-native-calendar-picker";
+import ReminderBottomSheet from "../components/reminderBottomSheet";
+import { useCommonView } from "../components/common/CommonViewShow";
+const { width, height } = Dimensions.get("window");
 
 export default function Routine(props) {
   const [selectedStartDate, setSelectedStartDate] = useState(null);
   const [open, setOpen] = useState(false);
 
+  const { isVisible, showView, hideView } = useCommonView();
+  const bottomSheetRef = React.useRef(null);
+
   const onDateChange = (date) => {
     setSelectedStartDate(date);
+  };
+
+  const openBottomSheet = () => {
+    bottomSheetRef.current?.snapToIndex(0); // Open the bottom sheet to a snap point to change the height.
+  };
+
+  const closeBottomSheet = () => {
+    bottomSheetRef.current?.close();
+  };
+
+  useEffect(() => {
+    if (isVisible) {
+      openBottomSheet();
+    } else {
+      closeBottomSheet();
+    }
+  }, [isVisible]);
+
+  const onChangeScreen = (page) => {
+    props.navigation.navigate(page);
   };
 
   return (
@@ -54,14 +81,20 @@ export default function Routine(props) {
           Follow your care schedule and take care of your beauty process result.
         </Text>
         <View style={styles.row3}>
-          <TouchableOpacity style={styles.btn3}>
-            <Text style={globalStyles.text3}>Edit</Text>
+          <TouchableOpacity style={styles.btn3} onPress={() => onChangeScreen("editSchedule")}>
+            <Text style={{
+              fontWeight: "bold",
+              fontSize: responsiveFontSize(2),
+              marginTop: responsiveHeight(1),
+              marginBottom: responsiveHeight(1),
+              color: "#75695A",
+            }}>Edit</Text>
             <Image
               source={require("../../assets/pen.png")}
               style={styles.imgg}
             />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.btn4}>
+          <TouchableOpacity style={styles.btn4} onPress={() => onChangeScreen("addSchedule")}>
             <Text style={globalStyles.whitetext3}>Add</Text>
             <Image
               source={require("../../assets/bolt.png")}
@@ -74,7 +107,7 @@ export default function Routine(props) {
           onPress={() => setOpen(true)}
         >
           <View style={styles.smallcont}>
-            <Text style={globalStyles.bigtext2}>June 2023</Text>
+            <Text style={styles.txtMonth}>June 2023</Text>
 
             <Image
               source={require("../../assets/right.png")}
@@ -152,6 +185,8 @@ export default function Routine(props) {
           </View>
         </View>
       </ScrollView>
+      {/* <ReminderBottomSheet refBottomSheet={bottomSheetRef} onClose={hideView} /> */}
+
     </View>
   );
 }
@@ -169,6 +204,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: responsiveWidth(2),
   },
+  txtMonth: {
+    fontSize: responsiveFontSize(2.4),
+    fontWeight: "bold",
+    marginTop: responsiveHeight(1),
+    marginBottom: responsiveHeight(1),
+    color: "#41392F",
+  },
   img: {
     height: 20,
     width: 20,
@@ -177,7 +219,7 @@ const styles = StyleSheet.create({
   },
   card: {
     width: responsiveWidth(90),
-    backgroundColor: "#F7F1E7",
+    backgroundColor: "#F4E9DD",
     borderRadius: 10,
     paddingVertical: responsiveHeight(2),
     marginBottom: responsiveHeight(2),
@@ -187,13 +229,14 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     alignItems: "center",
     width: responsiveWidth(90),
-    backgroundColor: "#F7F1E7",
+    backgroundColor: "#F4E9DD",
     alignSelf: "center",
     borderRadius: 10,
-    padding: responsiveWidth(1),
+    paddingVertical: responsiveHeight(.4),
+    paddingHorizontal: responsiveWidth(1.8)
   },
   btn2: {
-    height: responsiveHeight(4.5),
+    height: responsiveHeight(3.8),
     width: responsiveWidth(45),
     borderRadius: 10,
     flexDirection: "row",
@@ -201,7 +244,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   btn: {
-    height: responsiveHeight(4.5),
+    height: responsiveHeight(3.8),
     width: responsiveWidth(45),
     backgroundColor: "#fff",
     borderRadius: 10,
@@ -216,7 +259,7 @@ const styles = StyleSheet.create({
     marginTop: responsiveHeight(2),
   },
   btn3: {
-    height: responsiveHeight(5),
+    height: responsiveHeight(4.4),
     width: responsiveWidth(40),
     borderRadius: 10,
     flexDirection: "row",
@@ -226,7 +269,7 @@ const styles = StyleSheet.create({
     borderColor: "#41392F",
   },
   btn4: {
-    height: responsiveHeight(5),
+    height: responsiveHeight(4.4),
     width: responsiveWidth(40),
     backgroundColor: "#41392F",
     borderRadius: 10,
@@ -269,6 +312,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: '#F7F5F2',
+    paddingVertical: 12
   },
   datee: {
     backgroundColor: "#fff",

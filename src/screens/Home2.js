@@ -143,15 +143,11 @@ export default function Home2(props) {
   );
 
   useEffect(() => {
-    // hideView
-    setTimeout(() => {
-      hideView
-      console.log("Checkkkkk")
-    }, 10000);
-
     if (isVisible) {
-      // console.log("Checkkkkk")
       openBottomSheet();
+    }
+    else {
+      closeBottomSheet();
     }
   }, [isVisible]);
 
@@ -189,6 +185,10 @@ export default function Home2(props) {
     bottomSheetRef.current?.snapToIndex(0); // Open the bottom sheet to a snap point to change the height.
   };
 
+  const closeBottomSheet = () => {
+    bottomSheetRef.current?.close();
+  };
+
 
 
   // renders
@@ -211,10 +211,10 @@ export default function Home2(props) {
         style={globalStyles.scroll}
         overScrollMode="never">
         <Header {...props} />
-        {isVisible && <Pressable
+        {/* {isVisible && <Pressable
           style={{ backgroundColor: 'gray', width: 40, height: 40 }}
           onPress={hideView} >
-        </Pressable>}
+        </Pressable>} */}
         <Text style={globalStyles.bigtext}>Welcome Back, {user.displayName}</Text>
         {promotions.map((promotion) => (
           <Card1
@@ -349,7 +349,7 @@ export default function Home2(props) {
           </TouchableOpacity>
         ))}
       </ScrollView>
-      <ReminderBottomSheet refBottomSheet={bottomSheetRef} onClose={hideView} />
+      {/* <ReminderBottomSheet refBottomSheet={bottomSheetRef} onClose={hideView} /> */}
       {/* <BottomSheet
         ref={bottomSheetRef}
         style={{
@@ -468,23 +468,24 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontWeight: "bold",
   },
-  discover: {
-    height: responsiveHeight(20),
-    width: responsiveWidth(90),
-    resizeMode: "contain",
-    alignSelf: "center",
-    marginBottom: responsiveHeight(5),
-    alignSelf: "center",
-    borderRadius: 10,
-  },
+  // discover: {
+  //   height: responsiveHeight(20),
+  //   width: responsiveWidth(90),
+  //   resizeMode: "contain",
+  //   alignSelf: "center",
+  //   marginBottom: responsiveHeight(5),
+  //   alignSelf: "center",
+  //   borderRadius: 10,
+  // },
   cardContainer: {
     marginBottom: responsiveHeight(5),
     alignSelf: "center",
+
   },
   discover: {
     height: responsiveHeight(20),
     width: responsiveWidth(90),
-    resizeMode: "contain",
+    resizeMode: "cover",
     borderRadius: 10,
   },
   warningText: {

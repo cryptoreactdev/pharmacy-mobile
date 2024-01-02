@@ -6,6 +6,7 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
+  SafeAreaView
 } from "react-native";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../actions/cartActions";
@@ -19,6 +20,8 @@ import Checkoutbtn from "../components/checkoutbtn";
 import { useNavigation } from "@react-navigation/native";
 import { Dimensions } from "react-native";
 const windowWidth = Dimensions.get("window").width;
+const { width, height } = Dimensions.get("window");
+
 
 export default function Checkout2(props) {
   const dispatch = useDispatch();
@@ -83,252 +86,254 @@ export default function Checkout2(props) {
 
   return (
     <View>
-      <ScrollView
-        style={[
-          styles.cont,
-          selectedOption && {
-            padding: responsiveWidth(2),
-            marginHorizontal: responsiveWidth(2),
-          },
-        ]}
-        showsVerticalScrollIndicator={false}
-      >
-        <View style={{ position: "relative" }}>
-          <View style={[!selectedOption && styles.wrapper]}></View>
-          <View style={styles.header}>
-            <TouchableOpacity onPress={() => navigation.goBack()}>
+      <SafeAreaView style={globalStyles.droidSafeArea}>
+        <ScrollView
+          style={[
+            styles.cont,
+            selectedOption && {
+              padding: responsiveWidth(2),
+              marginHorizontal: responsiveWidth(2),
+            },
+          ]}
+          showsVerticalScrollIndicator={false}
+        >
+          <View style={{ position: "relative", paddingHorizontal: 22 }}>
+            <View style={[!selectedOption && styles.wrapper]}></View>
+            <View style={styles.header}>
+              <TouchableOpacity onPress={() => navigation.goBack()}>
+                <Image
+                  source={require("../../assets/left.png")}
+                  style={styles.left}
+                />
+              </TouchableOpacity>
+              <Text style={styles.text}>Pricing</Text>
+            </View>
+            <View style={styles.imgcont}>
               <Image
-                source={require("../../assets/left.png")}
-                style={styles.left}
+                source={{
+                  uri: productInformation.allImages.split(",")[0],
+                }}
+                style={styles.img}
               />
-            </TouchableOpacity>
-            <Text style={styles.text}>Pricing</Text>
-          </View>
-          <View style={styles.imgcont}>
-            <Image
-              source={{
-                uri: productInformation.allImages.split(",")[0],
-              }}
-              style={styles.img}
-            />
-            <View style={styles.textcont}>
-              <Text style={styles.text3}>{productInformation.volumn}</Text>
-              <Text style={styles.text2}>{productInformation.title}</Text>
-              <Text style={styles.text4}>
-                {productInformation.description.replace(/(<([^>]+)>)/gi, "")}
-              </Text>
+              <View style={styles.textcont}>
+                <Text style={styles.text3}>{productInformation.volumn}</Text>
+                <Text numberOfLines={2} style={styles.text2}>{productInformation.title}</Text>
+                <Text style={styles.text4}>
+                  {productInformation.description.replace(/(<([^>]+)>)/gi, "")}
+                </Text>
+              </View>
             </View>
           </View>
-        </View>
 
-        {selectedOption ? (
-          <View>
-            <View>
-              {productInformation.type === "Skin Care" ? (
-                <View>
-                  <Text style={globalStyles.bigtext2}>Subscribe & Save:</Text>
-
-                  <TouchableOpacity
-                    style={styles.package2}
-                    onPress={() => handleRadioSelect("30days")}
-                  >
-                    <View style={styles.themeCheckedcont}>
-                      <View style={styles.themeCont}>
-                        <Text style={styles.themeText}>Save $240 a year</Text>
-                      </View>
-                      <View
-                        style={{ flexDirection: "row", alignItems: "center" }}
-                      ></View>
-                    </View>
-                    <View style={styles.textrow}>
-                      <View style={{ flexDirection: "row" }}>
-                        <Image
-                          source={
-                            selectedOption === "30days"
-                              ? require("../../assets/radio-button-checked.png")
-                              : require("../../assets/radio-button-empty.png")
-                          }
-                          style={styles.box}
-                        />
-                        <Text style={globalStyles.blackLargeText}>
-                          Every 30 days
-                        </Text>
-                      </View>
-                      <Text style={globalStyles.blackLargeText}>
-                        ${productInformation.price_30_days}/mo
-                      </Text>
-                    </View>
-                    <Text style={globalStyles.smallText}>
-                      Get 30 uses shipped 30days
-                    </Text>
-                  </TouchableOpacity>
-
+          {selectedOption ? (
+            <View style={{ paddingHorizontal: 18 }}>
+              <View>
+                {productInformation.type === "Skin Care" ? (
                   <View>
-                    <View style={styles.checkedcont}>
-                      <View style={styles.greencont}>
-                        <Text style={styles.greentext}>Save $240 a year</Text>
-                      </View>
-                      <View
-                        style={{ flexDirection: "row", alignItems: "center" }}
-                      >
-                        <Image
-                          source={require("../../assets/star2.png")}
-                          style={styles.starIcon}
-                        />
-                        <Text style={styles.mostPopularText}>Most Popular</Text>
-                      </View>
-                    </View>
+                    <Text style={globalStyles.bigtext2}>Subscribe & Save:</Text>
 
                     <TouchableOpacity
-                      style={styles.package1}
-                      onPress={() => handleRadioSelect("60days")}
+                      style={styles.package2}
+                      onPress={() => handleRadioSelect("30days")}
                     >
+                      <View style={styles.themeCheckedcont}>
+                        <View style={styles.themeCont}>
+                          <Text style={styles.themeText}>Save $240 a year</Text>
+                        </View>
+                        <View
+                          style={{ flexDirection: "row", alignItems: "center" }}
+                        ></View>
+                      </View>
                       <View style={styles.textrow}>
                         <View style={{ flexDirection: "row" }}>
                           <Image
                             source={
-                              selectedOption === "60days"
+                              selectedOption === "30days"
                                 ? require("../../assets/radio-button-checked.png")
                                 : require("../../assets/radio-button-empty.png")
                             }
                             style={styles.box}
                           />
                           <Text style={globalStyles.blackLargeText}>
-                            Every 60 days
+                            Every 30 days
                           </Text>
                         </View>
-                        <Text style={globalStyles.greenLargeText}>
-                          ${productInformation.price_60_days}/mo
+                        <Text style={globalStyles.blackLargeText}>
+                          ${productInformation.price_30_days}/mo
                         </Text>
                       </View>
                       <Text style={globalStyles.smallText}>
-                        Get 30 uses shipped 60days
+                        Get 30 uses shipped 30days
+                      </Text>
+                    </TouchableOpacity>
+
+                    <View>
+                      <View style={styles.checkedcont}>
+                        <View style={styles.greencont}>
+                          <Text style={styles.greentext}>Save $240 a year</Text>
+                        </View>
+                        <View
+                          style={{ flexDirection: "row", alignItems: "center" }}
+                        >
+                          <Image
+                            source={require("../../assets/star2.png")}
+                            style={styles.starIcon}
+                          />
+                          <Text style={styles.mostPopularText}>Most Popular</Text>
+                        </View>
+                      </View>
+
+                      <TouchableOpacity
+                        style={styles.package1}
+                        onPress={() => handleRadioSelect("60days")}
+                      >
+                        <View style={styles.textrow}>
+                          <View style={{ flexDirection: "row" }}>
+                            <Image
+                              source={
+                                selectedOption === "60days"
+                                  ? require("../../assets/radio-button-checked.png")
+                                  : require("../../assets/radio-button-empty.png")
+                              }
+                              style={styles.box}
+                            />
+                            <Text style={globalStyles.blackLargeText}>
+                              Every 60 days
+                            </Text>
+                          </View>
+                          <Text style={globalStyles.greenLargeText}>
+                            ${productInformation.price_60_days}/mo
+                          </Text>
+                        </View>
+                        <Text style={globalStyles.smallText}>
+                          Get 30 uses shipped 60days
+                        </Text>
+                      </TouchableOpacity>
+                    </View>
+
+                    <TouchableOpacity
+                      style={styles.package2}
+                      onPress={() => handleRadioSelect("90days")}
+                    >
+                      <View style={styles.themeCheckedcont}>
+                        <View style={styles.themeCont}>
+                          <Text style={styles.themeText}>Save $240 a year</Text>
+                        </View>
+                        <View
+                          style={{ flexDirection: "row", alignItems: "center" }}
+                        ></View>
+                      </View>
+                      <View style={styles.textrow}>
+                        <View style={{ flexDirection: "row" }}>
+                          <Image
+                            source={
+                              selectedOption === "90days"
+                                ? require("../../assets/radio-button-checked.png")
+                                : require("../../assets/radio-button-empty.png")
+                            }
+                            style={styles.box}
+                          />
+                          <Text style={globalStyles.blackLargeText}>
+                            Every 90 days
+                          </Text>
+                        </View>
+                        <Text style={globalStyles.blackLargeText}>
+                          ${productInformation.price_90_days}/mo
+                        </Text>
+                      </View>
+                      <Text style={globalStyles.smallText}>
+                        Get 30 uses shipped 90days
                       </Text>
                     </TouchableOpacity>
                   </View>
-
-                  <TouchableOpacity
-                    style={styles.package2}
-                    onPress={() => handleRadioSelect("90days")}
-                  >
-                    <View style={styles.themeCheckedcont}>
-                      <View style={styles.themeCont}>
-                        <Text style={styles.themeText}>Save $240 a year</Text>
-                      </View>
-                      <View
-                        style={{ flexDirection: "row", alignItems: "center" }}
-                      ></View>
-                    </View>
-                    <View style={styles.textrow}>
-                      <View style={{ flexDirection: "row" }}>
-                        <Image
-                          source={
-                            selectedOption === "90days"
-                              ? require("../../assets/radio-button-checked.png")
-                              : require("../../assets/radio-button-empty.png")
-                          }
-                          style={styles.box}
-                        />
-                        <Text style={globalStyles.blackLargeText}>
-                          Every 90 days
-                        </Text>
-                      </View>
-                      <Text style={globalStyles.blackLargeText}>
-                        ${productInformation.price_90_days}/mo
-                      </Text>
-                    </View>
-                    <Text style={globalStyles.smallText}>
-                      Get 30 uses shipped 90days
-                    </Text>
-                  </TouchableOpacity>
-                </View>
-              ) : (
-                <View></View>
-              )}
-            </View>
-
-            <Text style={styles.oneTimePurchase}>One-time purchase:</Text>
-            <TouchableOpacity
-              style={styles.package}
-              onPress={() => handleRadioSelect("onetime")}
-            >
-              <View style={[styles.textrow]}>
-                <View style={{ flexDirection: "row" }}>
-                  <Image
-                    source={
-                      selectedOption === "onetime"
-                        ? require("../../assets/radio-button-checked.png")
-                        : require("../../assets/radio-button-empty.png")
-                    }
-                    style={styles.box}
-                  />
-                  <Text style={globalStyles.text2}>One time purchase</Text>
-                </View>
-                <View style={styles.counterContainer}>
-                  <TouchableOpacity onPress={handleDecrement}>
-                    <Image
-                      source={require("../../assets/removed.png")}
-                      style={styles.operationsButtonRemove}
-                    />
-                  </TouchableOpacity>
-                  <Text style={styles.operationsButtonCounter}>{quantity}</Text>
-                  <TouchableOpacity onPress={handleIncrement}>
-                    <Image
-                      source={require("../../assets/add.png")}
-                      style={styles.operationsButtonAdd}
-                    />
-                  </TouchableOpacity>
-                </View>
+                ) : (
+                  <View></View>
+                )}
               </View>
-            </TouchableOpacity>
 
-            <Checkoutbtn
-              lg
-              title={`Add to cart · $${finalPrice}`}
-              onPress={handleCheckout}
-            />
-          </View>
-        ) : (
-          <View style={styles.popup}>
-            <Image
-              source={require("../../assets/Imagee.png")}
-              style={styles.popupimg}
-            />
-            <Text style={globalStyles.bigtext2}>Subscribe & Save</Text>
-            <TouchableOpacity style={styles.last}>
-              <Image
-                source={require("../../assets/tick.png")}
-                style={styles.box}
-              />
-              <Text style={styles.text6}>No Commitment, cancel anytime</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.last}>
-              <Image
-                source={require("../../assets/tick.png")}
-                style={styles.box}
-              />
-              <Text style={styles.text6}>
-                You’re only charged before each delivery
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.last}>
-              <Image
-                source={require("../../assets/tick.png")}
-                style={styles.box}
-              />
-              <Text style={styles.text6}>Payless</Text>
-            </TouchableOpacity>
-            <TouchableOpacity>
+              <Text style={styles.oneTimePurchase}>One-time purchase:</Text>
+              <TouchableOpacity
+                style={styles.package}
+                onPress={() => handleRadioSelect("onetime")}
+              >
+                <View style={[styles.textrow]}>
+                  <View style={{ flexDirection: "row" }}>
+                    <Image
+                      source={
+                        selectedOption === "onetime"
+                          ? require("../../assets/radio-button-checked.png")
+                          : require("../../assets/radio-button-empty.png")
+                      }
+                      style={styles.box}
+                    />
+                    <Text style={styles.radioButtonText}>One time purchase</Text>
+                  </View>
+                  <View style={styles.counterContainer}>
+                    <TouchableOpacity onPress={handleDecrement}>
+                      <Image
+                        source={require("../../assets/removed.png")}
+                        style={styles.operationsButtonRemove}
+                      />
+                    </TouchableOpacity>
+                    <Text style={styles.operationsButtonCounter}>{quantity}</Text>
+                    <TouchableOpacity onPress={handleIncrement}>
+                      <Image
+                        source={require("../../assets/add.png")}
+                        style={styles.operationsButtonAdd}
+                      />
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              </TouchableOpacity>
+
               <Checkoutbtn
-                title={"Continue"}
-                onPress={() => {
-                  setSelectedOption(true);
-                }}
+                lg
+                title={`Add to cart · $${finalPrice}`}
+                onPress={handleCheckout}
               />
-            </TouchableOpacity>
-          </View>
-        )}
-      </ScrollView>
+            </View>
+          ) : (
+            <View style={styles.popup}>
+              <Image
+                source={require("../../assets/Imagee.png")}
+                style={styles.popupimg}
+              />
+              <Text style={globalStyles.bigtext2}>Subscribe & Save</Text>
+              <TouchableOpacity style={styles.last}>
+                <Image
+                  source={require("../../assets/tick.png")}
+                  style={styles.box}
+                />
+                <Text style={styles.text6}>No Commitment, cancel anytime</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.last}>
+                <Image
+                  source={require("../../assets/tick.png")}
+                  style={styles.box}
+                />
+                <Text style={styles.text6}>
+                  You’re only charged before each delivery
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.last}>
+                <Image
+                  source={require("../../assets/tick.png")}
+                  style={styles.box}
+                />
+                <Text style={styles.text6}>Payless</Text>
+              </TouchableOpacity>
+              <TouchableOpacity>
+                <Checkoutbtn
+                  title={"Continue"}
+                  onPress={() => {
+                    setSelectedOption(true);
+                  }}
+                />
+              </TouchableOpacity>
+            </View>
+          )}
+        </ScrollView>
+      </SafeAreaView>
     </View>
   );
 }
@@ -341,9 +346,9 @@ const styles = StyleSheet.create({
     position: "relative",
   },
   left: {
-    height: 80,
-    width: 70,
-    resizeMode: "contain",
+    height: responsiveHeight(8),
+    width: responsiveWidth(8),
+    left: -11
   },
   down: {
     height: 30,
@@ -352,15 +357,18 @@ const styles = StyleSheet.create({
   },
   header: {
     height: responsiveHeight(11),
-    width: responsiveWidth(104),
+    // width: responsiveWidth(104),
     flexDirection: "row",
-    justifyContent: "space-between",
+    // justifyContent: "space-between",
     alignItems: "center",
   },
   img: {
-    height: responsiveHeight(20),
-    width: responsiveWidth(30),
-    resizeMode: "contain",
+    height: responsiveHeight(14),
+    width: responsiveWidth(28),
+    resizeMode: "cover",
+    borderWidth: 1,
+    borderColor: '#00000000',
+    borderRadius: 12,
   },
   img2: {
     height: responsiveHeight(10),
@@ -390,22 +398,35 @@ const styles = StyleSheet.create({
   },
   textcont: {
     width: responsiveWidth(45),
+    flex: 1,
+    marginLeft: 22,
     justifyContent: "space-between",
     alignItems: "flex-start",
     marginTop: responsiveHeight(2),
   },
   oneTimePurchase: {
     color: "#41392F",
-    fontSize: 24,
+    fontSize: responsiveFontSize(2.6),
     fontFamily: "Bricolage Grotesque",
     fontWeight: "700",
     lineHeight: 32,
     wordWrap: "break-word",
   },
+  radioButtonText: {
+    fontSize: responsiveFontSize(2.1),
+    marginTop: responsiveHeight(1),
+    marginLeft: 8,
+    marginBottom: responsiveHeight(1),
+    color: "#75695A",
+    // fontWeight: "bold",
+  },
   text: {
-    fontSize: responsiveFontSize(2),
+    flex: 1,
+    marginRight: responsiveWidth(6),
+    fontSize: height > 700 ? responsiveFontSize(2) : responsiveFontSize(2.4),
     color: "#000000",
-    marginRight: responsiveWidth(45),
+    fontWeight: 'bold',
+    textAlign: 'center'
   },
   text2: {
     fontSize: responsiveFontSize(2.5),
@@ -426,13 +447,6 @@ const styles = StyleSheet.create({
     color: "#000000",
     fontWeight: "400",
   },
-  header: {
-    height: responsiveHeight(10),
-    width: responsiveWidth(100),
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
   textrow: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -448,10 +462,18 @@ const styles = StyleSheet.create({
   },
   package: {
     borderWidth: 0.2,
-    borderColor: "#75695A",
+    borderColor: "#75695A00",
     padding: responsiveHeight(2),
     marginVertical: responsiveHeight(1),
-    borderRadius: 10,
+    borderRadius: 16,
+    shadowColor: '#000000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 10,
     // borderTopLeftRadius:0,
     // borderTopRightRadius:0,
     backgroundColor: "#fff",

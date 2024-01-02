@@ -68,7 +68,7 @@ export default function ThanksPurchase(props) {
             <Text style={styles.rowText}>2120 NE 1236 ST, Floor 6, Apt 9</Text>
           </View>
           <View style={styles.row}>
-          <Text style={styles.rowTitleItem}>Items:</Text>
+            <Text style={styles.rowTitleItem}>Items:</Text>
           </View>
           <View style={styles.itemsPurchased}>
             {cartInformation.cartItems.map((item, index) => (
@@ -77,7 +77,7 @@ export default function ThanksPurchase(props) {
           </View>
           <Checkoutbtn
             title={'Add to my calendar'}
-            onPress={() => navigation.navigate("dailyroutine")}
+            onPress={() => navigation.navigate("dailyroutine", { from: "THANKS_PURCHASE" })}
           />
         </View>
       </ScrollView>
@@ -101,8 +101,8 @@ const CartItem = ({ item }) => {
       </View>
       <View style={styles.textContainer}>
         <View style={styles.titleContainer}>
-          <Text style={styles.text2}>{item.productInformation.title.length > 10 
-            ?item.productInformation.title.substring(0, 10) + '...' : item.productInformation.title}</Text>
+          <Text style={styles.text2}>{item.productInformation.title.length > 10
+            ? item.productInformation.title.substring(0, 10) + '...' : item.productInformation.title}</Text>
         </View>
         <Text style={styles.text3}>{item.productInformation.volumn}</Text>
       </View>
@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
     fontStyle: "normal",
     fontWeight: "700",
     lineHeight: 40,
-    
+
   },
   mainContainer: {
     display: "flex",
@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
     padding: 10,
     flexGrow: 0,
     flexShrink: 0,
-  
+
   },
 
 
@@ -177,10 +177,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     marginTop: 16,
   },
-  row:{
-    marginTop:20
+  row: {
+    marginTop: 20
   },
-  rowTitle:{
+  rowTitle: {
     fontFamily: "Inter",
     fontSize: 14,
     fontStyle: "normal",
@@ -238,7 +238,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
   },
   text2: {
-    flexDirection:"row",
+    flexDirection: "row",
     fontSize: responsiveFontSize(2.3),
     color: "#000000",
     fontWeight: "bold",

@@ -44,14 +44,24 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 20,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
-    backgroundColor: '#FFF'
+    backgroundColor: '#FFF',
+    resizeMode: "cover",
 
   },
   container: {
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 10,
+    marginTop: 2,
     marginHorizontal: responsiveWidth(1),
+    shadowColor: '#000000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.12,
+    shadowRadius: 4,
+    elevation: 0.4,
 
     // marginRight: responsiveWidth(2.6),
   },

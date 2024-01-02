@@ -5,6 +5,7 @@ import {
   View,
   ScrollView,
   TouchableOpacity,
+  SafeAreaView,
   Image,
 } from "react-native";
 import {
@@ -67,68 +68,70 @@ export default function Checkout1(props) {
 
   return (
     <View style={styles.cont}>
-      <View style={styles.header}>
-        <TouchableOpacity
-          // style={{ width: 20 }}
-          onPress={() => {
-            navigation.goBack();
-          }}
-        >
-          <Image
-            source={require("../../assets/left.png")}
-            style={styles.left}
-          />
-        </TouchableOpacity>
-        <Text style={styles.text}></Text>
-      </View>
-
-      <ScrollView>
-        <View>
-          <View style={styles.imgcont}>
+      <SafeAreaView style={globalStyles.droidSafeArea}>
+        <View style={styles.header}>
+          <TouchableOpacity
+            // style={{ width: 20 }}
+            onPress={() => {
+              navigation.goBack();
+            }}
+          >
             <Image
-              source={{ uri: params.allImages.split(",")[0] }}
-              style={styles.img}
+              source={require("../../assets/left.png")}
+              style={styles.left}
+            />
+          </TouchableOpacity>
+          <Text style={styles.text}></Text>
+        </View>
+
+        <ScrollView>
+          <View>
+            <View style={styles.imgcont}>
+              <Image
+                source={{ uri: params.allImages.split(",")[0] }}
+                style={styles.img}
+              />
+            </View>
+            <ScrollView
+              style={styles.cont2}
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+            >
+              {params.allImages
+                .split(",")
+                .slice(1, 5)
+                .map((image, index) => (
+                  <Image
+                    key={index}
+                    source={{
+                      uri: `https://rdevsolutions.com/applications/pharmacy/images/${image.trim()}`,
+                    }}
+                    style={styles.img2}
+                  />
+                ))}
+            </ScrollView>
+            <View>
+              <Text style={globalStyles.text1}>Starts from</Text>
+              <Text style={globalStyles.bigtext}>${params.one_time_price}</Text>
+              <Text style={globalStyles.bigtext2}>${params.title}</Text>
+              <Text style={styles.blacktext}>{params.volumn} ml</Text>
+            </View>
+            <Accordion
+              sections={SECTIONS}
+              activeSections={activeSections}
+              renderHeader={renderHeader}
+              renderContent={renderContent}
+              onChange={updateSections}
+            />
+            <Checkoutbtn
+              title={"Buy Now"}
+              onPress={() => {
+                navigation.navigate("checkout2", { productInformation });
+              }}
             />
           </View>
-          <ScrollView
-            style={styles.cont2}
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-          >
-            {params.allImages
-              .split(",")
-              .slice(1, 5)
-              .map((image, index) => (
-                <Image
-                  key={index}
-                  source={{
-                    uri: `https://rdevsolutions.com/applications/pharmacy/images/${image.trim()}`,
-                  }}
-                  style={styles.img2}
-                />
-              ))}
-          </ScrollView>
-          <View>
-            <Text style={globalStyles.text1}>Starts from</Text>
-            <Text style={globalStyles.bigtext}>${params.one_time_price}</Text>
-            <Text style={globalStyles.bigtext2}>${params.title}</Text>
-            <Text style={styles.blacktext}>{params.volumn} ml</Text>
-          </View>
-          <Accordion
-            sections={SECTIONS}
-            activeSections={activeSections}
-            renderHeader={renderHeader}
-            renderContent={renderContent}
-            onChange={updateSections}
-          />
-          <Checkoutbtn
-            title={"Buy Now"}
-            onPress={() => {
-              navigation.navigate("checkout2", { productInformation });
-            }}
-          />
-        </View>
-      </ScrollView>
+        </ScrollView>
+      </SafeAreaView>
     </View>
   );
 }
@@ -141,8 +144,8 @@ const styles = StyleSheet.create({
 
   left: {
     left: 0,
-    height: 80,
-    width: 70,
+    height: responsiveHeight(8),
+    width: responsiveWidth(8),
     // /resizeMode: "contain",
   },
   header: {
@@ -175,9 +178,12 @@ const styles = StyleSheet.create({
   },
 
   img: {
-    height: responsiveHeight(15),
-    width: responsiveWidth(40),
-    resizeMode: "contain",
+    height: responsiveHeight(18),
+    width: responsiveWidth(36),
+    resizeMode: "cover",
+    borderWidth: 1,
+    borderRadius: 12,
+    borderColor: "#00000000"
   },
   img2: {
     height: responsiveHeight(10),

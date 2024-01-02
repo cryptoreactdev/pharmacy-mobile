@@ -6,6 +6,7 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
+  Dimensions
 } from "react-native";
 import Header from "../components/header";
 import { globalStyles } from "../stylesheet";
@@ -21,10 +22,24 @@ import Card4 from "../components/homescreencards/card4";
 import Card5 from "../components/homescreencards/card5";
 import { getCommunityPosts } from "../config/DataApp";
 import { useNavigation } from "@react-navigation/native";
+import ReminderBottomSheet from "../components/reminderBottomSheet";
+import { useCommonView } from "../components/common/CommonViewShow";
+const { width, height } = Dimensions.get("window");
+
 
 export default function Community2(props) {
   const [blogPosts, setBlogPosts] = useState([]);
   const navigation = useNavigation();
+  const { isVisible, showView, hideView } = useCommonView();
+  const bottomSheetRef = React.useRef(null);
+
+  const openBottomSheet = () => {
+    bottomSheetRef.current?.snapToIndex(0); // Open the bottom sheet to a snap point to change the height.
+  };
+
+  const closeBottomSheet = () => {
+    bottomSheetRef.current?.close();
+  };
 
   useEffect(() => {
     getCommunityPosts().then((response) => {
@@ -36,6 +51,16 @@ export default function Community2(props) {
   const onChangeScreen = (id, title) => {
     navigation.navigate("postdetails", { id, title });
   };
+
+
+  useEffect(() => {
+    if (isVisible) {
+      openBottomSheet();
+    } else {
+      closeBottomSheet();
+    }
+  }, [isVisible]);
+
 
   return (
     <View style={globalStyles.cont}>
@@ -97,6 +122,8 @@ export default function Community2(props) {
           ))}
         </ScrollView>
       </ScrollView>
+      {/* <ReminderBottomSheet refBottomSheet={bottomSheetRef} onClose={hideView} /> */}
+
     </View>
   );
 }
