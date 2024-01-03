@@ -63,7 +63,12 @@ export default function Routine(props) {
               source={require("../../assets/calendar.png")}
               style={styles.img}
             />
-            <Text style={globalStyles.text3}>Schedule</Text>
+            <Text style={{
+              fontSize: height > 700 ? responsiveFontSize(1.6) : responsiveFontSize(1.8),
+              marginTop: height > 700 ? responsiveHeight(1) : responsiveHeight(.4),
+              marginBottom: height > 700 ? responsiveHeight(1) : responsiveHeight(.4),
+              color: "#75695A",
+            }}>Schedule</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.btn2}
@@ -73,7 +78,12 @@ export default function Routine(props) {
               source={require("../../assets/camera.png")}
               style={styles.img}
             />
-            <Text style={globalStyles.text3}>Process</Text>
+            <Text style={{
+              fontSize: height > 700 ? responsiveFontSize(1.6) : responsiveFontSize(1.8),
+              marginTop: height > 700 ? responsiveHeight(1) : responsiveHeight(.4),
+              marginBottom: height > 700 ? responsiveHeight(1) : responsiveHeight(.4),
+              color: "#75695A",
+            }}>Process</Text>
           </TouchableOpacity>
         </View>
         <Text style={globalStyles.bigtext}>Schedule</Text>
@@ -85,8 +95,8 @@ export default function Routine(props) {
             <Text style={{
               fontWeight: "bold",
               fontSize: responsiveFontSize(2),
-              marginTop: responsiveHeight(1),
-              marginBottom: responsiveHeight(1),
+              marginTop: height > 700 ? responsiveHeight(1) : responsiveHeight(.4),
+              marginBottom: height > 700 ? responsiveHeight(1) : responsiveHeight(.4),
               color: "#75695A",
             }}>Edit</Text>
             <Image
@@ -95,7 +105,13 @@ export default function Routine(props) {
             />
           </TouchableOpacity>
           <TouchableOpacity style={styles.btn4} onPress={() => onChangeScreen("addSchedule")}>
-            <Text style={globalStyles.whitetext3}>Add</Text>
+            <Text style={{
+              fontSize: responsiveFontSize(2),
+              marginTop: height > 700 ? responsiveHeight(1) : responsiveHeight(.4),
+              marginBottom: height > 700 ? responsiveHeight(1) : responsiveHeight(.4),
+              color: "#fff",
+              fontWeight: "bold",
+            }}>Add</Text>
             <Image
               source={require("../../assets/bolt.png")}
               style={styles.imgg}
@@ -236,7 +252,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: responsiveWidth(1.8)
   },
   btn2: {
-    height: responsiveHeight(3.8),
+    height: height > 700 ? responsiveHeight(3.8) : responsiveHeight(4.8),
     width: responsiveWidth(45),
     borderRadius: 10,
     flexDirection: "row",
@@ -244,7 +260,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   btn: {
-    height: responsiveHeight(3.8),
+    height: height > 700 ? responsiveHeight(3.8) : responsiveHeight(4.8),
     width: responsiveWidth(45),
     backgroundColor: "#fff",
     borderRadius: 10,
@@ -259,7 +275,7 @@ const styles = StyleSheet.create({
     marginTop: responsiveHeight(2),
   },
   btn3: {
-    height: responsiveHeight(4.4),
+    height: height > 700 ? responsiveHeight(4.4) : responsiveHeight(5),
     width: responsiveWidth(40),
     borderRadius: 10,
     flexDirection: "row",
@@ -269,7 +285,7 @@ const styles = StyleSheet.create({
     borderColor: "#41392F",
   },
   btn4: {
-    height: responsiveHeight(4.4),
+    height: height > 700 ? responsiveHeight(4.4) : responsiveHeight(5),
     width: responsiveWidth(40),
     backgroundColor: "#41392F",
     borderRadius: 10,

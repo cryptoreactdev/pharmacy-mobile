@@ -6,7 +6,8 @@ import {
   Image,
   TouchableOpacity,
   SafeAreaView,
-  Dimensions
+  Dimensions,
+  Alert
   // AsyncStorage
 } from "react-native";
 import React, { useState, useEffect } from "react";
@@ -153,10 +154,11 @@ export default function DailyRoutine(props) {
           <View style={styles.header}>
             <TouchableOpacity
               onPress={() => {
-                if (fromType === 'EDIT_ROUTINE')
-                  navigation.goBack();
-                else
-                  navigation.navigate("checkout2");
+                navigation.goBack();
+                // if (fromType === 'EDIT_ROUTINE')
+                //   navigation.goBack();
+                // else
+                //   navigation.navigate("checkout2");
               }}
             >
               <Image
@@ -259,6 +261,9 @@ export default function DailyRoutine(props) {
               <Button style={styles.saveButton} labelStyle={styles.saveButtonLabel} onPress={() => {
                 if (fromType === 'EDIT_ROUTINE')
                   openBottomSheet()
+                else {
+                  Alert.alert("Success", "Routine Saved", [{ text: "OK" }])
+                }
               }}>Save</Button>
             </View>
             {fromType === 'EDIT_ROUTINE'

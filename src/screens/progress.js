@@ -4,7 +4,7 @@ import {
   View,
   ScrollView,
   Image,
-  TouchableOpacity,
+  TouchableOpacity, Dimensions
 } from "react-native";
 import React, { useState } from "react";
 import Header from "../components/header";
@@ -19,6 +19,7 @@ import {
 import CalendarPicker from "react-native-calendar-picker";
 import * as ImagePicker from "expo-image-picker";
 import { LinearGradient } from "expo-linear-gradient";
+const { width, height } = Dimensions.get("window");
 
 export default function Progress(props) {
   const [selectedStartDate, setSelectedStartDate] = useState(null);
@@ -53,7 +54,7 @@ export default function Progress(props) {
 
   return (
     <View style={globalStyles.cont}>
-      <ScrollView style={globalStyles.scroll}>
+      <ScrollView style={globalStyles.scroll} showsVerticalScrollIndicator={false} overScrollMode="never">
         <Header />
         <View style={styles.row}>
           <TouchableOpacity
@@ -64,14 +65,24 @@ export default function Progress(props) {
               source={require("../../assets/calendar.png")}
               style={styles.img}
             />
-            <Text style={globalStyles.text3}>Schedule</Text>
+            <Text style={{
+              fontSize: height > 700 ? responsiveFontSize(1.6) : responsiveFontSize(1.8),
+              marginTop: height > 700 ? responsiveHeight(1) : responsiveHeight(.4),
+              marginBottom: height > 700 ? responsiveHeight(1) : responsiveHeight(.4),
+              color: "#75695A",
+            }}>Schedule</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.btn}>
             <Image
               source={require("../../assets/camera.png")}
               style={styles.img}
             />
-            <Text style={globalStyles.text3}>Process</Text>
+            <Text style={{
+              fontSize: height > 700 ? responsiveFontSize(1.6) : responsiveFontSize(1.8),
+              marginTop: height > 700 ? responsiveHeight(1) : responsiveHeight(.4),
+              marginBottom: height > 700 ? responsiveHeight(1) : responsiveHeight(.4),
+              color: "#75695A",
+            }}>Process</Text>
           </TouchableOpacity>
         </View>
         <Text style={[globalStyles.bigtext, { marginTop: 22 }]}>Process</Text>
@@ -192,7 +203,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: responsiveWidth(1.8)
   },
   btn2: {
-    height: responsiveHeight(3.8),
+    height: height > 700 ? responsiveHeight(3.8) : responsiveHeight(4.8),
     width: responsiveWidth(45),
     borderRadius: 10,
     flexDirection: "row",
@@ -200,7 +211,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   btn: {
-    height: responsiveHeight(3.8),
+    height: height > 700 ? responsiveHeight(3.8) : responsiveHeight(4.8),
     width: responsiveWidth(45),
     backgroundColor: "#fff",
     borderRadius: 10,
