@@ -14,10 +14,10 @@ import { clearCart } from '../actions/cartActions'; // Update the path
 const { width, height } = Dimensions.get("window");
 
 
-export default function ConfirmCheckout(props, { navigation }) {
+export default function ConfirmCheckout(props) {
   const [inputValue, setInputValue] = useState('');
   const cartInformation = useSelector((state) => state.cart);
-  // const navigation = useNavigation();
+  const navigation = useNavigation();
 
   const dispatch = useDispatch(); // Add this line to get the dispatch function
 
@@ -34,7 +34,6 @@ export default function ConfirmCheckout(props, { navigation }) {
   const auth = getAuth();
 
   const handleCheckout = async () => {
-
     try {
       // Iterate over each item in the cart and make a separate API call for each
       for (const cartItem of cartInformation.cartItems) {
@@ -49,11 +48,12 @@ export default function ConfirmCheckout(props, { navigation }) {
         const responseData = await createPurchase(purchaseData);
         console.log('Response from createPurchase:', responseData);
       }
+      navigation.navigate("thankspurchase");
 
       // After all API calls are complete, navigate to the next screen
       dispatch(clearCart());
 
-      navigation.navigate("thankspurchase");
+      
     } catch (error) {
       console.error('Error during checkout:', error);
       // Handle the error as needed
