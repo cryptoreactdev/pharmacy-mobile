@@ -231,6 +231,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     backgroundColor: 'lightgray',
     overflow: 'hidden',
+    marginBottom: 16
   },
   backgroundImageCover: {
     position: 'absolute',
