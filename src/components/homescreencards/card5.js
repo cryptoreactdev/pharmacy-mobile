@@ -54,14 +54,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginTop: 2,
     marginHorizontal: responsiveWidth(1),
-    shadowColor: '#000000',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.12,
-    shadowRadius: 4,
-    elevation: 0.4,
+
 
     // marginRight: responsiveWidth(2.6),
   },
