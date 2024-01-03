@@ -6,6 +6,8 @@ import {
   Text,
   View,
   useWindowDimensions,
+  Dimensions,
+  Alert
 } from "react-native";
 import {
   responsiveHeight,
@@ -21,6 +23,10 @@ import { getProductById } from "../config/DataApp";
 import RenderHtml from "react-native-render-html";
 import DropdownComponent from "../components/DropDownComponent";
 import { useNavigation } from "@react-navigation/native";
+import { globalStyles } from "../stylesheet";
+const { width, height } = Dimensions.get("window");
+
+
 const data = [
   { label: "30 days", value: "Every 30 days" },
   { label: "60 days", value: "Every 60 days" },
@@ -67,33 +73,63 @@ const SubscriptionDetails = (props) => {
     // You can handle logic based on the selected duration if needed
   };
   const navigation = useNavigation();
+
+
+  const Row = ({ children }) => (
+    <View style={styles.row}>{children}</View>
+  )
+
+  const Col = ({ numRows, children }) => {
+    return (
+      <View style={styles[`${numRows}col`]}>{children}</View>
+    )
+  }
+
+
   return (
     <>
       <View style={styles.container}>
-        <View style={styles.header}>
-          <TouchableOpacity
-            // style={{ width: 20 }}
-            onPress={() => {
-              navigation.goBack();
-            }}
-          >
-            <Image
-              source={require("../../assets/left.png")}
-              style={styles.left}
-            />
-          </TouchableOpacity>
-          <Text style={styles.text}>Subscription</Text>
-        </View>
-        <ScrollView style={{ flex: 1 }}>
-          <View style={styles.detailsContainer}>
+        <SafeAreaView style={globalStyles.droidSafeArea}>
+          <View style={styles.header}>
+            <TouchableOpacity
+              // style={{ width: 20 }}
+              onPress={() => {
+                navigation.goBack();
+              }}
+            >
+              <Image
+                source={require("../../assets/left.png")}
+                style={styles.left}
+              />
+            </TouchableOpacity>
+            <Text style={styles.text}>Subscription</Text>
+          </View>
+        </SafeAreaView>
+
+        <ScrollView style={{ flex: 1, paddingHorizontal: 18 }} overScrollMode="never" showsVerticalScrollIndicator={false}>
+          <View style={{
+            flex: 1,
+            width: '100%',
+            flexDirection: 'row'
+          }}>
+            <View>
+              <Image source={require('../../assets/card3.png')} style={styles.productImage} />
+            </View>
+            <View style={{ flex: 1, justifyContent: 'center', marginLeft: 16 }}>
+              <Text style={styles.smallText}>30ml / 1 fl.oz</Text>
+              <Text numberOfLines={2} style={styles.productName}>Estrella renewing vitamin C serum</Text>
+              <Text numberOfLines={2} style={styles.productDetail}>Explanation about the product sddfdf dfdfdf </Text>
+            </View>
+          </View>
+
+          {/* <View style={styles.detailsContainer}>
             <Image
               source={{ uri: productDetail?.image }}
               style={{ width: 130, height: 150 }}
             />
 
             <View
-              style={{ flex: 1, paddingHorizontal: 10, paddingVertical: 16 }}
-            >
+              style={{ flex: 1, paddingHorizontal: 10, paddingVertical: 16 }}>
               <Text style={{ fontSize: 11, paddingVertical: 5 }}>
                 {productDetail?.volumn}
               </Text>
@@ -113,10 +149,10 @@ const SubscriptionDetails = (props) => {
                 />
               </Text>
             </View>
-          </View>
+          </View> */}
           <View style={styles.optionContainer}>
             <View style={{ flex: 1 }}>
-              <TouchableOpacity style={[styles.optionCard]}>
+              <TouchableOpacity style={[styles.optionCard, { marginRight: 10 }]}>
                 <MaterialCommunityIcons
                   name="lightning-bolt-circle"
                   size={35}
@@ -130,7 +166,7 @@ const SubscriptionDetails = (props) => {
               </TouchableOpacity>
             </View>
             <View style={{ flex: 1 }}>
-              <TouchableOpacity style={styles.optionCard} onPress={showModal}>
+              <TouchableOpacity style={[styles.optionCard, { marginLeft: 10 }]} onPress={showModal}>
                 <Image
                   source={require("../../assets/crescent.png")}
                   height={50}
@@ -149,7 +185,7 @@ const SubscriptionDetails = (props) => {
               flex: 1,
               borderBottomWidth: 1,
               borderBottomColor: "#F4E9DD",
-              marginHorizontal: 30,
+              // marginHorizontal: 30,
               paddingVertical: 25,
             }}
           >
@@ -173,12 +209,15 @@ const SubscriptionDetails = (props) => {
               <Text style={{ color: "#75695A", fontWeight: "bold" }}>
                 Routine
               </Text>
-              <TouchableOpacity style={{ flexDirection: "row" }}>
-                <Text style={{ color: "#75695A" }}>Edit</Text>
-                <MaterialCommunityIcons
-                  name="arrow-right"
-                  size={18}
-                  color={"#757575"}
+              <TouchableOpacity style={{ flexDirection: "row" }} onPress={() => props.navigation.navigate("dailyroutine", { from: 'SUBSCRIPTION' })}>
+                <Text style={{ fontSize: height > 700 ? responsiveFontSize(1.8) : responsiveFontSize(2), color: "#75695A" }}>Edit</Text>
+                <Image
+                  source={require("../../assets/right.png")}
+                  style={{
+                    height: height > 700 ? responsiveHeight(2.2) : responsiveHeight(3.2),
+                    width: height > 700 ? responsiveWidth(5.4) : responsiveWidth(6.4),
+                    resizeMode: "contain"
+                  }}
                 />
               </TouchableOpacity>
             </View>
@@ -186,7 +225,7 @@ const SubscriptionDetails = (props) => {
           <View
             style={{
               flex: 1,
-              marginHorizontal: 30,
+              // marginHorizontal: 30,
               paddingVertical: 25,
               borderBottomWidth: 1,
               borderBottomColor: "#F4E9DD",
@@ -213,21 +252,34 @@ const SubscriptionDetails = (props) => {
                 <Text style={{ color: "#75695A", marginBottom: 2 }}>
                   Frequency
                 </Text>
-
-                <DropdownComponent
+                <Text
+                  style={{
+                    fontSize: 18,
+                    marginTop: 2,
+                    fontWeight: "bold",
+                    color: "#41392F",
+                    marginBottom: 10,
+                  }}
+                >
+                  Every 3 months
+                </Text>
+                {/* <DropdownComponent
                   data={data}
                   value={value}
                   setValue={setValue}
                   isFocus={isFocus}
                   setIsFocus={setIsFocus}
-                />
+                /> */}
               </View>
-              <TouchableOpacity style={{ flexDirection: "row" }}>
-                <Text style={{ color: "#75695A" }}>Change</Text>
-                <MaterialCommunityIcons
-                  name="arrow-right"
-                  size={18}
-                  color={"#757575"}
+              <TouchableOpacity style={{ flexDirection: "row" }} onPress={() => props.navigation.navigate("subscriptionShippingFrequency")}>
+                <Text style={{ fontSize: height > 700 ? responsiveFontSize(1.8) : responsiveFontSize(2), color: "#75695A" }}>Change</Text>
+                <Image
+                  source={require("../../assets/right.png")}
+                  style={{
+                    height: height > 700 ? responsiveHeight(2.2) : responsiveHeight(3.2),
+                    width: height > 700 ? responsiveWidth(5.4) : responsiveWidth(6.4),
+                    resizeMode: "contain"
+                  }}
                 />
               </TouchableOpacity>
             </View>
@@ -237,7 +289,7 @@ const SubscriptionDetails = (props) => {
               flex: 1,
               borderBottomWidth: 1,
               borderBottomColor: "#F4E9DD",
-              marginHorizontal: 30,
+              // marginHorizontal: 30,
               paddingVertical: 25,
             }}
           >
@@ -262,17 +314,21 @@ const SubscriptionDetails = (props) => {
                   color: "#41392F",
                   fontWeight: "bold",
                   fontSize: 16,
+                  paddingRight: 4,
                   flex: 1,
                 }}
               >
-                3000 NE 2nd Ave Apt813, Miami,FL
+                3000 NE 2nd Ave Apt813, Miami,FLs sdsd sdsd
               </Text>
-              <TouchableOpacity style={{ flexDirection: "row" }}>
-                <Text style={{ color: "#75695A" }}>Change</Text>
-                <MaterialCommunityIcons
-                  name="arrow-right"
-                  size={18}
-                  color={"#757575"}
+              <TouchableOpacity style={{ flexDirection: "row" }} onPress={() => props.navigation.navigate("myInformation")}>
+                <Text style={{ fontSize: height > 700 ? responsiveFontSize(1.8) : responsiveFontSize(2), color: "#75695A" }}>Change</Text>
+                <Image
+                  source={require("../../assets/right.png")}
+                  style={{
+                    height: height > 700 ? responsiveHeight(2.2) : responsiveHeight(3.2),
+                    width: height > 700 ? responsiveWidth(5.4) : responsiveWidth(6.4),
+                    resizeMode: "contain"
+                  }}
                 />
               </TouchableOpacity>
             </View>
@@ -282,7 +338,7 @@ const SubscriptionDetails = (props) => {
               flex: 1,
               borderBottomWidth: 1,
               borderBottomColor: "#41392F",
-              marginHorizontal: 30,
+              // marginHorizontal: 30,
               paddingVertical: 25,
             }}
           >
@@ -327,7 +383,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "white",
     height: 110,
-    marginHorizontal: 10,
+    // marginHorizontal: 10,
     borderRadius: 12,
     padding: 10,
   },
@@ -386,7 +442,38 @@ const styles = StyleSheet.create({
     fontSize: responsiveFontSize(2.3),
     color: "#000000",
     fontWeight: "700",
-    marginRight: responsiveWidth(45),
+    marginRight: responsiveWidth(38),
+  },
+
+  productImage: {
+    height: 125,
+    width: 125,
+    borderWidth: 1,
+    borderColor: '#00000000',
+    borderRadius: 12,
+    backgroundColor: '#fff',
+    resizeMode: 'cover'
+
+  },
+
+  row: {
+    flexDirection: "row"
+  },
+  smallText: {
+    color: '#000',
+    fontSize: 12,
+    fontWeight: '400'
+  },
+  productName: {
+    color: '#41392F',
+    fontSize: 18,
+    fontWeight: '600',
+  },
+  productDetail: {
+    marginTop: 8,
+    fontSize: 16,
+    fontWeight: '400',
+    color: '#000'
   },
 });
 

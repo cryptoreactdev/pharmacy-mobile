@@ -21,6 +21,9 @@ import SubscriptionDetails from "../screens/SubscriptionDetails";
 import BottomSheet from "@gorhom/bottom-sheet";
 import AddSchedule from "../screens/AddSchedule";
 import EditSchedule from "../screens/EditSchedule";
+import SubscriptionShippingFrequency from "../screens/SubscriptionShippingFrequency";
+import MyInformation from "../screens/MyInformation";
+import ChangePassword from "../screens/ChangePassword";
 
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -225,6 +228,21 @@ export default function Materialbottombar() {
       <Stack.Screen
         name="subscriptiondetails"
         component={SubscriptionDetails}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="subscriptionShippingFrequency"
+        component={SubscriptionShippingFrequency}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="myInformation"
+        component={MyInformation}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="changePassword"
+        component={ChangePassword}
         options={{ headerShown: false }}
       />
       <Stack.Screen
