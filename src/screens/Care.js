@@ -82,25 +82,15 @@ export default function Care({ props, navigation }) {
       <ScrollView showsVerticalScrollIndicator={false} style={globalStyles.scroll}>
         <Header {...props} />
         <Text style={[globalStyles.bigtext, { marginHorizontal: 2 }]}>Care</Text>
-        <Text style={styles.txtSubline}>Explore our most recent products</Text>
-        <ScrollView horizontal={true}>
-          {items.map((item, index) => (
-            <TouchableOpacity
-              key={index}
-              style={styles.cardContainer}
-              onPress={() => onChangeScreen(item.id, item.title)}
-            >
-              <Image source={{ uri: item.image }} style={styles.discover} />
-              <LinearGradient
-                colors={["rgba(0,0,0,0.0)", "rgba(0,0,0,0.9)"]}
-                style={styles.titleContainer}
-              >
-                <Text style={styles.blogTitle}>{item.title}</Text>
-              </LinearGradient>
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
-        {/* <Text style={globalStyles.text2}>We Can Help You with</Text> */}
+        <Text style={styles.txtSubline}>Explore our most popular treatments</Text>
+        <View style={styles.containerCover}>
+          <Image
+            source={require("../../assets/care-cover.png")}
+            style={styles.backgroundImageCover}
+          />
+          <Text style={[styles.textCover, { marginHorizontal: 2 }]}>Technology and benefits</Text>
+        </View>
+
         <View style={styles.search}>
           <Image
             source={require("../../assets/search.png")}
@@ -233,5 +223,31 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 16,
     fontWeight: "bold",
+  },
+  containerCover: {
+    width: 343,
+    height: 132,
+    flexShrink: 0,
+    borderRadius: 12,
+    backgroundColor: 'lightgray',
+    overflow: 'hidden',
+  },
+  backgroundImageCover: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+  },
+  textCover: {
+    position: 'absolute',
+    left: 16,
+    bottom: 12,
+    color: '#F7F1E7', // You can replace this with your desired color
+    fontFamily: 'Inter', // Replace with your chosen font family
+    fontSize: 16,
+    fontStyle: 'normal',
+    fontWeight: '700',
+    lineHeight: 24, // This sets line height in React Native
   },
 });
