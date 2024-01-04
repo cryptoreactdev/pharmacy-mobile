@@ -52,6 +52,9 @@ export default function MyInformation(props) {
         bottomSheetRef.current?.close();
     };
 
+    const onUpdateSubscription = () => {
+        Alert.alert("Success", "Subscription Updated", [{ text: "OK" }])
+    }
 
 
     return (
@@ -170,7 +173,7 @@ export default function MyInformation(props) {
                             </View>
                         </View>
 
-                        <TouchableOpacity style={styles.btnContainer} onPress={() => onUpdateSubscription()}>
+                        <TouchableOpacity style={styles.btnContainer} onPress={() => props.navigation.navigate('addShippingAddress')}>
                             <Text style={{
                                 fontSize: height > 700 ? responsiveFontSize(2) : responsiveFontSize(1.8),
                                 fontWeight: '700',

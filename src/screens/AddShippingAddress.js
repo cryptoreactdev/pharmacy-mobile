@@ -21,38 +21,13 @@ import {
 import { Button } from "react-native-paper";
 import ColorsApp from "../config/ColorsApp";
 import { useNavigation } from "@react-navigation/native";
-import BottomSheet, { BottomSheetBackdrop } from "@gorhom/bottom-sheet";
 const { width, height } = Dimensions.get("window");
 
-export default function ChangePassword(props) {
+export default function AddShippingAddress(props) {
     const navigation = useNavigation();
-    const [selectedOption, setSelectedOption] = useState(null);
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [showNewPassword, setShowNewPassword] = useState(false);
-    const bottomSheetRef = React.useRef(null);
-
-    const handleRadioSelect = (option) => {
-        setSelectedOption(option);
-        // if (option === "30days") {
-        //     setFinalPrice(productInformation.price_30_days * 12);
-        // } else if (option === "60days") {
-        //     setFinalPrice(productInformation.price_60_days * 12);
-        // } else if (option === "90days") {
-        //     setFinalPrice(productInformation.price_90_days * 12);
-        // } else if (option === "onetime") {
-        //     setFinalPrice(productInformation.one_time_price * quantity);
-        // }
-    };
-
-
-    const openBottomSheet = () => {
-        bottomSheetRef.current?.snapToIndex(0); // Open the bottom sheet to a snap point to change the height.
-    };
-
-    const closeBottomSheet = () => {
-        bottomSheetRef.current?.close();
-    };
 
     const toggleShowPassword = () => {
         setShowPassword(!showPassword);
@@ -62,7 +37,7 @@ export default function ChangePassword(props) {
     };
 
     const onUpdatePassword = () => {
-        Alert.alert("Success", "Successfully password updated", [{ text: "OK" }])
+        Alert.alert("Success", "Successfully Password Updated", [{ text: "OK" }])
     }
 
     return (
@@ -87,24 +62,15 @@ export default function ChangePassword(props) {
                                 style={styles.left}
                             />
                         </TouchableOpacity>
-                        <Text style={styles.text}>Account details</Text>
+                        <Text style={styles.text}>Add Shipping Address</Text>
                     </View>
 
                     <View style={{ paddingHorizontal: height > 700 ? responsiveWidth(1) : responsiveWidth(2) }}>
-                        <Text
-                            style={{
-                                fontSize: height > 700 ? responsiveFontSize(3) : responsiveFontSize(2),
-                                fontWeight: '700',
-                                marginTop: 12,
-                                marginBottom: 16,
-                                color: ColorsApp.APP_PRIMARY
-                            }}>Follow the instructions</Text>
 
                         <View style={styles.container}>
                             <TextInput
-                                placeholder="Current password"
+                                placeholder="First name"
                                 placeholderTextColor="#000"
-                                secureTextEntry={!showPassword}
                                 // onChangeText={(text) => setEmail(text.trim())}
                                 mode="flat"
                                 autoCapitalize="none"
@@ -112,28 +78,12 @@ export default function ChangePassword(props) {
                                 activeUnderlineColor="transparent"
                                 style={styles.inputContainer}
                             />
-                            <TouchableOpacity style={{ alignSelf: 'center' }} onPress={() => toggleShowPassword()}>
-                                <Image
-                                    source={
-                                        showPassword
-                                            ? require("../../assets/passwordVisible.png")
-                                            : require("../../assets/passwordNotVisible.png")}
-                                    style={{
-                                        marginRight: 8,
-                                        height: height > 700 ? responsiveHeight(2.5) : responsiveHeight(2),
-                                        width: height > 700 ? responsiveWidth(5) : responsiveWidth(4),
-                                        resizeMode: "contain",
-                                        alignSelf: 'center'
-                                    }}
-                                />
-                            </TouchableOpacity>
                         </View>
 
                         <View style={styles.container}>
                             <TextInput
-                                placeholder="New password"
+                                placeholder="Last name"
                                 placeholderTextColor="#000"
-                                secureTextEntry={!showNewPassword}
                                 // value={password} 
                                 // onChangeText={(text) => setEmail(text.trim())}
                                 mode="flat"
@@ -142,21 +92,48 @@ export default function ChangePassword(props) {
                                 activeUnderlineColor="transparent"
                                 style={styles.inputContainer}
                             />
-                            <TouchableOpacity style={{ alignSelf: 'center' }} onPress={() => toggleShowNewPassword()}>
-                                <Image
-                                    source={
-                                        showNewPassword
-                                            ? require("../../assets/passwordVisible.png")
-                                            : require("../../assets/passwordNotVisible.png")}
-                                    style={{
-                                        marginRight: 8,
-                                        height: height > 700 ? responsiveHeight(2.5) : responsiveHeight(2),
-                                        width: height > 700 ? responsiveWidth(5) : responsiveWidth(4),
-                                        resizeMode: "contain",
-                                    }}
-                                />
-                            </TouchableOpacity>
+                        </View>
 
+                        <View style={styles.container}>
+                            <TextInput
+                                placeholder="Last name"
+                                placeholderTextColor="#000"
+                                // value={password} 
+                                // onChangeText={(text) => setEmail(text.trim())}
+                                mode="flat"
+                                autoCapitalize="none"
+                                underlineColor="transparent"
+                                activeUnderlineColor="transparent"
+                                style={styles.inputContainer}
+                            />
+                        </View>
+
+                        <View style={styles.container}>
+                            <TextInput
+                                placeholder="Last name"
+                                placeholderTextColor="#000"
+                                // value={password} 
+                                // onChangeText={(text) => setEmail(text.trim())}
+                                mode="flat"
+                                autoCapitalize="none"
+                                underlineColor="transparent"
+                                activeUnderlineColor="transparent"
+                                style={styles.inputContainer}
+                            />
+                        </View>
+
+                        <View style={styles.container}>
+                            <TextInput
+                                placeholder="Last name"
+                                placeholderTextColor="#000"
+                                // value={password} 
+                                // onChangeText={(text) => setEmail(text.trim())}
+                                mode="flat"
+                                autoCapitalize="none"
+                                underlineColor="transparent"
+                                activeUnderlineColor="transparent"
+                                style={styles.inputContainer}
+                            />
                         </View>
 
                         <TouchableOpacity style={styles.btnContainer} onPress={() => onUpdatePassword()}>
@@ -186,7 +163,7 @@ const styles = StyleSheet.create({
         marginLeft: 6
     },
     container: {
-        marginVertical: 12,
+        marginVertical: 6,
         borderColor: "#CBCBCB",
         borderWidth: 1,
         paddingHorizontal: 10,

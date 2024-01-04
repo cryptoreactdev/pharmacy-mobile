@@ -24,6 +24,7 @@ import EditSchedule from "../screens/EditSchedule";
 import SubscriptionShippingFrequency from "../screens/SubscriptionShippingFrequency";
 import MyInformation from "../screens/MyInformation";
 import ChangePassword from "../screens/ChangePassword";
+import AddShippingAddress from "../screens/AddShippingAddress";
 
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -243,6 +244,11 @@ export default function Materialbottombar() {
       <Stack.Screen
         name="changePassword"
         component={ChangePassword}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="addShippingAddress"
+        component={AddShippingAddress}
         options={{ headerShown: false }}
       />
       <Stack.Screen
