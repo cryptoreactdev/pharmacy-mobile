@@ -201,7 +201,7 @@ export default function Routine(props) {
           </View>
         </View>
       </ScrollView>
-      {/* <ReminderBottomSheet refBottomSheet={bottomSheetRef} onClose={hideView} /> */}
+      <ReminderBottomSheet refBottomSheet={bottomSheetRef} onClose={hideView} />
 
     </View>
   );

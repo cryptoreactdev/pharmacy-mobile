@@ -39,10 +39,11 @@ export default function Shop2(props) {
   const [products, setProducts] = useState([]);
   const [filteredLatestPosts, setFilteredLatestPosts] = useState([]);
   const [allTypeProducts, setAllTypesProducts] = useState({});
+  const [selectedType, setSelectedType] = useState([]);
   const productTypes = [
     "Skin Care",
     "Devices",
-    "Accesories",
+    "Accessories",
     "Accidental Warranty",
   ];
 
@@ -114,6 +115,18 @@ export default function Shop2(props) {
     }
   }, [isVisible]);
 
+  const handleTypeClick = (type) => {
+    if (selectedType.includes(type)) {
+      // If selected, remove it
+      setSelectedType((prevSelectedTypes) =>
+        prevSelectedTypes.filter((selectedType) => selectedType !== type)
+      );
+    } else {
+      // If not selected, add it
+      setSelectedType((prevSelectedTypes) => [...prevSelectedTypes, type]);
+    }
+  };
+
 
   return (
     <View style={globalStyles.cont}>
@@ -154,7 +167,18 @@ export default function Shop2(props) {
         </View>
         <ScrollView showsHorizontalScrollIndicator={false} horizontal={true}>
           <View style={styles.filters}>
-            <TouchableOpacity
+
+            {productTypes?.map((type, index) => (
+              <TouchableOpacity
+                style={selectedType.includes(type) ? styles.selectedViewContainer : styles.unselectedViewContainer}
+                onPress={() => handleTypeClick(type)}
+              >
+                <Text style={globalStyles.txtType}>{type}</Text>
+              </TouchableOpacity>
+            ))}
+
+
+            {/* <TouchableOpacity
               style={styles.btn}
             // onPress={() => onChangeScreenProduct(product, "skincare")}
             >
@@ -177,7 +201,7 @@ export default function Shop2(props) {
             // onPress={() => onChangeScreenProduct(product, "skincare")}
             >
               <Text style={globalStyles.text3}>Warranty</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
         </ScrollView>
 
@@ -212,7 +236,7 @@ export default function Shop2(props) {
           ))}
         </ScrollView> */}
       </ScrollView>
-      {/* <ReminderBottomSheet refBottomSheet={bottomSheetRef} onClose={hideView} /> */}
+      <ReminderBottomSheet refBottomSheet={bottomSheetRef} onClose={hideView} />
     </View>
   );
 }
@@ -300,5 +324,31 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     marginBottom: 10,
+  },
+
+  selectedViewContainer: {
+    height: height > 700 ? responsiveHeight(4.2) : responsiveHeight(4.4),
+    paddingHorizontal: responsiveWidth(3),
+    borderWidth: responsiveWidth(.34),
+    borderColor: "#ECDDC6",
+    marginRight: 5,
+    backgroundColor: "#ECDDC6",
+    borderRadius: 25,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  unselectedViewContainer: {
+    height: height > 700 ? responsiveHeight(4.2) : responsiveHeight(4.4),
+    paddingHorizontal: responsiveWidth(3),
+    marginRight: 5,
+    borderWidth: responsiveWidth(.34),
+    borderColor: "#ECDDC6",
+    backgroundColor: "#ECDDC600",
+    borderRadius: 25,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });

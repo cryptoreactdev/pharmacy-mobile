@@ -93,7 +93,7 @@ export default function ChangePassword(props) {
                     <View style={{ paddingHorizontal: height > 700 ? responsiveWidth(1) : responsiveWidth(2) }}>
                         <Text
                             style={{
-                                fontSize: height > 700 ? responsiveFontSize(3) : responsiveFontSize(2),
+                                fontSize: height > 700 ? responsiveFontSize(3) : responsiveFontSize(3.2),
                                 fontWeight: '700',
                                 marginTop: 12,
                                 marginBottom: 16,
@@ -161,7 +161,7 @@ export default function ChangePassword(props) {
 
                         <TouchableOpacity style={styles.btnContainer} onPress={() => onUpdatePassword()}>
                             <Text style={{
-                                fontSize: height > 700 ? responsiveFontSize(2) : responsiveFontSize(1.8),
+                                fontSize: height > 700 ? responsiveFontSize(2) : responsiveFontSize(2.2),
                                 fontWeight: '700',
                                 color: '#F7F1E7'
                             }}>Change Password</Text>
@@ -203,7 +203,7 @@ const styles = StyleSheet.create({
         marginVertical: 6,
         paddingVertical: 6,
         fontWeight: '400',
-        fontSize: height > 700 ? responsiveFontSize(2) : responsiveFontSize(1.6),
+        fontSize: height > 700 ? responsiveFontSize(2) : responsiveFontSize(2.1),
         color: ColorsApp.APP_PRIMARY,
         marginRight: 4
         // borderRadius:40,

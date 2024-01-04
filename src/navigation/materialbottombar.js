@@ -25,6 +25,9 @@ import SubscriptionShippingFrequency from "../screens/SubscriptionShippingFreque
 import MyInformation from "../screens/MyInformation";
 import ChangePassword from "../screens/ChangePassword";
 import AddShippingAddress from "../screens/AddShippingAddress";
+import VideosHowToUse from "../screens/VideosHowToUse";
+import TestimonialReviews from "../screens/TestimonialReviews";
+import PaymentMethod from "../screens/PaymentMethod";
 
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -74,20 +77,6 @@ function TabNav() {
 
   return (
     <Tab.Navigator
-      // tabBar={(props) => <MyTabBar {...props} />
-      //   // <BottomSheet
-      //   //   ref={bottomSheetRef}
-      //   //   // initialSnap={0}
-      //   //   snapPoints={["40%", "80%"]} // Set custom heights here
-      //   //   enablePanDownToClose // Pan down gesture closes the sheet
-      //   // // index={-1} // Initial position of the bottom sheet (optional). Default is 0
-      //   // >
-      //   //   <View style={bottomStyles.contentContainer}>
-      //   //     <Text >React Native Bottom Sheet</Text>
-      //   //     <Button onPress={closeBottomSheet} title="Close Bottom Sheet" />
-      //   //   </View>
-      //   // </BottomSheet>
-      // }
       barStyle={{
         backgroundColor: "#F7F1E7",
         position: "absolute",
@@ -289,6 +278,21 @@ export default function Materialbottombar() {
       <Stack.Screen
         name="dailyroutine"
         component={DailyRoutine}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="videosHowToUse"
+        component={VideosHowToUse}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="testimonialReviews"
+        component={TestimonialReviews}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="paymentMethod"
+        component={PaymentMethod}
         options={{ headerShown: false }}
       />
 

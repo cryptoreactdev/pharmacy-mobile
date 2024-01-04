@@ -133,6 +133,16 @@ export default function Home2(props) {
   // Use the useEffect hook for the initial data fetching
   useEffect(() => {
     fetchData();
+    const timeoutId = setTimeout(() => {
+      hideView();
+      console.log("HIDE FROM HOME")
+    }, 10000);
+
+    // Your component will unmount logic here
+    return () => {
+      // Clear the timeout to avoid memory leaks
+      clearTimeout(timeoutId);
+    };
   }, []);
 
   // Use the useFocusEffect hook to update data when the screen is focused
@@ -190,20 +200,6 @@ export default function Home2(props) {
   };
 
 
-
-  // renders
-  const renderBackdrop = useCallback(
-    props => (
-      <BottomSheetBackdrop
-        {...props}
-        disappearsOnIndex={1}
-        appearsOnIndex={2}
-      />
-    ),
-    []
-  );
-
-
   return (
     <View style={globalStyles.cont}>
       <ScrollView
@@ -258,7 +254,7 @@ export default function Home2(props) {
             <View style={[styles.card, { paddingVertical: openSkinCareOption[index] ? responsiveHeight(2) : 0 }]} key={index}>
               <Card3 product={product} onPress={() => handleCardClick(index)} />
               {openSkinCareOption[index] && (
-                <View>
+                <View style={{ marginTop: height > 700 ? 0 : responsiveHeight(1) }}>
                   <View style={styles.row}>
                     <TouchableOpacity style={styles.btn}>
                       <Image
@@ -349,46 +345,7 @@ export default function Home2(props) {
           </TouchableOpacity>
         ))}
       </ScrollView>
-      {/* <ReminderBottomSheet refBottomSheet={bottomSheetRef} onClose={hideView} /> */}
-      {/* <BottomSheet
-        ref={bottomSheetRef}
-        style={{
-          borderRadius: 24,
-          shadowColor: '#000000',
-          shadowOffset: {
-            width: 0,
-            height: 8,
-          },
-          shadowOpacity: 0.2,
-          shadowRadius: 24,
-          elevation: 15,
-        }}
-        snapPoints={height > 700 ? ["50%", "70%"] : ["60%", "80%"]}
-        enablePanDownToClose
-        index={-1}
-      >
-        <View style={{ width: '100%', alignItems: 'center' }}>
-          <Text
-            style={{
-              color: '#000',
-              fontSize: height > 700 ? responsiveFontSize(2.2) : responsiveFontSize(2.8),
-              fontWeight: '700',
-              marginTop: 8
-            }}>
-            Treatment Reminder
-          </Text>
-          <Text
-            style={{
-              color: '#000',
-              fontSize: height > 700 ? responsiveFontSize(1.8) : responsiveFontSize(2.2),
-              fontWeight: '400',
-              marginTop: 8
-            }}>
-            Treatment Reminder
-          </Text>
-          <ReminderCardContent />
-        </View>
-      </BottomSheet> */}
+      <ReminderBottomSheet refBottomSheet={bottomSheetRef} onClose={hideView} />
     </View>
   );
 }

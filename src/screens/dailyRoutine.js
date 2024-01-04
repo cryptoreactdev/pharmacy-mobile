@@ -261,7 +261,9 @@ export default function DailyRoutine(props) {
               <Button style={styles.saveButton} labelStyle={styles.saveButtonLabel} onPress={() => {
                 if (fromType === 'EDIT_ROUTINE')
                   openBottomSheet()
-                else {
+                else if (fromType === 'THANKS_PURCHASE') {
+                  navigation.navigate("home");
+                } else {
                   Alert.alert("Success", "Routine Saved", [{ text: "OK" }])
                 }
               }}>Save</Button>

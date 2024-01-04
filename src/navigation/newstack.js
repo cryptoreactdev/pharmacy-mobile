@@ -14,6 +14,9 @@ import ShoppingCart from "../screens/shoppingcart";
 import ConfirmCheckout from "../screens/confirmcheckout";
 import ThanksPurchase from "../screens/thankspurchase";
 import DailyRoutine from "../screens/dailyRoutine";
+import Notification from "../screens/Notification";
+import NotificationSettings from "../screens/NotificationSettings";
+import VideosHowToUse from "../screens/VideosHowToUse";
 
 const Stack = createStackNavigator();
 
@@ -28,6 +31,16 @@ export default function Newstack() {
       <Stack.Screen
         name="profile"
         component={Profile}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="notification"
+        component={Notification}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="notificationSettings"
+        component={NotificationSettings}
         options={{ headerShown: false }}
       />
       <Stack.Screen
@@ -99,6 +112,7 @@ export function RoutineStack() {
         component={Gallery}
         options={{ headerShown: false }}
       />
+
     </Stack.Navigator>
   );
 }

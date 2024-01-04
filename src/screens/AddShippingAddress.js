@@ -65,7 +65,9 @@ export default function AddShippingAddress(props) {
                         <Text style={styles.text}>Add Shipping Address</Text>
                     </View>
 
-                    <View style={{ paddingHorizontal: height > 700 ? responsiveWidth(1) : responsiveWidth(2) }}>
+                    <View style={{
+                        height: '100%', paddingHorizontal: height > 700 ? responsiveWidth(1) : responsiveWidth(2)
+                    }}>
 
                         <View style={styles.container}>
                             <TextInput
@@ -96,7 +98,7 @@ export default function AddShippingAddress(props) {
 
                         <View style={styles.container}>
                             <TextInput
-                                placeholder="Last name"
+                                placeholder="Street Address"
                                 placeholderTextColor="#000"
                                 // value={password} 
                                 // onChangeText={(text) => setEmail(text.trim())}
@@ -110,7 +112,7 @@ export default function AddShippingAddress(props) {
 
                         <View style={styles.container}>
                             <TextInput
-                                placeholder="Last name"
+                                placeholder="Address Line"
                                 placeholderTextColor="#000"
                                 // value={password} 
                                 // onChangeText={(text) => setEmail(text.trim())}
@@ -124,7 +126,7 @@ export default function AddShippingAddress(props) {
 
                         <View style={styles.container}>
                             <TextInput
-                                placeholder="Last name"
+                                placeholder="City"
                                 placeholderTextColor="#000"
                                 // value={password} 
                                 // onChangeText={(text) => setEmail(text.trim())}
@@ -135,13 +137,84 @@ export default function AddShippingAddress(props) {
                                 style={styles.inputContainer}
                             />
                         </View>
+
+                        <View style={{ flexDirection: 'row' }}>
+                            <View style={{
+                                flex: 1,
+                                marginVertical: 6,
+                                borderColor: "#CBCBCB",
+                                borderWidth: 1,
+                                paddingHorizontal: 10,
+                                flexDirection: 'row',
+                                // paddingVertical: 6,
+                                fontWeight: '400',
+                                marginRight: 8,
+                                fontSize: height > 700 ? responsiveFontSize(2) : responsiveFontSize(1.6),
+                                color: ColorsApp.APP_PRIMARY,
+
+                                borderRadius: 12
+                            }}>
+                                <TextInput
+                                    placeholder="State"
+                                    placeholderTextColor="#000"
+                                    // value={password} 
+                                    // onChangeText={(text) => setEmail(text.trim())}
+                                    mode="flat"
+                                    autoCapitalize="none"
+                                    underlineColor="transparent"
+                                    activeUnderlineColor="transparent"
+                                    style={styles.inputContainer}
+                                />
+                            </View>
+                            <View style={{
+                                flex: 1,
+                                marginVertical: 6,
+                                borderColor: "#CBCBCB",
+                                borderWidth: 1,
+                                paddingHorizontal: 10,
+                                flexDirection: 'row',
+                                // paddingVertical: 6,
+                                marginLeft: 8,
+                                fontWeight: '400',
+                                fontSize: height > 700 ? responsiveFontSize(2) : responsiveFontSize(1.6),
+                                color: ColorsApp.APP_PRIMARY,
+                                borderRadius: 12
+                            }}>
+                                <TextInput
+                                    placeholder="Zip Code"
+                                    placeholderTextColor="#000"
+                                    // value={password} 
+                                    // onChangeText={(text) => setEmail(text.trim())}
+                                    mode="flat"
+                                    autoCapitalize="none"
+                                    underlineColor="transparent"
+                                    activeUnderlineColor="transparent"
+                                    style={styles.inputContainer}
+                                />
+                            </View>
+                        </View>
+
+                        <View style={styles.container}>
+                            <TextInput
+                                placeholder="Phone Number"
+                                placeholderTextColor="#000"
+                                // value={password} 
+                                // onChangeText={(text) => setEmail(text.trim())}
+                                mode="flat"
+                                autoCapitalize="none"
+                                underlineColor="transparent"
+                                activeUnderlineColor="transparent"
+                                style={styles.inputContainer}
+                            />
+                        </View>
+
 
                         <TouchableOpacity style={styles.btnContainer} onPress={() => onUpdatePassword()}>
                             <Text style={{
-                                fontSize: height > 700 ? responsiveFontSize(2) : responsiveFontSize(1.8),
+                                fontSize: height > 700 ? responsiveFontSize(2) : responsiveFontSize(2.2),
                                 fontWeight: '700',
                                 color: '#F7F1E7'
-                            }}>Change Password</Text>
+                            }}>Save Info</Text>
                         </TouchableOpacity>
                     </View>
                 </ScrollView>
@@ -180,7 +253,7 @@ const styles = StyleSheet.create({
         marginVertical: 6,
         paddingVertical: 6,
         fontWeight: '400',
-        fontSize: height > 700 ? responsiveFontSize(2) : responsiveFontSize(1.6),
+        fontSize: height > 700 ? responsiveFontSize(2) : responsiveFontSize(2.1),
         color: ColorsApp.APP_PRIMARY,
         marginRight: 4
         // borderRadius:40,
@@ -197,8 +270,8 @@ const styles = StyleSheet.create({
         alignItems: "center",
         alignSelf: 'center',
         borderRadius: 10,
-        marginTop: height > 700 ? responsiveHeight(4) : responsiveHeight(3),
-        marginBottom: 22
+        marginTop: height > 700 ? responsiveHeight(18) : responsiveHeight(12),
+        // marginBottom: 22
     },
     header: {
         flexDirection: "row",

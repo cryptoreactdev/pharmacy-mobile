@@ -6,6 +6,8 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
+  SafeAreaView,
+  Dimensions
 } from "react-native";
 import {
   responsiveHeight,
@@ -15,6 +17,9 @@ import {
 import { useSelector } from "react-redux";
 import Checkoutbtn from "../components/checkoutbtn";
 import { useNavigation } from "@react-navigation/native";
+import { globalStyles } from "../stylesheet";
+const { width, height } = Dimensions.get("window");
+
 
 export default function ThanksPurchase(props) {
   const [inputValue, setInputValue] = useState("");
@@ -34,53 +39,61 @@ export default function ThanksPurchase(props) {
   };
 
   return (
-    <View>
-      <ScrollView style={styles.cont}>
-        <View>
-          <View style={styles.header}>
-            <TouchableOpacity
+    <View style={{ flex: 1, backgroundColor: '#FAF9F7' }}>
+      <SafeAreaView style={globalStyles.droidSafeArea}>
+        <ScrollView style={styles.cont}>
+          <View>
+            <View style={styles.header}>
+              <TouchableOpacity
+                onPress={() => {
+                  // props.navigation.navigate("checkout2", props);
+                  props.navigation.goBack();
+                }}
+              >
+                {/* <Image
+                  source={require("../../assets/left.png")}
+                  style={styles.left}
+                /> */}
+              </TouchableOpacity>
+              <Text style={styles.text}>Thanks</Text>
+            </View>
+            <View style={styles.mainContainer}>
+              <Text style={styles.thanksTitle}>Thank you for your purchase</Text>
+            </View>
+            <View style={styles.rowContainer}>
+              <View style={styles.column}>
+                <Text style={styles.rowTitle}>Order:</Text>
+                <Text style={styles.rowText}>#A341HVE</Text>
+              </View>
+              <View style={styles.column}>
+                <Text style={styles.rowTitle}>Delivery Date:</Text>
+                <Text style={styles.rowText}>12/13/2023</Text>
+              </View>
+            </View>
+            <View style={styles.oneColumn}>
+              <Text style={styles.rowTitle}>Shipping Address:</Text>
+              <Text style={styles.rowText}>2120 NE 1236 ST, Floor 6, Apt 9</Text>
+            </View>
+            <View style={styles.row}>
+              <Text style={styles.rowTitleItem}>Items:</Text>
+            </View>
+            <View style={styles.itemsPurchased}>
+              {cartInformation.cartItems.map((item, index) => (
+                <CartItem key={index} item={item} />
+              ))}
+            </View>
+            <Checkoutbtn
+              title={'Add to my calendar'}
               onPress={() => {
-                props.navigation.navigate("checkout2", props);
+                // navigation.popToTop()
+                // navigation.navigate("home");
+                navigation.navigate("dailyroutine", { from: "THANKS_PURCHASE" })
               }}
-            >
-              <Image
-                source={require("../../assets/left.png")}
-                style={styles.left}
-              />
-            </TouchableOpacity>
-            <Text style={styles.text}>Thanks</Text>
+            />
           </View>
-          <View style={styles.mainContainer}>
-            <Text style={styles.thanksTitle}>Thank you for your purchase</Text>
-          </View>
-          <View style={styles.rowContainer}>
-            <View style={styles.column}>
-              <Text style={styles.rowTitle}>Order:</Text>
-              <Text style={styles.rowText}>#A341HVE</Text>
-            </View>
-            <View style={styles.column}>
-              <Text style={styles.rowTitle}>Delivery Date:</Text>
-              <Text style={styles.rowText}>12/13/2023</Text>
-            </View>
-          </View>
-          <View style={styles.oneColumn}>
-            <Text style={styles.rowTitle}>Shipping Address:</Text>
-            <Text style={styles.rowText}>2120 NE 1236 ST, Floor 6, Apt 9</Text>
-          </View>
-          <View style={styles.row}>
-            <Text style={styles.rowTitleItem}>Items:</Text>
-          </View>
-          <View style={styles.itemsPurchased}>
-            {cartInformation.cartItems.map((item, index) => (
-              <CartItem key={index} item={item} />
-            ))}
-          </View>
-          <Checkoutbtn
-            title={'Add to my calendar'}
-            onPress={() => navigation.navigate("dailyroutine", { from: "THANKS_PURCHASE" })}
-          />
-        </View>
-      </ScrollView>
+        </ScrollView>
+      </SafeAreaView>
+
     </View>
   );
 }
@@ -121,7 +134,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     // marginBottom: responsiveHeight(10),
     // backgroundColor: "#F5F5F5",
-    backgroundColor: "#FFF",
+    backgroundColor: "#FAF9F7",
   },
   left: {
     height: 50,
@@ -136,15 +149,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   text: {
-    fontSize: responsiveFontSize(2.4),
+    fontSize: height > 700 ? responsiveFontSize(2.2) : responsiveFontSize(2.4),
     color: "#000000",
-    fontWeight: "700",
-    marginRight: responsiveWidth(45),
+    fontWeight: '700',
+    marginRight: responsiveWidth(48),
   },
   thanksTitle: {
     color: "#41392F",
     fontFamily: "Bricolage Grotesque",
-    fontSize: 32,
+    fontSize: height > 700 ? responsiveFontSize(3.6) : responsiveFontSize(2.6),
     fontStyle: "normal",
     fontWeight: "700",
     lineHeight: 40,

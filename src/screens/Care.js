@@ -119,7 +119,7 @@ export default function Care({ props, navigation }) {
           ))}
         </View>
       </ScrollView>
-      {/* <ReminderBottomSheet refBottomSheet={bottomSheetRef} onClose={hideView} /> */}
+      <ReminderBottomSheet refBottomSheet={bottomSheetRef} onClose={hideView} />
 
     </View>
   );

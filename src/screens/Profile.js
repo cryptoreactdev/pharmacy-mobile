@@ -38,14 +38,14 @@ export default function Profile(props) {
 
         deleteUser(user).then(() => {
           // User deleted.
-          }).catch((error) => {
-            console.log(error);
-            Alert.alert(Strings.ST32);
-          });
+        }).catch((error) => {
+          console.log(error);
+          Alert.alert(Strings.ST32);
+        });
 
       }).catch((error) => {
-            console.log(error);
-            Alert.alert(Strings.ST32);
+        console.log(error);
+        Alert.alert(Strings.ST32);
       });
     }
   };
@@ -54,65 +54,66 @@ export default function Profile(props) {
 
   useEffect(() => {
 
-      setUser(auth.currentUser);
-      setIsLoaded(true);
+    setUser(auth.currentUser);
+    setIsLoaded(true);
 
   }, []);
 
-if(isLoaded) {
+  if (isLoaded) {
 
- return (
+    return (
 
-  <ScrollView showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false}>
-  <SafeAreaView>
+      <ScrollView showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false}>
+        <SafeAreaView>
 
-  <View style={Styles.HeaderProfile}>
-    {user.photoURL ? <Image source={{uri: user.photoURL}} style={Styles.ImageProfile} resizeMode={"cover"}/>
-    : <Image source={require('../../assets/male.jpg')} style={Styles.ImageProfile} resizeMode={"cover"}/>}
-  
-    <View style={{flexDirection: 'row'}}>
-    {user.displayName ? <Text style={Styles.TextProfile}>{user.displayName}</Text> : null}
-    {user.user_verified ? <Icon name="check-decagram" size={22} style={Styles.memberBadge}/> : null}
-    </View>
-  <Text style={Styles.SmallTextProfile}>{user.email}</Text>
-  </View>
+          <View style={Styles.HeaderProfile}>
+            {user.photoURL ? <Image source={{ uri: user.photoURL }} style={Styles.ImageProfile} resizeMode={"cover"} />
+              : <Image source={require('../../assets/male.jpg')} style={Styles.ImageProfile} resizeMode={"cover"} />}
 
-  <View style={{marginHorizontal: 30, marginBottom: 40}}>
-  <CustomButton Icon="bookmark-outline" Label={Strings.ST110} Click={() => onChangeScreen("about")}/>
-  <CustomButton Icon="file-document-outline" Label={Strings.ST8} Click={() => onChangeScreen("terms")}/>
-  <CustomButton Icon="logout" Label={Strings.ST9} Click={() => signOut(auth)}/>
-  <CustomButton Icon="account-cancel-outline" Label={Strings.ST141} Click={() => setVisible(true)}/>
+            <View style={{ flexDirection: 'row' }}>
+              {user.displayName ? <Text style={Styles.TextProfile}>{user.displayName}</Text> : null}
+              {user.user_verified ? <Icon name="check-decagram" size={22} style={Styles.memberBadge} /> : null}
+            </View>
+            <Text style={Styles.SmallTextProfile}>{user.email}</Text>
+          </View>
 
-  <Portal>
-      <Dialog visible={visible} onDismiss={hideDialog}>
-        <Dialog.Content>
-          <Title>{Strings.ST144}</Title>
-          <Paragraph style={{marginVertical: 10}}>{Strings.ST145}</Paragraph>
-          <TextInput
-          value={password}
-          mode="outlined"
-          secureTextEntry={true}
-          onChangeText={text => setPassword(text)}
-        />
-        </Dialog.Content>
-        <Dialog.Actions style={{marginBottom: 8, marginTop: -20, marginHorizontal: 8}}>
-          <Button onPress={() => hideDialog()}>{Strings.ST142}</Button>
-          <Button onPress={() => deleteAccount()}>{Strings.ST143}</Button>
-        </Dialog.Actions>
-      </Dialog>
-    </Portal>
+          <View style={{ marginHorizontal: 30, marginBottom: 40 }}>
+            <CustomButton Icon="bookmark-outline" Label={Strings.ST110} Click={() => onChangeScreen("about")} />
+            <CustomButton Icon="bell-check-outline" Label='Notification' Click={() => onChangeScreen("notification")} />
+            <CustomButton Icon="file-document-outline" Label={Strings.ST8} Click={() => onChangeScreen("terms")} />
+            <CustomButton Icon="logout" Label={Strings.ST9} Click={() => signOut(auth)} />
+            <CustomButton Icon="account-cancel-outline" Label={Strings.ST141} Click={() => setVisible(true)} />
 
-  </View>
-  </SafeAreaView>
-  </ScrollView>
+            <Portal>
+              <Dialog visible={visible} onDismiss={hideDialog}>
+                <Dialog.Content>
+                  <Title>{Strings.ST144}</Title>
+                  <Paragraph style={{ marginVertical: 10 }}>{Strings.ST145}</Paragraph>
+                  <TextInput
+                    value={password}
+                    mode="outlined"
+                    secureTextEntry={true}
+                    onChangeText={text => setPassword(text)}
+                  />
+                </Dialog.Content>
+                <Dialog.Actions style={{ marginBottom: 8, marginTop: -20, marginHorizontal: 8 }}>
+                  <Button onPress={() => hideDialog()}>{Strings.ST142}</Button>
+                  <Button onPress={() => deleteAccount()}>{Strings.ST143}</Button>
+                </Dialog.Actions>
+              </Dialog>
+            </Portal>
 
-      );
+          </View>
+        </SafeAreaView>
+      </ScrollView>
 
-   }else{
-   return (
-     <AppLoading/>
-     );
- }
- 
+    );
+
+  } else {
+    return (
+      <AppLoading />
+    );
+  }
+
 }
 

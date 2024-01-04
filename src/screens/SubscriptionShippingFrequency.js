@@ -69,6 +69,16 @@ export default function SubscriptionShippingFrequency(props) {
         Alert.alert("Success", "Subscription Updated", [{ text: "OK" }])
     }
 
+    const Row = ({ children }) => (
+        <View style={styles.row}>{children}</View>
+    )
+
+    const Col = ({ numRows, children }) => {
+        return (
+            <View style={styles[`${numRows}col`]}>{children}</View>
+        )
+    }
+
     return (
         <View style={globalStyles.cont}>
             <SafeAreaView style={globalStyles.droidSafeArea}>
@@ -208,12 +218,12 @@ export default function SubscriptionShippingFrequency(props) {
 
                     <TouchableOpacity style={styles.btnContainer} onPress={() => onUpdateSubscription()}>
                         <Text style={{
-                            fontSize: height > 700 ? responsiveFontSize(2) : responsiveFontSize(1.8),
+                            fontSize: height > 700 ? responsiveFontSize(2) : responsiveFontSize(2.2),
                             fontWeight: '700',
                             color: '#F7F1E7'
                         }}>Upgrade • </Text>
                         <Text style={{
-                            fontSize: height > 700 ? responsiveFontSize(2) : responsiveFontSize(1.8),
+                            fontSize: height > 700 ? responsiveFontSize(2) : responsiveFontSize(2.2),
                             fontWeight: '700',
                             color: '#F7F1E7'
                         }}>$75</Text>

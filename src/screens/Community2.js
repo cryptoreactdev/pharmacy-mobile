@@ -32,6 +32,9 @@ export default function Community2(props) {
   const navigation = useNavigation();
   const { isVisible, showView, hideView } = useCommonView();
   const bottomSheetRef = React.useRef(null);
+  const productType = ['Most Popular', 'Recent', 'Skin', 'Eyes'];
+  const [selectedType, setSelectedType] = useState([]);
+
 
   const openBottomSheet = () => {
     bottomSheetRef.current?.snapToIndex(0); // Open the bottom sheet to a snap point to change the height.
@@ -52,6 +55,19 @@ export default function Community2(props) {
     navigation.navigate("postdetails", { id, title });
   };
 
+  const handleTypeClick = (type) => {
+    if (selectedType.includes(type)) {
+      // If selected, remove it
+      setSelectedType((prevSelectedTypes) =>
+        prevSelectedTypes.filter((selectedType) => selectedType !== type)
+      );
+    } else {
+      // If not selected, add it
+      setSelectedType((prevSelectedTypes) => [...prevSelectedTypes, type]);
+    }
+  };
+
+
 
   useEffect(() => {
     if (isVisible) {
@@ -67,52 +83,58 @@ export default function Community2(props) {
       <ScrollView style={globalStyles.scroll}>
         <Header {...props} />
         <Text style={globalStyles.bigtext}>Community</Text>
-        <Text style={globalStyles.text1}>
-          Get inspiration from other pharmacy name users
+        <Text style={{
+          fontSize: responsiveFontSize(2),
+          color: "#75695A",
+        }}>
+          Explore, discover, share your journey, and find inspiration in the stories of our vibrant community.
         </Text>
         <View style={styles.cont1}>
-          <View style={styles.cont2}>
+          <TouchableOpacity style={[styles.cont2, { marginRight: 8 }]} onPress={() => props.navigation.navigate("videosHowToUse")}>
             <Image
               source={require("../../assets/video.png")}
               style={styles.img}
             />
-            <Text style={styles.blacktext}> Videos and how to use it</Text>
-          </View>
-          <View style={styles.cont2}>
+            <Text style={styles.blacktext}>Videos &{"\n"}how to use it</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.cont2, , { marginLeft: 8 }]} onPress={() => props.navigation.navigate("testimonialReviews")}>
             <Image
               source={require("../../assets/review.png")}
               style={styles.img}
             />
-            <Text style={styles.blacktext}> Testimonials and reviews</Text>
-          </View>
+            <Text style={styles.blacktext}>Testimonials &{"\n"}reviews</Text>
+          </TouchableOpacity>
         </View>
-        <Text style={globalStyles.text2}>Tags </Text>
-        <ScrollView horizontal={true}>
-          <TouchableOpacity style={styles.btn}>
-            <Text style={globalStyles.text1}> Most Popular</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.btn}>
-            <Text style={globalStyles.text1}> Recent</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.btn}>
-            <Text style={globalStyles.text1}> Most Popular</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.btn}>
-            <Text style={globalStyles.text1}> Most Popular</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.btn}>
-            <Text style={globalStyles.text1}> Most Popular</Text>
-          </TouchableOpacity>
+        <Text style={{
+          fontSize: responsiveFontSize(2),
+          marginTop: responsiveHeight(1),
+          // marginBottom: responsiveHeight(.6),
+          color: "#75695A", fontWeight: '700'
+        }}>Tags </Text>
+
+        <ScrollView showsHorizontalScrollIndicator={false} horizontal={true}>
+          <View style={styles.typeContainer}>
+            {productType?.map((type, index) => (
+              <TouchableOpacity
+                style={selectedType.includes(type) ? styles.selectedViewContainer : styles.unselectedViewContainer}
+                onPress={() => handleTypeClick(type)}
+              >
+                <Text style={globalStyles.txtType}>{type}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
         </ScrollView>
         <View style={styles.smallcont}>
-          <Text style={globalStyles.bigtext2}>Popular Reads</Text>
+          <Text style={[globalStyles.bigtext2, { flex: 1 }]}>Popular Reads</Text>
           <Text style={globalStyles.text2}>See All</Text>
+          <Image
+            source={require("../../assets/right.png")}
+            style={styles.btnOpen} />
         </View>
         <ScrollView horizontal={true} style={styles.cont3}>
           {blogPosts.map((post) => (
             <TouchableOpacity
               onPress={() => onChangeScreen(post.id, post.title)}
-              style={styles.btn4}
             >
               <View key={post.id}>
                 <Image source={{ uri: post.image }} style={styles.imgg} />
@@ -122,7 +144,7 @@ export default function Community2(props) {
           ))}
         </ScrollView>
       </ScrollView>
-      {/* <ReminderBottomSheet refBottomSheet={bottomSheetRef} onClose={hideView} /> */}
+      <ReminderBottomSheet refBottomSheet={bottomSheetRef} onClose={hideView} />
 
     </View>
   );
@@ -132,25 +154,72 @@ const styles = StyleSheet.create({
   cont1: {
     flexDirection: "row",
     justifyContent: "space-between",
+    marginTop: 12,
+    paddingHorizontal: 1
+  },
+  typeContainer: {
+    display: "flex",
+    flexDirection: "row",
+    marginBottom: 10,
+    // paddingHorizontal: responsiveWidth(6),
+    marginTop: 12
+  },
+  btnOpen: {
+    width: 22,
+    height: 22,
+    // /resizeMode: "contain",
+  },
+  selectedViewContainer: {
+    height: responsiveHeight(4.2),
+    paddingHorizontal: responsiveWidth(3),
+    borderWidth: responsiveWidth(.34),
+    borderColor: "#ECDDC6",
+    marginRight: 5,
+    backgroundColor: "#ECDDC6",
+    borderRadius: 25,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  unselectedViewContainer: {
+    height: responsiveHeight(4.2),
+    paddingHorizontal: responsiveWidth(3),
+    marginRight: 5,
+    borderWidth: responsiveWidth(.34),
+    borderColor: "#ECDDC6",
+    backgroundColor: "#ECDDC600",
+    borderRadius: 25,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
   },
   cont2: {
-    height: responsiveHeight(20),
-    width: responsiveWidth(40),
+    flex: 1,
     backgroundColor: "#fff",
     borderRadius: 10,
-    padding: responsiveWidth(2),
+    paddingVertical: responsiveHeight(2),
+    paddingHorizontal: responsiveWidth(3.8),
     marginBottom: responsiveHeight(2),
+    shadowColor: '#000000',
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 1,
+    elevation: 1,
   },
   img: {
-    height: responsiveHeight(10),
-    width: responsiveWidth(20),
+    height: responsiveHeight(5),
+    width: responsiveWidth(10),
     resizeMode: "contain",
   },
   blacktext: {
     color: "#000",
-    fontWeight: "bold",
-    fontSize: responsiveFontSize(2.2),
-    marginTop: responsiveHeight(1),
+    fontWeight: "600",
+    fontSize: responsiveFontSize(1.8),
+    marginTop: responsiveHeight(1.6),
   },
   btn: {
     borderWidth: 1,

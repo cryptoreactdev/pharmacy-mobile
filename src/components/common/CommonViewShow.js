@@ -10,6 +10,7 @@ export const CommonViewProvider = ({ children }) => {
     };
 
     const hideView = () => {
+        console.log("HIDE VIEW PRESSED")
         setIsVisible(false);
         setNewTimeout();
     };

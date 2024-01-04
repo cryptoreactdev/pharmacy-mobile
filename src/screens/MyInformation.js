@@ -85,7 +85,7 @@ export default function MyInformation(props) {
                     <View style={{ paddingHorizontal: height > 700 ? responsiveWidth(1) : responsiveWidth(2) }}>
                         <Text
                             style={{
-                                fontSize: height > 700 ? responsiveFontSize(3) : responsiveFontSize(2),
+                                fontSize: height > 700 ? responsiveFontSize(3) : responsiveFontSize(3.2),
                                 fontWeight: '700',
                                 marginTop: 12,
                                 marginBottom: 22,
@@ -124,7 +124,7 @@ export default function MyInformation(props) {
 
                         <Text
                             style={{
-                                fontSize: height > 700 ? responsiveFontSize(3) : responsiveFontSize(2),
+                                fontSize: height > 700 ? responsiveFontSize(3) : responsiveFontSize(3.2),
                                 fontWeight: '700',
                                 marginTop: 32,
                                 marginBottom: 22,
@@ -144,29 +144,29 @@ export default function MyInformation(props) {
                                 },
                                 shadowOpacity: 0.08,
                                 shadowRadius: 1,
-                                elevation: 1,
+                                elevation: .6,
                             }}>
                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                 <Image
                                     source={require("../../assets/shipping-icon.png")}
                                     style={{
-                                        width: height > 700 ? responsiveWidth(5) : responsiveWidth(5),
-                                        height: height > 700 ? responsiveHeight(3) : responsiveHeight(3)
+                                        width: height > 700 ? responsiveWidth(5) : responsiveWidth(5.4),
+                                        height: height > 700 ? responsiveHeight(3) : responsiveHeight(3.4)
                                     }}
                                 />
                                 <View style={{ flex: 1, flexDirection: 'column', marginLeft: 8, paddingHorizontal: 6, paddingVertical: 4 }}>
-                                    <Text style={{ color: ColorsApp.BLACK, fontWeight: '700', fontSize: height > 700 ? responsiveFontSize(2) : responsiveFontSize(1.8) }}>2120 NE 1236 ST, FLoor 6,Apt 9</Text>
-                                    <Text style={{ color: ColorsApp.BLACK, marginTop: 4, fontWeight: '400', fontSize: height > 700 ? responsiveFontSize(1.8) : responsiveFontSize(1.6) }}>2120 NE 1236 ST, FLoor 6,Apt 9</Text>
+                                    <Text style={{ color: ColorsApp.BLACK, fontWeight: '700', fontSize: height > 700 ? responsiveFontSize(2) : responsiveFontSize(2.2) }}>2120 NE 1236 ST, FLoor 6,Apt 9</Text>
+                                    <Text style={{ color: ColorsApp.BLACK, marginTop: 4, fontWeight: '400', fontSize: height > 700 ? responsiveFontSize(1.8) : responsiveFontSize(2) }}>2120 NE 1236 ST, FLoor 6,Apt 9</Text>
                                 </View>
                             </View>
                             <View style={{ marginTop: 22, marginBottom: 6, flexDirection: 'row', justifyContent: 'space-between', }}>
                                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', borderRadius: 12, borderColor: ColorsApp.BLACK, borderWidth: 1, paddingVertical: 6, marginRight: 6 }}>
-                                    <Text style={{ fontWeight: 700, fontSize: height > 700 ? responsiveFontSize(2) : responsiveFontSize(1.6) }}>
+                                    <Text style={{ fontWeight: 700, fontSize: height > 700 ? responsiveFontSize(2) : responsiveFontSize(2.2) }}>
                                         Edit
                                     </Text>
                                 </View>
                                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', borderRadius: 12, borderColor: ColorsApp.BLACK, borderWidth: 1, paddingVertical: 6, marginLeft: 6 }}>
-                                    <Text style={{ fontWeight: 700 }}>
+                                    <Text style={{ fontWeight: 700, fontSize: height > 700 ? responsiveFontSize(2) : responsiveFontSize(2.2) }}>
                                         Delete
                                     </Text>
                                 </View>
@@ -175,7 +175,7 @@ export default function MyInformation(props) {
 
                         <TouchableOpacity style={styles.btnContainer} onPress={() => props.navigation.navigate('addShippingAddress')}>
                             <Text style={{
-                                fontSize: height > 700 ? responsiveFontSize(2) : responsiveFontSize(1.8),
+                                fontSize: height > 700 ? responsiveFontSize(2) : responsiveFontSize(2.2),
                                 fontWeight: '700',
                                 color: '#F7F1E7'
                             }}>Add Shipping Address </Text>
@@ -184,22 +184,44 @@ export default function MyInformation(props) {
                                 style={styles.btnAdd} />
                         </TouchableOpacity>
 
+                        {/* <TouchableOpacity style={{
+                            backgroundColor: "#41392F",
+                            width: "98%",
+                            height: 50,
+                            flexDirection: 'row',
+                            justifyContent: "center",
+                            alignItems: "center",
+                            alignSelf: 'center',
+                            borderRadius: 10,
+                            marginTop: height > 700 ? responsiveHeight(2) : responsiveHeight(2.2),
+                            marginBottom: 22
+                        }} onPress={() => props.navigation.navigate('paymentMethod')}>
+                            <Text style={{
+                                fontSize: height > 700 ? responsiveFontSize(2) : responsiveFontSize(2.2),
+                                fontWeight: '700',
+                                color: '#F7F1E7'
+                            }}>Update Payment Method </Text>
+                            <Image
+                                source={require("../../assets/img_new_add.png")}
+                                style={styles.btnAdd} />
+                        </TouchableOpacity> */}
+
                         <TouchableOpacity style={styles.txtLink}>
-                            <Text style={[styles.txtLinkLabel, { fontSize: height > 700 ? responsiveFontSize(2) : responsiveFontSize(1.8), color: ColorsApp.APP_PRIMARY }]} onPress={() => { props.navigation.navigate("changePassword") }}>Change Password</Text>
+                            <Text style={[styles.txtLinkLabel, { fontSize: height > 700 ? responsiveFontSize(2) : responsiveFontSize(2.2), color: ColorsApp.APP_PRIMARY }]} onPress={() => { props.navigation.navigate("changePassword") }}>Change Password</Text>
                         </TouchableOpacity>
 
                         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', }}>
                             <TouchableOpacity style={[styles.txtLink, { marginRight: 14, alignItems: 'center', justifyContent: 'center' }]}>
-                                <Text style={[styles.txtLinkLabel, { fontSize: height > 700 ? responsiveFontSize(1.8) : responsiveFontSize(1.5), color: ColorsApp.LIGHT_RED }]}>Log out</Text>
+                                <Text style={[styles.txtLinkLabel, { fontSize: height > 700 ? responsiveFontSize(1.8) : responsiveFontSize(2), color: ColorsApp.LIGHT_RED }]}>Log out</Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={[styles.txtLink, { marginLeft: 14, alignItems: 'center', justifyContent: 'center' }]}>
-                                <Text style={[styles.txtLinkLabel, { fontSize: height > 700 ? responsiveFontSize(1.8) : responsiveFontSize(1.5), color: ColorsApp.LIGHT_RED }]}>Delete account</Text>
+                                <Text style={[styles.txtLinkLabel, { fontSize: height > 700 ? responsiveFontSize(1.8) : responsiveFontSize(2), color: ColorsApp.LIGHT_RED }]}>Delete account</Text>
                             </TouchableOpacity>
                         </View>
 
-                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 8, marginBottom: 42 }}>
-                            <Text style={{ fontSize: height > 700 ? responsiveFontSize(1.8) : responsiveFontSize(1.5), color: ColorsApp.APP_PRIMARY, fontWeight: '300' }}>App Version </Text>
-                            <Text style={{ fontSize: height > 700 ? responsiveFontSize(1.8) : responsiveFontSize(1.5), color: ColorsApp.APP_PRIMARY, fontWeight: '300' }}>3.106 (20232317)</Text>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 6, marginBottom: 42 }}>
+                            <Text style={{ fontSize: responsiveFontSize(1.8), color: ColorsApp.APP_PRIMARY, fontWeight: '300' }}>App Version </Text>
+                            <Text style={{ fontSize: responsiveFontSize(1.8), color: ColorsApp.APP_PRIMARY, fontWeight: '300' }}>3.106 (20232317)</Text>
                         </View>
                     </View>
                 </ScrollView>
@@ -216,8 +238,8 @@ const styles = StyleSheet.create({
         // resizeMode: "contain",
     },
     btnAdd: {
-        width: height > 700 ? responsiveWidth(5) : responsiveWidth(4),
-        height: height > 700 ? responsiveHeight(5) : responsiveHeight(4),
+        width: height > 700 ? responsiveWidth(5) : responsiveWidth(5.4),
+        height: height > 700 ? responsiveHeight(5) : responsiveHeight(5.4),
         marginLeft: 6
     },
     inputContainer: {
@@ -227,7 +249,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 12,
         paddingVertical: 12,
         fontWeight: '600',
-        fontSize: height > 700 ? responsiveFontSize(2) : responsiveFontSize(1.6),
+        fontSize: height > 700 ? responsiveFontSize(2) : responsiveFontSize(2.2),
         color: ColorsApp.APP_PRIMARY,
         // borderRadius:40,
         // borderEndEndRadius: 40,
@@ -260,7 +282,7 @@ const styles = StyleSheet.create({
     },
     txtLink: {
         marginHorizontal: 'auto',
-        marginVertical: 16
+        marginVertical: height > 700 ? 14 : 10
     },
     txtLinkLabel: {
         textAlign: 'center',

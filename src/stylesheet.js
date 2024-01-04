@@ -15,7 +15,7 @@ export const globalStyles = StyleSheet.create({
   droidSafeArea: {
     // flex: 1,
     backgroundColor: '#FAF9F7',
-    paddingTop: Platform.OS === 'android' ? 25 : 0
+    paddingTop: Platform.OS === 'android' ? 28 : 0
   },
   cont: {
     alignItems: "center",
