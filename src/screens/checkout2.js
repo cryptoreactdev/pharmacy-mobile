@@ -29,6 +29,11 @@ export default function Checkout2(props) {
   const [quantity, setQuantity] = useState(1);
   const productInformation = props.route.params.productInformation;
 
+  const savings30Days = (productInformation.one_time_price * 12) - (productInformation.price_30_days * 12);
+  const savings60Days = (productInformation.one_time_price * 6) - (productInformation.price_60_days * 6);
+  const savings90Days = (productInformation.one_time_price * 4) - (productInformation.price_90_days * 4);
+
+
   const [finalPrice, setFinalPrice] = useState(
     productInformation.one_time_price * 1 // Default to one-time price with quantity 1
   );
@@ -45,9 +50,9 @@ export default function Checkout2(props) {
     if (option === "30days") {
       setFinalPrice(productInformation.price_30_days * 12);
     } else if (option === "60days") {
-      setFinalPrice(productInformation.price_60_days * 12);
+      setFinalPrice(productInformation.price_60_days * 6); // Change calculation here
     } else if (option === "90days") {
-      setFinalPrice(productInformation.price_90_days * 12);
+      setFinalPrice(productInformation.price_90_days * 4); // Change calculation here
     } else if (option === "onetime") {
       setFinalPrice(productInformation.one_time_price * quantity);
     }
@@ -138,7 +143,7 @@ export default function Checkout2(props) {
                     >
                       <View style={styles.themeCheckedcont}>
                         <View style={styles.themeCont}>
-                          <Text style={styles.themeText}>Save $240 a year</Text>
+                          <Text style={styles.themeText}>Save ${savings30Days} a year</Text>
                         </View>
                         <View
                           style={{ flexDirection: "row", alignItems: "center" }}
@@ -159,7 +164,7 @@ export default function Checkout2(props) {
                           </Text>
                         </View>
                         <Text style={globalStyles.blackLargeText}>
-                          ${productInformation.price_30_days}/mo
+                          ${productInformation.price_30_days}
                         </Text>
                       </View>
                       <Text style={globalStyles.smallText}>
@@ -170,7 +175,7 @@ export default function Checkout2(props) {
                     <View>
                       <View style={styles.checkedcont}>
                         <View style={styles.greencont}>
-                          <Text style={styles.greentext}>Save $240 a year</Text>
+                          <Text style={styles.greentext}>Save ${savings60Days} a year</Text>
                         </View>
                         <View
                           style={{ flexDirection: "row", alignItems: "center" }}
@@ -202,7 +207,7 @@ export default function Checkout2(props) {
                             </Text>
                           </View>
                           <Text style={globalStyles.greenLargeText}>
-                            ${productInformation.price_60_days}/mo
+                            ${productInformation.price_60_days}
                           </Text>
                         </View>
                         <Text style={globalStyles.smallText}>
@@ -217,7 +222,7 @@ export default function Checkout2(props) {
                     >
                       <View style={styles.themeCheckedcont}>
                         <View style={styles.themeCont}>
-                          <Text style={styles.themeText}>Save $240 a year</Text>
+                          <Text style={styles.themeText}>Save ${savings90Days} a year</Text>
                         </View>
                         <View
                           style={{ flexDirection: "row", alignItems: "center" }}
@@ -238,7 +243,7 @@ export default function Checkout2(props) {
                           </Text>
                         </View>
                         <Text style={globalStyles.blackLargeText}>
-                          ${productInformation.price_90_days}/mo
+                          ${productInformation.price_90_days}
                         </Text>
                       </View>
                       <Text style={globalStyles.smallText}>
