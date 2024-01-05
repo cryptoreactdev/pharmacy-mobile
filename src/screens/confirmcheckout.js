@@ -11,6 +11,7 @@ import Card5 from "../components/homescreencards/card5";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch } from 'react-redux';
 import { clearCart } from '../actions/cartActions'; // Update the path
+import ColorsApp from "../config/ColorsApp";
 const { width, height } = Dimensions.get("window");
 
 
@@ -53,7 +54,7 @@ export default function ConfirmCheckout(props) {
       // After all API calls are complete, navigate to the next screen
       dispatch(clearCart());
 
-      
+
     } catch (error) {
       console.error('Error during checkout:', error);
       // Handle the error as needed
@@ -241,7 +242,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     marginVertical: 16,
     borderRadius: 16,
-    backgroundColor: '#FFF',
+    backgroundColor: ColorsApp.WHITE,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,

@@ -25,6 +25,7 @@ import { getLatestProducts } from "../config/DataApp";
 import Card5 from "../components/homescreencards/card5";
 import { useNavigation } from "@react-navigation/native";
 import Pressable from "react-native/Libraries/Components/Pressable/Pressable";
+import ColorsApp from "../config/ColorsApp";
 const { width, height } = Dimensions.get("window");
 
 const data = [
@@ -48,7 +49,7 @@ export default function ShoppingCart(props) {
 
   useEffect(() => {
     getLatestProducts().then((response) => {
-      const modifiedProducts = response.map((product) => {
+      const modifiedProducts = response.map((product, index) => {
         const imageArray = product.image.split(",");
         product.allImages = product.image;
         product.image = imageArray.length > 0 ? imageArray[0].trim() : "";
@@ -330,8 +331,7 @@ const styles = StyleSheet.create({
     padding: 12,
     marginVertical: 16,
     borderRadius: 16,
-    backgroundColor: "#FFF",
-
+    backgroundColor: ColorsApp.WHITE,
     shadowColor: '#000000',
     shadowOffset: {
       width: 0,

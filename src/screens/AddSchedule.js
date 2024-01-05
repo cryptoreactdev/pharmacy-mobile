@@ -83,6 +83,7 @@ export default function AddSchedule(props) {
                                 <View style={styles.typeContainer}>
                                     {productType?.map((type, index) => (
                                         <TouchableOpacity
+                                            key={index}
                                             style={selectedType.includes(type) ? styles.selectedViewContainer : styles.unselectedViewContainer}
                                             onPress={() => handleTypeClick(type)}
                                         >

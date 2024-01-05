@@ -20,6 +20,7 @@ import {
 import { Button } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import BottomSheet, { BottomSheetBackdrop } from "@gorhom/bottom-sheet";
+import ColorsApp from "../config/ColorsApp";
 const { width, height } = Dimensions.get("window");
 
 export default function SubscriptionShippingFrequency(props) {
@@ -452,7 +453,7 @@ const styles = StyleSheet.create({
         // padding: responsiveWidth(0.8),
         borderRadius: 10,
         // marginBottom: responsiveHeight(1),
-        backgroundColor: "#fff",
+        backgroundColor: ColorsApp.WHITE,
         shadowColor: '#000000',
         shadowOffset: {
             width: 1,

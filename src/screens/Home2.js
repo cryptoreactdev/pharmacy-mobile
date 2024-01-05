@@ -90,7 +90,7 @@ export default function Home2(props) {
 
     getLatestPosts().then((response) => {
       setBlogPosts(response);
-      console.warn("Response from posts", response)
+      // console.warn("Response from posts", response)
       setIsLoaded(true);
     });
 
@@ -100,6 +100,7 @@ export default function Home2(props) {
     });
 
     getUserPurchases(auth.currentUser.uid).then((response) => {
+      // console.log("GET_USER_PURCHASE : ", JSON.stringify(response))
       const devices = response.filter(
         (product) =>
           product.product_info &&
@@ -120,8 +121,9 @@ export default function Home2(props) {
           product.product_info.type_title === "Skin Care" &&
           product.product_info.product_title
       );
-      console.log("AUTH ID2 : ", JSON.stringify(skinCareProductsList))
+      // console.log("AUTH ID2 : ", JSON.stringify(skinCareProductsList))
 
+      // console.log("GET_USER_PURCHASE : DEVICES :", JSON.stringify(devices))
 
       setDevices(devices);
       setAccesories(accessoriesList);
@@ -135,7 +137,7 @@ export default function Home2(props) {
     fetchData();
     const timeoutId = setTimeout(() => {
       hideView();
-      console.log("HIDE FROM HOME")
+      // console.log("HIDE FROM HOME")
     }, 10000);
 
     // Your component will unmount logic here
@@ -181,11 +183,20 @@ export default function Home2(props) {
   };
 
   const onChangeScreenProduct = (device, itemType) => {
-    props.navigation.navigate("subscriptiondetails", {
+    // props.navigation.navigate("subscriptiondetails", {
+    //   source: itemType,
+    //   device: device,
+    // });
+
+    props.navigation.navigate("productTipsDetails", {
       source: itemType,
       device: device,
     });
   };
+
+  const openInviteFriend = () => {
+    props.navigation.navigate("inviteFriends");
+  }
 
   const redirectShopFlow = (device, itemType) => {
     props.navigation.navigate("checkout1", device);
@@ -212,13 +223,16 @@ export default function Home2(props) {
           onPress={hideView} >
         </Pressable>} */}
         <Text style={globalStyles.bigtext}>Welcome Back, {user.displayName}</Text>
-        {promotions.map((promotion) => (
-          <Card1
-            key={promotion.id}
-            text1={promotion.text1}
-            text2={promotion.text2}
-            imageSrc={promotion.image}
-          />
+        {promotions.map((promotion, index) => (
+          <View key={index}>
+            <Card1
+              text1={promotion.text1}
+              text2={promotion.text2}
+              imageSrc={promotion.image}
+              onPress={openInviteFriend}
+            />
+          </View>
+
         ))}
         <View style={styles.smallcont}>
           <Text style={globalStyles.bigtext2}>My Treatments</Text>
@@ -237,9 +251,9 @@ export default function Home2(props) {
         </View>
         <Text style={styles.subTitle}>Devices</Text>
         {devices.length > 0 ? (
-          devices.map((device) => (
+          devices.map((device, index) => (
             <TouchableOpacity
-              key={device.id}
+              key={index}
               onPress={() => onChangeScreenProduct(device, "device")}
             >
               <Card2 device={device} onPress={onChangeScreenProduct} />
@@ -256,7 +270,12 @@ export default function Home2(props) {
               {openSkinCareOption[index] && (
                 <View style={{ marginTop: height > 700 ? 0 : responsiveHeight(1) }}>
                   <View style={styles.row}>
-                    <TouchableOpacity style={styles.btn}>
+                    <TouchableOpacity
+                      onPress={() => onChangeScreenProduct(product, "skincare")}
+                      style={[styles.btn, {
+                        marginRight: height > 700 ? responsiveWidth(1.4) : responsiveWidth(1.6),
+                        //  marginLeft: height > 700 ? responsiveWidth(3) : responsiveWidth(3.2) 
+                      }]}>
                       <Image
                         source={require("../../assets/tips.png")}
                         style={styles.img}
@@ -264,7 +283,10 @@ export default function Home2(props) {
                       <Text style={globalStyles.text3}>Tips</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                      style={styles.btn}
+                      style={[styles.btn, {
+                        marginLeft: height > 700 ? responsiveWidth(1.4) : responsiveWidth(1.5),
+                        // marginRight: height > 700 ? responsiveWidth(2) : responsiveWidth(3.2)
+                      }]}
                       onPress={() => onChangeScreenProduct(product, "skincare")}
                     >
                       <Image
@@ -392,6 +414,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     // paddingVertical: responsiveHeight(2),
     marginBottom: responsiveHeight(2),
+    paddingHorizontal: height > 700 ? responsiveWidth(2.6) : responsiveWidth(3)
   },
   row: {
     flexDirection: "row",
@@ -399,8 +422,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   btn: {
-    height: responsiveHeight(4.5),
-    width: responsiveWidth(35),
+    height: height > 700 ? responsiveHeight(4.2) : responsiveHeight(5.2),
+    // width: responsiveWidth(35),
+    flex: 1,
     backgroundColor: "#F7F1E7",
     borderRadius: 10,
     flexDirection: "row",
@@ -408,8 +432,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   btn2: {
-    height: responsiveHeight(4.5),
-    width: responsiveWidth(80),
+    // flex: 1,
+    height: height > 700 ? responsiveHeight(4.2) : responsiveHeight(5.2),
+    width: '100%',
     backgroundColor: "#41392F",
     borderRadius: 10,
     flexDirection: "row",

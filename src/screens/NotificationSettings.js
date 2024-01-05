@@ -229,19 +229,6 @@ const styles = StyleSheet.create({
         width: responsiveWidth(7),
         resizeMode: "contain"
     },
-    cardContainer: {
-        shadowColor: '#000000',
-        shadowOffset: {
-            width: 0,
-            height: 0,
-        },
-        shadowOpacity: 0.3,
-        shadowRadius: .6,
-        elevation: 1,
-        marginVertical: 6,
-        paddingVertical: height > 700 ? responsiveHeight(.4) : responsiveHeight(.4),
-        backgroundColor: ColorsApp.WHITE, borderRadius: 12, flexDirection: 'row'
-    },
     container: {
         marginVertical: 12,
         borderColor: "#CBCBCB",

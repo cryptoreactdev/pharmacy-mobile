@@ -43,7 +43,7 @@ export default function Shop2(props) {
   const productTypes = [
     "Skin Care",
     "Devices",
-    "Accessories",
+    "Accesories",
     "Accidental Warranty",
   ];
 
@@ -86,13 +86,14 @@ export default function Shop2(props) {
         // Add the product to the array of its type
         separatedData[productType].push(product);
       });
+      // console.log("SHOP_SEPERATED_PRODUCT : ", JSON.stringify(separatedData))
       setAllTypesProducts(separatedData);
 
       setProducts(modifiedProducts);
       setIsLoaded(true);
     });
   }, []);
-  console.log("products", products);
+  // console.log("products", products);
   const onChangeScreenProduct = async (product) => {
     // props.navigation.navigate("productdetails", { id, title });
     props.navigation.navigate("checkout1", product);
@@ -170,6 +171,7 @@ export default function Shop2(props) {
 
             {productTypes?.map((type, index) => (
               <TouchableOpacity
+                key={index}
                 style={selectedType.includes(type) ? styles.selectedViewContainer : styles.unselectedViewContainer}
                 onPress={() => handleTypeClick(type)}
               >
@@ -205,16 +207,16 @@ export default function Shop2(props) {
           </View>
         </ScrollView>
 
-        {productTypes.map((type) => (
-          <>
-            <View style={styles.smallcont}>
+        {productTypes.map((type, index) => (
+          (selectedType.includes(type) || selectedType.length === 0) && <>
+            <View key={index} style={styles.smallcont}>
               <Text style={globalStyles.bigtext2}>{type}</Text>
             </View>
             <ScrollView contentContainerStyle={styles.cont3}>
-              {allTypeProducts[type]?.map((item, index) => (
+              {allTypeProducts[type]?.map((item, innerIndex) => (
                 <TouchableOpacity
                   style={styles.cardContainer2}
-                  key={index}
+                  key={innerIndex}
                   onPress={() => onChangeScreenProduct(item)}
                 >
                   <Card5 item={item} />

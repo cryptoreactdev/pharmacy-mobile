@@ -187,6 +187,7 @@ export async function addReminder(payload) {
 
 
 export async function getUserPurchases(userId) {
+  // console.log("USER_ID : ", userId)
   try {
     const url = `${ConfigApp.URL}json/data_purchases.php?userId=${userId}`;
     let response = await fetch(url);

@@ -13,12 +13,29 @@ import {
 } from "react-native";
 import React from "react";
 import { globalStyles } from "../../stylesheet";
+import ColorsApp from "../../config/ColorsApp";
 
 export default function Card5(props) {
   const { item } = props;
   return (
     <View style={styles.container}>
-      <Image source={{ uri: item.image }} style={styles.img} />
+      <View style={{
+        height: responsiveHeight(18),
+        width: responsiveWidth(27),
+        borderRadius: 20,
+        backgroundColor: ColorsApp.WHITE,
+        shadowColor: '#000000',
+        shadowOffset: {
+          width: 0,
+          height: 0,
+        },
+        shadowOpacity: 0.2,
+        shadowRadius: .8,
+        elevation: .4,
+      }}>
+        <Image source={{ uri: item.image }} style={styles.img} />
+
+      </View>
 
       <View style={styles.textcont}>
         <Text numberOfLines={2} style={styles.productName}>
@@ -30,7 +47,8 @@ export default function Card5(props) {
         <Text style={styles.txtStartingFrom}>
           Starting from:
         </Text>
-        <Text style={styles.txtPrice}>${item.price_30_days}</Text>
+        {/* <Text style={styles.txtPrice}>${item.price_30_days}</Text> */}
+        <Text style={styles.txtPrice}>${item.one_time_price}</Text>
       </View>
     </View>
   );
@@ -40,13 +58,9 @@ const styles = StyleSheet.create({
   img: {
     height: responsiveHeight(18),
     width: responsiveWidth(27),
-    borderTopRightRadius: 20,
-    borderTopLeftRadius: 20,
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
+    borderRadius: 20,
     backgroundColor: '#FFF',
     resizeMode: "cover",
-
   },
   container: {
     alignItems: "center",
@@ -54,8 +68,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginTop: 2,
     marginHorizontal: responsiveWidth(1),
-
-
     // marginRight: responsiveWidth(2.6),
   },
   textcont: {

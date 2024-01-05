@@ -19,6 +19,7 @@ import { globalStyles } from "../stylesheet";
 import Checkoutbtn from "../components/checkoutbtn";
 import { useNavigation } from "@react-navigation/native";
 import { Dimensions } from "react-native";
+import ColorsApp from "../config/ColorsApp";
 const windowWidth = Dimensions.get("window").width;
 const { width, height } = Dimensions.get("window");
 
@@ -466,14 +467,15 @@ const styles = StyleSheet.create({
     padding: responsiveHeight(2),
     marginVertical: responsiveHeight(1),
     borderRadius: 16,
+    backgroundColor: ColorsApp.WHITE,
     shadowColor: '#000000',
     shadowOffset: {
       width: 0,
-      height: 1,
+      height: 0,
     },
     shadowOpacity: 0.3,
-    shadowRadius: 4,
-    elevation: 10,
+    shadowRadius: 1,
+    elevation: 2,
     // borderTopLeftRadius:0,
     // borderTopRightRadius:0,
     backgroundColor: "#fff",

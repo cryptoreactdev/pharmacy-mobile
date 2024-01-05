@@ -17,9 +17,11 @@ import { globalStyles } from "../../stylesheet";
 const { width, height } = Dimensions.get("window");
 
 
-export default function card1({ key, text1, text2, imageSrc }) {
+export default function card1({ text1, text2, imageSrc, onPress }) {
   return (
-    <TouchableOpacity style={styles.cont}>
+    <TouchableOpacity
+      onPress={() => onPress()}
+      style={styles.cont}>
       <View style={styles.cont2}>
         <Image
           source={{ uri: imageSrc }}
@@ -47,7 +49,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 12,
     borderColor: '#ffffff',
-    elevation: 1,
+    // elevation: 1,
     marginRight: responsiveWidth(2),
   },
   cont: {

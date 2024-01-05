@@ -41,7 +41,7 @@ export default function PostDetails(props, { navigation }) {
 
   useEffect(() => {
     getPostById(id).then((response) => {
-      console.log("RESPONSE IS : " + JSON.stringify(response))
+      // console.log("RESPONSE IS : " + JSON.stringify(response))
       setItem(response[0]);
       setIsLoaded(true);
     });

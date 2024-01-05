@@ -18,6 +18,7 @@ import { useSelector } from "react-redux";
 import Checkoutbtn from "../components/checkoutbtn";
 import { useNavigation } from "@react-navigation/native";
 import { globalStyles } from "../stylesheet";
+import ColorsApp from "../config/ColorsApp";
 const { width, height } = Dimensions.get("window");
 
 
@@ -194,7 +195,7 @@ const styles = StyleSheet.create({
     marginTop: 20
   },
   rowTitle: {
-    fontFamily: "Inter",
+    // fontFamily: "Inter",
     fontSize: 14,
     fontStyle: "normal",
     fontWeight: "400",
@@ -202,7 +203,7 @@ const styles = StyleSheet.create({
     color: "#75695A",
   },
   rowTitleItem: {
-    fontFamily: "Inter",
+    // fontFamily: "Inter",
     fontSize: 18,
     fontStyle: "normal",
     fontWeight: "600",
@@ -210,7 +211,7 @@ const styles = StyleSheet.create({
     lineHeight: 24,
   },
   rowText: {
-    fontFamily: "Inter",
+    // fontFamily: "Inter",
     fontSize: 16,
     fontStyle: "normal",
     fontWeight: "bold",
@@ -227,7 +228,7 @@ const styles = StyleSheet.create({
     marginRight: 'auto', // Align to the left edge
     marginLeft: 'auto', // Align to the right edge
     borderRadius: 16,
-    backgroundColor: '#FFF',
+    backgroundColor: ColorsApp.WHITE,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -323,7 +324,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    fontFamily: "Inter",
+    // fontFamily: "Inter",
     fontSize: 16,
     fontStyle: "normal",
     fontWeight: "700",

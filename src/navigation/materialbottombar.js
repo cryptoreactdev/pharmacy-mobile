@@ -28,6 +28,10 @@ import AddShippingAddress from "../screens/AddShippingAddress";
 import VideosHowToUse from "../screens/VideosHowToUse";
 import TestimonialReviews from "../screens/TestimonialReviews";
 import PaymentMethod from "../screens/PaymentMethod";
+import ProductTipsDetails from "../screens/ProductTipsDetails";
+import InviteFriends from "../components/InviteFriends";
+import InviteFriendScreen from "../screens/InviteFriendScreen";
+import WarrantyClaim from "../screens/WarrantyClaim";
 
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -221,6 +225,11 @@ export default function Materialbottombar() {
         options={{ headerShown: false }}
       />
       <Stack.Screen
+        name="productTipsDetails"
+        component={ProductTipsDetails}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
         name="subscriptionShippingFrequency"
         component={SubscriptionShippingFrequency}
         options={{ headerShown: false }}
@@ -293,6 +302,16 @@ export default function Materialbottombar() {
       <Stack.Screen
         name="paymentMethod"
         component={PaymentMethod}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="inviteFriends"
+        component={InviteFriendScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="warrantyClaim"
+        component={WarrantyClaim}
         options={{ headerShown: false }}
       />
 

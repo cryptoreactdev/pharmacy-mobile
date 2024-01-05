@@ -87,13 +87,13 @@ export default function ModalNavigation(props) {
       shadowColor: "transparent",
       elevation: 0,
       shadowOpacity: 0,
-      backgroundColor: theme === "light" ? "#fff" : "#000",
+      backgroundColor: theme === "light" ? ColorsApp.WHITE : ColorsApp.BLACK,
     },
     headerTitleAlign: "center",
     presentation: "modal",
     gestureEnabled: false,
     /*cardOverlayEnabled: true,
-		...TransitionPresets.ModalPresentationIOS*/
+    ...TransitionPresets.ModalPresentationIOS*/
   };
 
   return (

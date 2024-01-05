@@ -20,7 +20,7 @@ const RegisterPharmacyProduct = ({ navigation }) => {
   useEffect(() => {
     getFeaturedProducts()
       .then((response) => {
-        console.warn("all products", response);
+        // console.warn("all products", response);
         setProducts(response);
       })
       .catch((error) => {
@@ -78,9 +78,10 @@ const RegisterPharmacyProduct = ({ navigation }) => {
           />
         </View>
         <View style={styles.productContainer}>
-          {filteredProducts.map((product) => (
+          {filteredProducts.map((product, index) => (
             <TouchableOpacity
-              key={product.id}
+              // key={product.id}
+              key={index}
               style={[
                 styles.productButton,
                 selectedProducts.includes(product) && styles.selectedButton,

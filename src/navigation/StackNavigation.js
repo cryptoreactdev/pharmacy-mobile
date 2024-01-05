@@ -35,6 +35,7 @@ import CustomDiets from "../screens/CustomDiets";
 import PostDetails from "../screens/PostDetails";
 import Routine from "../screens/Routine";
 import DailyRoutine from "../screens/dailyRoutine";
+import ColorsApp from "../config/ColorsApp";
 
 const Stack = createStackNavigator();
 
@@ -51,7 +52,7 @@ export default function StackNavigation(props) {
       shadowColor: "transparent",
       elevation: 0,
       shadowOpacity: 0,
-      backgroundColor: theme === "light" ? "#fff" : "#000",
+      backgroundColor: theme === "light" ? ColorsApp.WHITE : ColorsApp.BLACK,
     },
     headerTitleAlign: "center",
   };

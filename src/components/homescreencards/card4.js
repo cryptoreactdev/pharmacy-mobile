@@ -15,7 +15,7 @@ export default function Card4(props) {
       <Image source={{ uri: item.image }} style={styles.img} />
       <View style={styles.textcont}>
         <Text numberOfLines={2} style={styles.text3}>{item.title}</Text>
-        <Text style={styles.text1}>${item.price === "" && item.price !== null ? 0 : item.price}</Text>
+        <Text style={styles.text1}>${item.one_time_price === "" && item.one_time_price !== null ? 0 : item.one_time_price}</Text>
       </View>
     </View>
   );

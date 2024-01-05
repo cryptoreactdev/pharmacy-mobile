@@ -24,6 +24,7 @@ import { getAuth } from "firebase/auth";
 import { addReminder } from "../config/DataApp";
 import ReminderCardContent from "../components/homescreencards/reminderCard";
 import BottomSheet, { BottomSheetBackdrop } from "@gorhom/bottom-sheet";
+import ColorsApp from "../config/ColorsApp";
 const { width, height } = Dimensions.get("window");
 
 export default function DailyRoutine(props) {
@@ -194,7 +195,7 @@ export default function DailyRoutine(props) {
           <View style={styles.badgeContainer}>
             {daysOfWeek?.map((day, index) => (
               <TouchableOpacity
-                key={day}
+                key={index}
                 onPress={() => handleDayClick(day)}
 
               >
@@ -284,6 +285,7 @@ export default function DailyRoutine(props) {
         ref={bottomSheetRef}
         style={{
           borderRadius: 24,
+          backgroundColor: ColorsApp.WHITE,
           shadowColor: '#000000',
           shadowOffset: {
             width: 0,

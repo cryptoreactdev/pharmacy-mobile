@@ -8,6 +8,7 @@ import {
     responsiveWidth,
     responsiveFontSize,
 } from "react-native-responsive-dimensions";
+import ColorsApp from '../config/ColorsApp';
 
 
 const ReminderBottomSheet = ({ refBottomSheet, onClose }) => {
@@ -22,6 +23,7 @@ const ReminderBottomSheet = ({ refBottomSheet, onClose }) => {
         <BottomSheet
             ref={refBottomSheet}
             style={{
+                backgroundColor: ColorsApp.WHITE,
                 borderRadius: 24,
                 shadowColor: '#000000',
                 shadowOffset: {

@@ -44,7 +44,7 @@ const SubscriptionDetails = (props) => {
   const [selectedDuration, setSelectedDuration] = useState("30days");
   const source = props.route.params.source;
   const deviceInfo = props.route.params.device;
-  console.warn("props.route.params", props.route.params);
+  // console.warn("props.route.params", props.route.params);
 
   const fetchProductData = (id) => {
     getProductById(id)

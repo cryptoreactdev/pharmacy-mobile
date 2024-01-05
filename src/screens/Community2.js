@@ -24,6 +24,7 @@ import { getCommunityPosts } from "../config/DataApp";
 import { useNavigation } from "@react-navigation/native";
 import ReminderBottomSheet from "../components/reminderBottomSheet";
 import { useCommonView } from "../components/common/CommonViewShow";
+import ColorsApp from "../config/ColorsApp";
 const { width, height } = Dimensions.get("window");
 
 
@@ -46,7 +47,7 @@ export default function Community2(props) {
 
   useEffect(() => {
     getCommunityPosts().then((response) => {
-      console.warn("community posts", response)
+      // console.warn("community posts", response)
       setBlogPosts(response);
     });
   }, []);
@@ -116,6 +117,7 @@ export default function Community2(props) {
           <View style={styles.typeContainer}>
             {productType?.map((type, index) => (
               <TouchableOpacity
+                key={index}
                 style={selectedType.includes(type) ? styles.selectedViewContainer : styles.unselectedViewContainer}
                 onPress={() => handleTypeClick(type)}
               >
@@ -132,8 +134,9 @@ export default function Community2(props) {
             style={styles.btnOpen} />
         </View>
         <ScrollView horizontal={true} style={styles.cont3}>
-          {blogPosts.map((post) => (
+          {blogPosts.map((post, index) => (
             <TouchableOpacity
+              key={index}
               onPress={() => onChangeScreen(post.id, post.title)}
             >
               <View key={post.id}>
@@ -196,11 +199,11 @@ const styles = StyleSheet.create({
   },
   cont2: {
     flex: 1,
-    backgroundColor: "#fff",
     borderRadius: 10,
     paddingVertical: responsiveHeight(2),
     paddingHorizontal: responsiveWidth(3.8),
     marginBottom: responsiveHeight(2),
+    backgroundColor: ColorsApp.WHITE,
     shadowColor: '#000000',
     shadowOffset: {
       width: 0,
